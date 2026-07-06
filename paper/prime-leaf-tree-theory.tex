@@ -1389,9 +1389,11 @@ universal among them?
 \appendix
 \section{Computational verification}\label{app:verification}
 
-All computations are reproducible from the two scripts in the \texttt{verification/}
-directory of this repository (\texttt{verify\_combinatorics.py}, standard library
-only; \texttt{analytic.py}, requiring \texttt{mpmath} and \texttt{numpy}).
+All computations are reproducible from the accompanying \texttt{primeleaf} Python
+package (see the repository \texttt{README} for installation):
+\texttt{python -m primeleaf verify-combinatorics} reproduces the combinatorial
+checks below, \texttt{verify-zeta} the identities and constants, and
+\texttt{census} and \texttt{dominance} the zero census and the density check.
 
 \subsection{Combinatorial checks}
 
@@ -1456,11 +1458,11 @@ flowed to zero \#1 of the table.
 
 \subsection{Zero census and the density check}
 
-The census of \S\ref{sec:density} (script \texttt{zero\_census.py}) extends the scan
-to $[1.30, 2.72] \times [0.3, 500]$ with primes up to $10^5$ (grid
+The census of \S\ref{sec:density} (command \texttt{python -m primeleaf census})
+extends the scan to $[1.30, 2.72] \times [0.3, 500]$ with primes up to $10^5$ (grid
 $0.02 \times 0.05$, seed threshold $0.06$, Newton polish at 18 significant digits,
 residuals below $10^{-14}$): $59$ zeros, real parts in $(1.3149,\, 2.5396)$, listed
-in \texttt{verification/zeros\_t500.txt}. The running counts are
+in \texttt{data/zeros\_t500.txt}. The running counts are
 $N(100), \dots, N(500) = 11, 23, 35, 47, 59$; the one-per-period line
 $T\log 2/2\pi$ would give $11.0, 22.1, 33.1, 44.1, 55.2$; the mean spacing is
 $8.417$, with extremes $1.31$ and $10.54$. A
