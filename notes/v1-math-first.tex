@@ -1,0 +1,1058 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amscd}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+
+% ---------- macros ----------
+\newcommand{\cT}{\mathcal{T}}   % planar binary trees (free magma)
+\newcommand{\cW}{\mathcal{W}}   % words (free semigroup)
+\newcommand{\cB}{\mathcal{B}}   % unordered binary trees (free commutative magma)
+\newcommand{\cM}{\mathcal{M}}   % prime multisets (free commutative semigroup)
+\newcommand{\cG}{\mathcal{G}}   % grouped quantities
+\newcommand{\cA}{\mathcal{A}}   % flat quantities
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\pkg}[1]{\boxed{#1}}
+\newcommand{\act}{\rho}
+\DeclareMathOperator{\supp}{supp}
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Prime-Leaf Tree Theory\\[2mm]
+\large Ordinary arithmetic as the shadow of a free multiplicative structure}
+\author{Giuseppe Barbalinardo}
+\date{Working draft --- \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We develop an arithmetic in which multiplication does not return a number.
+The product of two objects is a \emph{multiplication tree}: an ordered, parenthesized
+record of how the object was built from \emph{prime leaves} $L_2, L_3, L_5, \dots$
+Formally, the multiplicative world is the free magma $\cT$ on the set of primes, and
+the ordinary value of a tree is recovered by a shadow map $N \colon \cT \to \NN_{\ge 2}$,
+the unique magma morphism sending $L_p$ to $p$. Ordinary multiplicative arithmetic is
+the double quotient of $\cT$ by associativity and commutativity; the Fundamental
+Theorem of Arithmetic is precisely the statement that this double quotient loses no
+information. The two identifications are independent, giving a commuting square of four
+arithmetics, each with a degeneracy count and a zeta function: the Riemann zeta function
+(multisets), a geometric zeta with critical exponent $1.39943\dots$ (words), an
+Otter-type zeta with exponent $1.98847\dots$ (unordered trees), and a Catalan zeta with
+exponent $\sigma^{*} = 2.59738\dots$ (planar trees), where $P(\sigma^{*}) = \tfrac14$ for
+the prime zeta function $P$. The tree partition function converges \emph{at} its critical
+point with the exact value $\tfrac12$ and a square-root cusp: a second-order phase
+transition, in contrast with the first-order pole of $\zeta$. Its complex branch points
+--- the ``tree zeros'', solutions of $P(s) = \tfrac14$ --- are computed; they do not lie
+on a vertical line. Finally we construct the bridge between the multiplicative and
+additive worlds: trees do not map into quantities, they \emph{act} on them, producing
+grouped quantities. Under this action, associativity of multiplication becomes
+additively invisible, commutativity survives grouping and dies only under flattening,
+and distributivity becomes a theorem about flattening rather than an axiom. The prime
+leaves themselves can then be derived, rather than imported: primes are exactly the heap
+sizes that admit no uniform regrouping.
+\end{abstract}
+
+\tableofcontents
+
+%======================================================================
+\section{Introduction}
+
+\subsection{Multiplication before evaluation}
+
+Ordinary arithmetic writes
+\[
+3 \times 2 = 6
+\qquad\text{and}\qquad
+1+1+1+1+1+1 = 6
+\]
+and treats the two results as the same kind of object. The starting intuition of this
+paper is that they are not. Six liters obtained by pouring is a flat additive quantity.
+``Three groups of two'' is a \emph{structured} object --- and a differently structured
+object than ``two groups of three'' --- whose ordinary numerical shadow happens to be~$6$.
+The slogan:
+
+\begin{quote}
+\emph{You never get six liters from multiplication. You get a structured object whose
+shadow is $6$.}
+\end{quote}
+
+We therefore refuse to let multiplication collapse into numbers. Multiplication forms
+\emph{trees}: the product of two trees is the ordered pair of them, written
+$T_1 \boxtimes T_2$, and nothing is evaluated. A tree is an unevaluated multiplication
+expression; the familiar integer is obtained only when one applies an evaluator
+$N$, the \emph{shadow map}. In this reading the classical laws --- commutativity,
+associativity, distributivity --- are not properties of multiplication itself. They are
+properties of the \emph{evaluator}: statements that $N$ merges distinct expressions.
+The richer theory keeps the expressions apart and studies what the merging forgets.
+
+\subsection{Results}
+
+The paper makes this program precise and proves the following.
+
+\begin{enumerate}
+\item \textbf{The framework} (\S\ref{sec:trees}). The multiplicative world is the free
+magma $\cT$ on the set of primes; the shadow map is the unique magma morphism
+$N\colon \cT \to (\NN_{\ge2},\cdot)$ with $N(L_p) = p$. The multiplicative world has no
+unit: $1$ is not the shadow of any tree, and appears only after quotienting, as the
+empty multiset.
+
+\item \textbf{The quotient square} (\S\ref{sec:square}). Associativity and commutativity
+are \emph{independent} identifications. Quotienting $\cT$ by either, both, or neither
+yields four arithmetics
+\[
+\cT \;(\text{planar trees}), \quad
+\cW \;(\text{words}), \quad
+\cB \;(\text{unordered trees}), \quad
+\cM \;(\text{multisets}),
+\]
+arranged in a commuting square. The Fundamental Theorem of Arithmetic is the statement
+that the shadow map of the final quotient $\cM$ is a bijection onto $\NN_{\ge2}$. Each
+level carries a degeneracy count over each integer $n$; for $\cT$ it is
+$C_{\Omega(n)-1}\,\Omega(n)!/\prod_p \alpha_p!$ (Catalan number times multinomial), for
+$\cW$ the multinomial, for $\cB$ a sequence which restricts to the
+Wedderburn--Etherington numbers on prime powers and which appears not to have been
+recorded before, and for $\cM$ the constant $1$. All counts were verified by exhaustive
+enumeration for $n \le 20000$ (Appendix~\ref{app:verification}).
+
+\item \textbf{Four zeta functions} (\S\ref{sec:zeta}). Each corner has a partition
+function $Z(s) = \sum N(\,\cdot\,)^{-s}$. They satisfy, respectively, a Catalan equation
+$Z = P + Z^2$, a geometric equation $Z = P/(1-P)$, an Otter equation
+$Z = P + \tfrac12(Z^2 + Z(2s))$, and the Euler product
+$\zeta(s) = \exp\bigl(\sum_{k\ge1} P(ks)/k\bigr)$, where
+$P(s) = \sum_p p^{-s}$ is the prime zeta function. The critical exponents form a strict
+ladder
+\[
+1 \;<\; 1.3994333287263303 \;<\; 1.9884768518009081 \;<\; \sigma^{*} = 2.5973851271346716,
+\]
+one for each amount of remembered structure. At its critical point the tree zeta
+converges with the exact value $Z_\cT(\sigma^{*}) = \tfrac12$ and a square-root cusp.
+
+\item \textbf{Tree zeros} (\S\ref{sec:analytic}). $Z_\cT$ is an algebraic function of
+$P$, so its analytic structure reduces to that of $P$ --- which inherits a branch point
+at $s = \rho/k$ from every nontrivial zero $\rho$ of $\zeta$ and has the imaginary axis
+as a natural boundary. The genuinely new singularities are the branch points where
+$P(s) = \tfrac14$. We compute the five with $0 < \operatorname{Im} s < 50$; they cluster
+near integer multiples of $2\pi/\log 2$ and do \emph{not} lie on a vertical line, so the
+naive tree analogue of the Riemann Hypothesis is false and must be reformulated as a
+distribution question (\S\ref{sec:open}).
+
+\item \textbf{Thermodynamics} (\S\ref{sec:thermo}). With energy $E(T) = \log N(T)$, the
+four zetas are partition functions of four gases built on the primon gas of Julia and of
+Bost--Connes. Remembering more structure raises the critical inverse temperature ---
+equivalently, lowers the Hagedorn temperature from $1$ to $0.38500\dots$ --- and changes
+the order of the transition: the associative levels blow up at their critical point
+(pole), the non-associative levels stay finite and cusp (continuous transition).
+
+\item \textbf{The additive bridge} (\S\ref{sec:bridge}). Multiplication trees do not map
+into the additive world; they \emph{act} on it. We build a world $\cG$ of grouped
+quantities (boxed heaps of unit quantities), on which a tree $T$ acts by uniform
+regrouping. Three theorems then stratify the classical laws:
+associativity of $\boxtimes$ is invisible to the action (the action factors through the
+word quotient, \emph{exactly}); commutativity fails for the action and holds only after
+flattening; distributivity fails structurally and holds after flattening. ``You never
+get six liters from multiplication'' becomes a theorem. Moreover the prime leaves can be
+\emph{derived} from the additive world: primes are exactly the heap sizes admitting no
+uniform regrouping, which answers the foundational question of whether the leaf alphabet
+must be imported.
+\end{enumerate}
+
+\subsection{Relation to existing mathematics}\label{sec:priorart}
+
+Parts of this structure are classical, and it is worth saying precisely which parts.
+The free magma and its Catalan combinatorics are standard. The count of ordered
+factorizations into primes is OEIS A008480, and the full planar-tree degeneracy
+$g_\cT(n)$ appears as OEIS A144757 (``number of factor trees for $n$'')~\cite{oeis}. The
+thermodynamic reading of $\zeta$ as a partition function over multiplicative states is
+the primon gas of Julia~\cite{julia} and Spector~\cite{spector}, made deep by
+Bost--Connes~\cite{bostconnes}. Closest in spirit is Loday's
+\emph{arithmetree}~\cite{loday}, further developed by Bruno and
+Yasaki~\cite{brunoyasaki}: an arithmetic on planar binary trees into which $\NN$ embeds,
+with non-commutative addition and one-sided distributivity. The ordered-factorization
+growth problem with arbitrary parts goes back to Kalm\'ar~\cite{kalmar}, and the natural
+boundary of the prime zeta function is due to Landau and Walfisz~\cite{landauwalfisz}.
+
+Against this background, the contributions here are: the quotient \emph{square} (rather
+than a single chain) with the new unordered-tree corner, its Otter zeta and critical
+exponent; the exact critical behavior $Z_\cT(\sigma^{*}) = \tfrac12$ and the transition-order
+dichotomy; the computation and non-collinearity of the tree zeros; the grouped-quantity
+bridge with the stratification theorems; and the internal derivation of the prime
+leaves. One honest caution runs through the paper: a \emph{free} structure carries no
+secrets about the primes themselves. Every classically hard question enters either
+through the values $2,3,5,\dots$ fed to the shadow map --- that is, through $P(s)$ ---
+or through the additive bridge. What the theory offers is a clean separation of the
+structural from the arithmetic, and new invariants that live in the separated layers.
+
+%======================================================================
+\section{The multiplicative world}\label{sec:trees}
+
+\subsection{Prime leaves and multiplication trees}
+
+\begin{definition}[Multiplication trees]\label{def:trees}
+Fix the set of prime leaves $\{L_p : p \text{ prime}\}$. The set $\cT$ of
+\emph{multiplication trees} is defined by the grammar
+\[
+T \;::=\; L_p \;\mid\; (T_1 \boxtimes T_2).
+\]
+Thus $\cT$ is the \emph{free magma} on the set of primes: $\boxtimes$ is ordered-pair
+formation, subject to no laws whatsoever.
+\end{definition}
+
+Examples of distinct elements of $\cT$:
+\[
+L_2, \qquad
+L_2 \boxtimes L_3, \qquad
+L_3 \boxtimes L_2, \qquad
+(L_2 \boxtimes L_3) \boxtimes L_5, \qquad
+L_2 \boxtimes (L_3 \boxtimes L_5).
+\]
+Non-commutativity and non-associativity are not axioms we impose; they are the
+\emph{absence} of axioms. $L_2 \boxtimes L_3$ records ``a structure built from $L_2$,
+then $L_3$''; the parenthesization records construction history. A multiplication tree
+is best read as the parse tree of a multiplication expression, before evaluation.
+
+For $T \in \cT$ write $|T|$ for the number of leaves and $\mathrm{word}(T)$ for the
+left-to-right sequence of leaf labels; $\supp(T)$ denotes the set of primes occurring.
+
+\subsection{The shadow map}
+
+\begin{definition}[Shadow]\label{def:shadow}
+The \emph{shadow map} $N \colon \cT \to \NN_{\ge 2}$ is defined recursively by
+\[
+N(L_p) = p, \qquad N(T_1 \boxtimes T_2) = N(T_1)\,N(T_2).
+\]
+Equivalently: $N$ is the unique magma morphism from $\cT$ to the multiplicative
+semigroup $(\NN_{\ge2},\cdot)$ sending $L_p$ to $p$. It is the evaluator of
+multiplication expressions.
+\end{definition}
+
+\begin{remark}[No unit]\label{rem:nounit}
+$\cT$ has no unit object and $1$ is not the shadow of any tree: the image of $N$ is
+exactly $\NN_{\ge 2}$. One could freely adjoin an empty tree $I$, but then
+$I \boxtimes T \neq T$ (freeness again), which buys nothing. We prefer to let $1$ appear
+where it belongs: as the \emph{empty multiset} after quotienting
+(\S\ref{sec:square}), i.e.\ as a feature of the collapsed theory, not of the fundamental
+one.
+\end{remark}
+
+Composite numbers are not primitive objects of the multiplicative world. There is no
+$L_6$; the number $6$ occurs only as the common shadow of the two trees
+$L_2\boxtimes L_3$ and $L_3\boxtimes L_2$. Likewise $8$ is the common shadow of
+$(L_2\boxtimes L_2)\boxtimes L_2$ and $L_2\boxtimes(L_2\boxtimes L_2)$. Distinct
+microstates, one observable: this degeneracy is quantified in \S\ref{sec:square} and
+made thermodynamic in \S\ref{sec:thermo}.
+
+%======================================================================
+\section{Ordinary arithmetic as a quotient: the square}\label{sec:square}
+
+\subsection{Two independent identifications}
+
+\begin{definition}\label{def:congruences}
+Let $\approx_a$ be the smallest congruence on $(\cT,\boxtimes)$ with
+$(T_1\boxtimes T_2)\boxtimes T_3 \approx_a T_1\boxtimes(T_2\boxtimes T_3)$ for all
+$T_i$, and $\approx_c$ the smallest congruence with
+$T_1\boxtimes T_2 \approx_c T_2\boxtimes T_1$. Write
+\[
+\cW = \cT/\!\approx_a, \qquad
+\cB = \cT/\!\approx_c, \qquad
+\cM = \cT/(\approx_a \vee \approx_c).
+\]
+\end{definition}
+
+Each quotient is a familiar free object: $\cW$ is the free semigroup on the primes
+(elements are nonempty \emph{words} in primes, i.e.\ ordered prime factorizations);
+$\cB$ is the free \emph{commutative} magma on the primes (binary trees with unordered
+branches); $\cM$ is the free commutative semigroup (nonempty finite \emph{multisets} of
+primes). The shadow map descends to all four corners, and the two identifications
+commute:
+\[
+\begin{CD}
+\cT @>\text{associativity}>> \cW \\
+@V\text{commutativity}VV @VV\text{commutativity}V \\
+\cB @>>\text{associativity}> \cM
+\end{CD}
+\]
+The shadow map of the final corner is where classical arithmetic begins:
+
+\begin{proposition}[FTA as exactness of the collapse]\label{prop:fta}
+The induced map $N \colon \cM \to \NN_{\ge2}$ is a bijection. This statement is
+equivalent to the Fundamental Theorem of Arithmetic.
+\end{proposition}
+
+\begin{proof}
+Elements of $\cM$ are nonempty prime multisets $\{p_1,\dots,p_k\}$ with
+$N = p_1\cdots p_k$. Surjectivity of $N$ is the existence of a prime factorization;
+injectivity is its uniqueness. \end{proof}
+
+Thus classical multiplicative arithmetic is the coarsest shadow of the tree theory, and
+the FTA acquires a new reading: \emph{the double quotient loses nothing numerically}.
+Everything it does lose is structure, and the degeneracy counts below measure exactly
+how much.
+
+\begin{remark}[The identifications are themselves structured]
+The associativity identification is not a group action: two trees with the same word are
+connected by a sequence of reassociations, and the set of parenthesizations of a fixed
+word carries the \emph{Tamari lattice} structure, realized geometrically by the
+associahedron~\cite{tamari}. Commutativity moves similarly generate the permutohedron.
+The quotient square therefore has polytopal fibers, a refinement we do not pursue here.
+\end{remark}
+
+\subsection{Degeneracy counts}
+
+For $n \ge 2$ with factorization $n = \prod_p p^{\alpha_p}$ write
+$\Omega(n) = \sum_p \alpha_p$. For each corner $\mathcal{X}$ of the square let
+$g_{\mathcal X}(n) = \#\{X \in \mathcal{X} : N(X) = n\}$ be the number of microstates
+over $n$.
+
+\begin{proposition}[Planar trees]\label{prop:gT}
+\[
+g_\cT(n) \;=\; C_{\Omega(n)-1}\;\frac{\Omega(n)!}{\prod_p \alpha_p!},
+\qquad C_k = \frac{1}{k+1}\binom{2k}{k}.
+\]
+\end{proposition}
+
+\begin{proof}
+A tree with shadow $n$ has exactly $\Omega(n)$ leaves, by induction and multiplicativity
+of $N$. The map $T \mapsto (\text{shape}(T), \mathrm{word}(T))$ is a bijection from
+$\{T : N(T)=n\}$ to (binary tree shapes with $k=\Omega(n)$ leaves) $\times$ (sequences
+of primes with product $n$). There are $C_{k-1}$ shapes~\cite{stanley} and
+$\Omega!/\prod \alpha_p!$ sequences (permutations of the prime multiset). The two
+factors are independent: the fiber of the full collapse $\cT \to \cM$ splits as
+shapes $\times$ orderings.
+\end{proof}
+
+\begin{proposition}[Words]\label{prop:gW}
+$g_\cW(n) = \Omega(n)!/\prod_p \alpha_p!$, with recursion
+$g_\cW(n) = \sum_{p \mid n} g_\cW(n/p)$ and $g_\cW(p)=1$. This is OEIS A008480.
+\end{proposition}
+
+\begin{proposition}[Unordered trees]\label{prop:gB}
+$g_\cB$ satisfies $g_\cB(p) = 1$ and, for composite $n$,
+\[
+g_\cB(n) \;=\; \frac12 \sum_{\substack{d \mid n \\ 1<d<n}} g_\cB(d)\, g_\cB(n/d)
+\;+\; \frac12\,[\,n \text{ is a square}\,]\; g_\cB(\sqrt n).
+\]
+On prime powers, $g_\cB(p^k)$ is the $k$-th Wedderburn--Etherington number
+(OEIS A001190): 1, 1, 1, 2, 3, 6, 11, 23, \dots
+\end{proposition}
+
+\begin{proof}
+An element of $\cB$ over composite $n$ is an unordered pair $\{B_1,B_2\}$ with
+$N(B_1)N(B_2) = n$. Ordered pairs are counted by $\sum_{1<d<n} g_\cB(d)g_\cB(n/d)$; the
+diagonal (possible only when $n$ is a square, both factors of shadow $\sqrt n$ and equal
+as trees) is counted by $g_\cB(\sqrt n)$; unordered pairs with repetition are (ordered
+$+$ diagonal)$/2$. On $p^k$ all leaves are identical and the count reduces to
+unordered binary trees with $k$ indistinguishable leaves, the defining recursion of the
+Wedderburn--Etherington numbers.
+\end{proof}
+
+\begin{remark}[A sequence not in the OEIS]\label{rem:newseq}
+At the time of writing, the sequence $g_\cB(2), g_\cB(3), \dots =
+1,1,1,1,1,1,1,1,1,1,2,\dots$ does not appear in the OEIS. The closest entry, A375120
+(``complete binary unordered tree-factorizations''), uses a different convention: it
+counts the two children as an \emph{ordered} pair whenever the factor split is
+$(d,d)$, so it disagrees with Proposition~\ref{prop:gB} first at $n=144$ (it gives
+$42$ where the true unordered count is $41$) and disagrees with
+Wedderburn--Etherington on prime powers. Submitting $g_\cB$ is a small item of
+independent interest.
+\end{remark}
+
+\begin{example}[The four levels over $n = 12$]\label{ex:twelve}
+\[
+\begin{array}{lll}
+\cT: & 6 \text{ trees} &
+(L_2\boxtimes L_2)\boxtimes L_3,\;
+(L_2\boxtimes L_3)\boxtimes L_2,\;
+(L_3\boxtimes L_2)\boxtimes L_2, \\
+& & L_2\boxtimes(L_2\boxtimes L_3),\;
+L_2\boxtimes(L_3\boxtimes L_2),\;
+L_3\boxtimes(L_2\boxtimes L_2); \\[1mm]
+\cW: & 3 \text{ words} & (2,2,3),\; (2,3,2),\; (3,2,2); \\[1mm]
+\cB: & 2 \text{ bushes} & \{\{L_2,L_2\},L_3\},\; \{\{L_2,L_3\},L_2\}; \\[1mm]
+\cM: & 1 \text{ multiset} & \{2,2,3\}.
+\end{array}
+\]
+And $g_\cT(12) = C_2 \cdot \tfrac{3!}{2!\,1!} = 2\cdot 3 = 6$, as predicted.
+\end{example}
+
+Table~\ref{tab:degeneracies} lists the three nontrivial counts for small $n$. All
+formulas and recursions of this subsection were verified against brute-force enumeration
+for every $n \le 20000$ (Appendix~\ref{app:verification}).
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}rrrrr@{\hspace{9mm}}rrrrr@{}}
+\toprule
+$n$ & $\Omega$ & $g_\cT$ & $g_\cB$ & $g_\cW$ &
+$n$ & $\Omega$ & $g_\cT$ & $g_\cB$ & $g_\cW$ \\
+\midrule
+ 2 & 1 &  1 & 1 & 1 &  20 & 3 &  6 & 2 & 3 \\
+ 4 & 2 &  1 & 1 & 1 &  24 & 4 & 20 & 4 & 4 \\
+ 6 & 2 &  2 & 1 & 2 &  27 & 3 &  2 & 1 & 1 \\
+ 8 & 3 &  2 & 1 & 1 &  28 & 3 &  6 & 2 & 3 \\
+10 & 2 &  2 & 1 & 2 &  30 & 3 & 12 & 3 & 6 \\
+12 & 3 &  6 & 2 & 3 &  32 & 5 & 14 & 3 & 1 \\
+16 & 4 &  5 & 2 & 1 &  36 & 4 & 30 & 6 & 6 \\
+18 & 3 &  6 & 2 & 3 &  64 & 6 & 42 & 6 & 1 \\
+\bottomrule
+\end{tabular}
+\caption{Degeneracies over $n$ at the three structured levels (primes and prime-free
+rows with all counts $1$ omitted). Note $g_\cT = C_{\Omega-1}\cdot g_\cW$ throughout,
+and $g_\cB(2^k) = 1,1,1,2,3,6$ for $k=1,\dots,6$ (Wedderburn--Etherington).}
+\label{tab:degeneracies}
+\end{table}
+
+%======================================================================
+\section{Four zeta functions}\label{sec:zeta}
+
+\subsection{Definitions and functional equations}
+
+Let $P(s) = \sum_p p^{-s}$ denote the prime zeta function. For each corner
+$\mathcal{X} \in \{\cT, \cW, \cB, \cM\}$ define the partition function
+\[
+Z_{\mathcal X}(s) \;=\; \sum_{X \in \mathcal X} \frac{1}{N(X)^{s}}
+\;=\; \sum_{n \ge 2} \frac{g_{\mathcal X}(n)}{n^{s}}
+\]
+(for $\cM$ we add by hand the empty multiset, of shadow $1$, so that
+$Z_\cM = \zeta$ exactly).
+
+\begin{theorem}[Functional equations]\label{thm:funceq}
+As identities of Dirichlet series,
+\begin{align}
+Z_\cT(s) &= P(s) + Z_\cT(s)^2,
+& Z_\cT &= \frac{1 - \sqrt{1 - 4P(s)}}{2} = \sum_{k\ge1} C_{k-1}\,P(s)^k,
+\label{eq:cat}\\
+Z_\cW(s) &= P(s) + P(s)\,Z_\cW(s),
+& Z_\cW &= \frac{P(s)}{1-P(s)} = \sum_{k \ge 1} P(s)^k,
+\label{eq:geo}\\
+Z_\cB(s) &= P(s) + \tfrac12\bigl(Z_\cB(s)^2 + Z_\cB(2s)\bigr),
+& Z_\cB &= 1 - \sqrt{1 - 2P(s) - Z_\cB(2s)},
+\label{eq:otter}\\
+Z_\cM(s) &= \zeta(s) = \prod_p \frac{1}{1-p^{-s}}
+& \zeta &= \exp\Bigl(\sum_{k \ge 1} \frac{P(ks)}{k}\Bigr).
+\label{eq:euler}
+\end{align}
+In \eqref{eq:cat} and \eqref{eq:otter} the branch of the square root is fixed by
+$Z \to 0$ as $\operatorname{Re} s \to \infty$.
+\end{theorem}
+
+\begin{proof}
+\eqref{eq:cat}: a tree is a leaf or an ordered pair of trees, and $N^{-s}$ is
+multiplicative over $\boxtimes$, so the sum over pairs factors as $Z_\cT^2$. Solving the
+quadratic and expanding gives the Catalan series.
+\eqref{eq:geo}: a word is a prime or a prime followed by a word.
+\eqref{eq:otter}: an element of $\cB$ is a leaf or an unordered pair
+$\{B_1,B_2\}$, possibly equal; ordered pairs contribute $Z_\cB^2$, the diagonal
+contributes $\sum_B N(B)^{-2s} = Z_\cB(2s)$, and unordered pairs with repetition are
+half their sum --- the same P\'olya computation as in Proposition~\ref{prop:gB}.
+\eqref{eq:euler}: independence of leaf multiplicities gives the Euler product, and
+$\log \zeta(s) = \sum_p \sum_{k\ge1} p^{-ks}/k = \sum_k P(ks)/k$.
+\end{proof}
+
+\begin{remark}[One zeta per way of assembling primes]\label{rem:species}
+The four right-hand sides are the four classical constructions of the symbolic
+method~\cite{flajolet}: sequence, multiset, planar binary tree, unordered binary tree,
+each applied to the ``atomic'' Dirichlet element $P$. The answer to the question
+\emph{which generalized zeta function is the right one} is therefore: there is one for
+every combinatorial construction, all expressible in $P(s), P(2s), P(3s), \dots$, and
+the Riemann zeta function is the multiset member of the family. Note where the unit
+lives: only the multiset construction has an empty structure, which is why $n=1$ belongs
+to $\zeta$ and to no other corner (Remark~\ref{rem:nounit}).
+\end{remark}
+
+\subsection{Critical exponents}
+
+\begin{theorem}[The exponent ladder]\label{thm:ladder}
+Each series has a finite abscissa of convergence $\sigma_{\mathcal X}$, determined by
+$P$:
+\[
+\begin{array}{llll}
+\cM: & \sigma_\cM = 1 & \text{(pole of } \zeta), & Z \to \infty; \\[0.5mm]
+\cW: & P(\sigma_\cW) = 1, & \sigma_\cW = 1.3994333287263303\dots, & Z \to \infty; \\[0.5mm]
+\cB: & 2P(\sigma_\cB) + Z_\cB(2\sigma_\cB) = 1, & \sigma_\cB = 1.9884768518009081\dots, & Z \to 1; \\[0.5mm]
+\cT: & P(\sigma^{*}) = \tfrac14, & \sigma^{*} = 2.5973851271346716\dots, & Z \to \tfrac12,
+\end{array}
+\]
+and $1 < \sigma_\cW < \sigma_\cB < \sigma^{*}$: every remembered layer of structure
+strictly raises the critical exponent.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+All coefficients are nonnegative, so each abscissa is located by the real singularity.
+For $\cW$, the geometric series diverges exactly when $P \ge 1$. For $\cT$, the Catalan
+series $\sum C_{k-1}P^k$ has radius of convergence $\tfrac14$ in $P$; since
+$C_{k-1}4^{-k} \sim k^{-3/2}/(4\sqrt{\pi})$ is summable, the series still converges at
+$P = \tfrac14$, with value $\tfrac{1-\sqrt{1-1}}{2}$ evaluated as the limit
+$\sum_k C_{k-1}4^{-k} = \tfrac12$. For $\cB$, equation \eqref{eq:otter} defines $Z_\cB$
+by descending the argument-doubling cascade ($Z_\cB(2s)$ lies deep in the convergent
+region), and the singularity occurs where the discriminant $1 - 2P(s) - Z_\cB(2s)$
+vanishes, at which point $Z_\cB = 1$: this is Otter's criticality condition for
+unordered trees~\cite{otter,flajolet}. The numerical values are computed to the stated
+precision in Appendix~\ref{app:verification}; the strict ordering follows from
+$g_\cM \le g_\cW, g_\cB \le g_\cT$ together with strict inequality on a positive-density
+set of $n$.
+\end{proof}
+
+\begin{remark}[Behavior at criticality: pole versus cusp]\label{rem:cusp}
+The associative levels diverge at their critical point: $\zeta$ and $Z_\cW$ have simple
+poles ($Z_\cW$ because $P'(\sigma_\cW) = -1.7311562\dots \ne 0$). The non-associative
+levels converge at theirs: expanding \eqref{eq:cat} at $\sigma^{*}$,
+\[
+Z_\cT(s) \;=\; \tfrac12 - \sqrt{\,|P'(\sigma^{*})|\,}\,(s-\sigma^{*})^{1/2} + O(s-\sigma^{*}),
+\qquad \sqrt{|P'(\sigma^{*})|} = 0.4796402876\dots,
+\]
+a square-root cusp with a finite value and an infinite derivative, and similarly for
+$Z_\cB$ at $\sigma_\cB$ with $Z_\cB = 1$. Associativity produces geometric/exponential
+(pole-type) generating structures; its absence produces Catalan/Otter (branch-type)
+ones. The thermodynamic meaning of this dichotomy is taken up in \S\ref{sec:thermo}.
+\end{remark}
+
+\begin{remark}[Growth of the counting functions]\label{rem:growth}
+By the Wiener--Ikehara theorem applied to $Z_\cW$ (legitimate: the line
+$\operatorname{Re} s = \sigma_\cW$ lies in the half-plane of analyticity of $P$, and
+$|P(\sigma_\cW + it)| < 1$ for $t \ne 0$ by Lemma~\ref{lem:strict} below),
+\[
+\sum_{n \le x} g_\cW(n) \;\sim\; \frac{x^{\sigma_\cW}}{\sigma_\cW\,|P'(\sigma_\cW)|}
+\;\approx\; 0.4128\, x^{1.39943\dots}.
+\]
+For the tree level, transfer heuristics for the square-root singularity suggest
+$\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$; making this rigorous is
+Problem~\ref{prob:tauberian}. Note also the extreme values: along $n = 2^k$ one has
+$g_\cT(n) = C_{k-1}$, which grows like $n^{2}/(\log n)^{3/2}$ up to constants --- the
+microstate count over a single observable can approach the \emph{square} of the
+observable. For comparison, Kalm\'ar's classical problem~\cite{kalmar} of ordered
+factorizations with arbitrary parts $\ge 2$ has Dirichlet series $1/(2 - \zeta(s))$ and
+growth exponent $\rho = 1.7286472389981836\dots$ with $\zeta(\rho) = 2$; it sits between
+our word and bush levels but belongs to a different family (its parts are composite-friendly).
+\end{remark}
+
+%======================================================================
+\section{Analytic structure: inherited singularities and tree zeros}\label{sec:analytic}
+
+Since $Z_\cT = \tfrac12(1 - \sqrt{1-4P})$ is an \emph{algebraic} function of $P$, its
+analytic life is entirely inherited from the prime zeta function, plus branch points
+where the discriminant vanishes. Both parts deserve attention.
+
+\subsection{What the tree zeta inherits}
+
+The prime zeta function continues to the right half-plane by M\"obius inversion of
+\eqref{eq:euler}:
+\begin{equation}\label{eq:Pcont}
+P(s) \;=\; \sum_{k \ge 1} \frac{\mu(k)}{k}\, \log \zeta(ks),
+\qquad \operatorname{Re} s > 0,
+\end{equation}
+valid off the singular set. Equation \eqref{eq:Pcont} shows that $P$ has logarithmic
+branch points at $s = 1/k$ (from the pole of $\zeta$) \emph{and at $s = \rho/k$ for
+every nontrivial zero $\rho$ of $\zeta$}; these points cluster on the imaginary axis,
+which is a natural boundary (Landau--Walfisz~\cite{landauwalfisz}). Two consequences:
+
+\begin{enumerate}
+\item Lifting arithmetic to trees does not dissolve the Riemann Hypothesis. The zeros
+of $\zeta$ reappear, relocated, inside $Z_\cT$ as branch points at $\rho/k$.
+\item No one-variable zeta of this family can contain more analytic information than
+$P$ itself. Genuinely new invariants must either weight tree \emph{shape} (two-variable
+zetas, Problem~\ref{prob:twovar}) or couple to the additive world (\S\ref{sec:bridge}).
+\end{enumerate}
+
+\subsection{Tree zeros}
+
+The new singularities of $Z_\cT$ are the solutions of
+\begin{equation}\label{eq:treezero}
+P(s) = \tfrac14,
+\end{equation}
+square-root branch points of $Z_\cT$. We call them \emph{tree zeros} (they are the
+zeros of the discriminant $1 - 4P$). On the real axis there is exactly one, $\sigma^{*}$,
+since $P$ is strictly decreasing there. Off the axis:
+
+\begin{lemma}\label{lem:strict}
+For $\sigma > 0$ where $P(\sigma)$ converges and $t \neq 0$:
+$|P(\sigma + it)| < P(\sigma)$.
+\end{lemma}
+
+\begin{proof}
+$|\sum_p p^{-\sigma} p^{-it}| \le \sum_p p^{-\sigma}$ with equality iff all phases
+$t \log p$ agree modulo $2\pi$. For $t \ne 0$ this fails already for $p = 2, 3$ since
+$\log 3/\log 2$ is irrational.
+\end{proof}
+
+\begin{proposition}\label{prop:strip}
+Every non-real tree zero satisfies $\operatorname{Re} s < \sigma^{*}$.
+\end{proposition}
+
+\begin{proof}
+If $\sigma \ge \sigma^{*}$ and $t \neq 0$ then
+$|P(\sigma+it)| < P(\sigma) \le P(\sigma^{*}) = \tfrac14$.
+\end{proof}
+
+The tree zeros with $0 < t < 50$ are listed in Table~\ref{tab:zeros} (method in
+Appendix~\ref{app:verification}).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}cllc@{}}
+\toprule
+$k$ & $\operatorname{Re} s$ & $\operatorname{Im} s$ & $t \big/ \tfrac{2\pi}{\log 2}$ \\
+\midrule
+1 & $1.54427014392$ & $10.0122461654$ & $1.105$ \\
+2 & $2.14220467429$ & $17.8224730193$ & $1.966$ \\
+3 & $2.24736156780$ & $27.6431435747$ & $3.050$ \\
+4 & $2.15502047591$ & $35.5407136013$ & $3.921$ \\
+5 & $2.39048394209$ & $45.5394484588$ & $5.024$ \\
+\bottomrule
+\end{tabular}
+\caption{All solutions of $P(s) = \tfrac14$ with $1.4 < \operatorname{Re} s < 2.7$,
+$0 < \operatorname{Im} s < 50$ (each accompanied by its complex conjugate). A coarser
+sweep of $1.05 < \operatorname{Re} s < 1.4$ found no further solutions in this height
+range.}
+\label{tab:zeros}
+\end{table}
+
+Two empirical observations. First, the ordinates hug integer multiples of
+$2\pi/\log 2 = 9.0647\dots$: the term $2^{-s}$ dominates $P$, and $P(s) \approx \tfrac14$
+requires $2^{-s}$ to return to the vicinity of its real value, which happens with that
+period; the interference of $3^{-s}$ and later terms then shifts each zero (violently so
+for $k=1$). Second, and decisively: \emph{the real parts wander}. The naive tree
+analogue of the Riemann Hypothesis --- branch points on a vertical line --- is simply
+false. The correct lifted question is distributional; see Problem~\ref{prob:zeros}.
+By almost-periodicity of $P$ on vertical lines, the zero set is expected to have
+positive density of ordinates and real parts dense in a subinterval of
+$(\sigma_{\min}, \sigma^{*})$; identifying $\sigma_{\min}$ is open.
+
+%======================================================================
+\section{Thermodynamics of multiplicative microstates}\label{sec:thermo}
+
+Write $E(T) = \log N(T)$. Then $N(T)^{-s} = e^{-sE(T)}$ and each corner's zeta becomes a
+partition function at inverse temperature $\beta = s$:
+\[
+Z_{\mathcal X}(\beta) = \sum_{X \in \mathcal X} e^{-\beta E(X)}.
+\]
+For $\cM$ this is the primon gas of Julia~\cite{julia} and Spector~\cite{spector}: a
+free bosonic gas with one mode per prime, energy $\log p$, partition function
+$\zeta(\beta)$, and a Hagedorn catastrophe at $\beta = 1$, the setting made rigorous and
+symmetry-rich by Bost--Connes~\cite{bostconnes}. The other three corners are gases of
+\emph{structured} multiplicative states over the same spectrum.
+
+\begin{center}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+gas & states & $\beta_c$ & $T_H = 1/\beta_c$ & transition \\
+\midrule
+multiset (primon) & prime multisets & $1$ & $1$ & pole \\
+word & ordered factorizations & $1.399433\dots$ & $0.714575\dots$ & pole \\
+bush & unordered trees & $1.988477\dots$ & $0.502897\dots$ & cusp, $Z_\cB \to 1$ \\
+tree & planar trees & $2.597385\dots$ & $0.385003\dots$ & cusp, $Z_\cT \to \tfrac12$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The physics reading of Theorem~\ref{thm:ladder}: remembering order and grouping
+multiplies the number of microstates at each energy (degeneracy
+$g_{\mathcal X}(n)$), so the entropy grows faster and the gas can sustain less heat ---
+the Hagedorn temperature drops from $1$ to $0.385$. The dichotomy of
+Remark~\ref{rem:cusp} also becomes physical: for the associative gases the partition
+function itself diverges at $\beta_c$; for the non-associative gases $Z$ stays finite
+while the mean energy
+\[
+U(\beta) = -\frac{\partial}{\partial \beta} \log Z_\cT(\beta)
+\;\sim\; \frac{\sqrt{|P'(\sigma^{*})|}}{2\,Z_\cT(\sigma^{*})}\,(\beta - \sigma^{*})^{-1/2}
+\;\to\; \infty
+\]
+diverges --- a continuous (second-order-like) transition. In this precise sense,
+\emph{associativity is a first-order axiom}.
+
+%======================================================================
+\section{The additive bridge: grouped quantities}\label{sec:bridge}
+
+The additive world of the theory is flat: $\cA = \{\,n\,\ell : n \in \NN_{\ge1}\},$
+heaps of a unit quantity $\ell$ (``one liter''), with
+$+\colon \cA \times \cA \to \cA$ ordinary accumulation. The question left open by the
+framework so far is how $\cT$ and $\cA$ interact. The answer proposed here: they do not
+interact by a map $\cT \to \cA$. \emph{Multiplication acts on quantities}, and the
+result of the action is neither a tree nor a flat quantity but a third kind of object.
+
+\subsection{Grouped quantities}
+
+\begin{definition}[Grouped quantities]\label{def:grouped}
+Define \emph{packages} $t$ and \emph{quantities} $f$ by the mutual grammar
+\[
+t \;::=\; \ell \;\mid\; \pkg{f}\,,
+\qquad\qquad
+f \;::=\; t_1 \oplus t_2 \oplus \cdots \oplus t_m \quad (m \ge 1),
+\]
+where $\pkg{f}$ is a box containing the quantity $f$, and $\oplus$ is concatenation of
+finite sequences of packages. Let $\cG$ denote the set of quantities. For $k \ge 2$
+define the \emph{uniform grouping}
+\[
+k \odot f \;=\; \underbrace{\pkg{f} \oplus \pkg{f} \oplus \cdots \oplus \pkg{f}}_{k}.
+\]
+The \emph{flattening} $\alpha \colon \cG \to \cA$ counts atoms:
+$\alpha(\ell) = \ell$, $\alpha(\pkg f) = \alpha(f)$,
+$\alpha(f \oplus g) = \alpha(f) + \alpha(g)$. We identify $\cA$ with
+$(\NN_{\ge1}, +)$ and write $\alpha(f) \in \NN_{\ge 1}$.
+\end{definition}
+
+Thus $\oplus$ is associative by construction (sequences), and $\cG$ refines $\cA$: a
+quantity is a heap that remembers how it is packed. (One may further quotient $\cG$ by
+reordering of packages; nothing below changes, as the proofs never use the order.)
+
+\begin{definition}[The action]\label{def:action}
+Define $\act \colon \cT \to \mathrm{Maps}(\cG, \cG)$ by
+\[
+\act(L_p)(f) = p \odot f,
+\qquad
+\act(T_1 \boxtimes T_2) = \act(T_1) \circ \act(T_2).
+\]
+\end{definition}
+
+\begin{example}\label{ex:liters}
+$\act(L_3)(\ell) = \pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}$ --- three bottles of one liter.
+Then
+\[
+\act(L_2 \boxtimes L_3)(\ell)
+= 2 \odot \bigl(\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\bigr)
+= \pkg{\,\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\,}\;\pkg{\,\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\,}\,,
+\]
+two cartons each holding three bottles; whereas $\act(L_3 \boxtimes L_2)(\ell)$ is three
+cartons each holding two bottles. Neither is ``six liters''; both flatten to
+$6\ell$. The slogan of \S1 is now a statement about the image of $\act$: multiplication
+outputs grouped quantities, never flat ones.
+\end{example}
+
+\subsection{The stratification theorems}
+
+The three classical laws now separate into three different epistemic layers.
+
+\begin{theorem}[Associativity is additively invisible --- exactly]\label{thm:assoc}
+The action $\act$ factors through the associativity quotient $\cT \to \cW$, and the
+induced map $\cW \to \mathrm{Maps}(\cG,\cG)$ is injective. Consequently the congruence
+$\{(T, T') : \act(T) = \act(T')\}$ is precisely $\approx_a$.
+\end{theorem}
+
+\begin{proof}
+\emph{Factoring:} $\mathrm{Maps}(\cG,\cG)$ is a monoid under composition, composition is
+associative, and $\act$ sends $\boxtimes$ to $\circ$; hence
+$\act((T_1 \boxtimes T_2)\boxtimes T_3) = \act(T_1)\circ\act(T_2)\circ\act(T_3)
+= \act(T_1 \boxtimes(T_2 \boxtimes T_3))$, and $\act(T)$ depends only on
+$\mathrm{word}(T)$.
+
+\emph{Injectivity:} let $w = p_1 p_2 \cdots p_k$ and evaluate on the single atom:
+$F = \act(w)(\ell) = p_1 \odot \act(p_2\cdots p_k)(\ell)$ consists of exactly $p_1$
+identical top-level packages whose common content is $\act(p_2 \cdots p_k)(\ell)$.
+So from $F$ one reads off $p_1$ (the number of top-level packages) and recurses on the
+content; the recursion terminates at the boxless atom $\ell$. Distinct words therefore
+give distinct maps.
+\end{proof}
+
+\begin{remark}[Why associativity feels inevitable]\label{rem:whyassoc}
+Theorem~\ref{thm:assoc} explains a phenomenology: any semantics that interprets
+multiplication as an \emph{iterable operation} --- anything of the form
+$\boxtimes \mapsto \circ$ into an endomorphism monoid --- must identify at least
+$\approx_a$, because composition of maps is associative whether we like it or not. Our
+particular semantics identifies \emph{exactly} $\approx_a$: nothing more is lost.
+Parenthesization is process history with no additive trace; to observe it, one would
+have to make quantities out of operators (currying), which is precisely to leave the
+additive world. By contrast, nothing in $\mathrm{Maps}(\cG,\cG)$ forces commutativity
+--- and indeed it fails there.
+\end{remark}
+
+\begin{theorem}[The shadow of the action; commutativity dies only at the bottom]
+\label{thm:shadowaction}
+For all $T \in \cT$ and $f \in \cG$:
+\[
+\alpha\bigl(\act(T)(f)\bigr) \;=\; N(T)\cdot \alpha(f).
+\]
+Hence the induced action on flat quantities $\cA$ is multiplication by the shadow, and
+two trees act identically on $\cA$ iff $N(T) = N(T')$, i.e.\ (by
+Proposition~\ref{prop:fta}) iff $T \approx_{ac} T'$. In particular:
+$\act(L_2 \boxtimes L_3) \neq \act(L_3 \boxtimes L_2)$ as maps of $\cG$, but they agree
+after flattening.
+\end{theorem}
+
+\begin{proof}
+Induction: $\alpha(p \odot f) = p\,\alpha(f)$ since boxes are $\alpha$-transparent, and
+$\alpha(\act(T_1\boxtimes T_2)(f)) = N(T_1)\,\alpha(\act(T_2)(f)) =
+N(T_1)N(T_2)\,\alpha(f)$. The characterization of equal flat actions is unique
+factorization. Distinctness on $\cG$ is Theorem~\ref{thm:assoc} (different words).
+\end{proof}
+
+The two observation layers thus recover the two axes of the quotient square:
+\emph{grouped} observation quotients by exactly associativity; \emph{flat} observation
+quotients by exactly associativity and commutativity --- and the ``exactly'' of the
+second statement is one more disguise of the Fundamental Theorem of Arithmetic.
+
+\begin{theorem}[Distributivity is a flattening theorem]\label{thm:distrib}
+For every $T \in \cT$ and $f, g \in \cG$:
+\[
+\act(T)(f \oplus g) \;\neq\; \act(T)(f) \oplus \act(T)(g)
+\quad\text{in } \cG,
+\qquad\text{yet}\qquad
+\alpha\bigl(\act(T)(f \oplus g)\bigr) \;=\;
+\alpha\bigl(\act(T)(f) \oplus \act(T)(g)\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Let $p_1$ be the first letter of $\mathrm{word}(T)$. The left object consists of $p_1$
+top-level packages; the right object consists of $2p_1$; since $p_1 \ge 2$ these
+differ. Flattening both sides gives $N(T)(\alpha f + \alpha g)$ by
+Theorem~\ref{thm:shadowaction}.
+\end{proof}
+
+``Multiply the merged heap'' and ``multiply separately, then merge'' are genuinely
+different constructions with the same flat shadow --- the claim of the informal theory,
+now a theorem. Note also the built-in one-sidedness: quantities act from the right of
+nothing; there is no $(f \oplus g) \cdot T$ at all, because quantities are not
+operators. It is striking that in Loday's arithmetree~\cite{loday}, where both arguments
+\emph{are} trees, distributivity likewise survives on one side only.
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+law & in $\cT$ & acting on $\cG$ & after flattening $\alpha$ \\
+\midrule
+associativity & fails (free) & \textbf{holds} & holds \\
+commutativity & fails (free) & fails & \textbf{holds} \\
+distributivity & not formulable & fails & \textbf{holds} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Where the primes come from}\label{sec:primesfrom}
+
+The theory so far imports its leaf alphabet from classical arithmetic. The bridge
+removes this dependency: the leaves can be \emph{found} inside $\cG$.
+
+\begin{definition}\label{def:groupable}
+Call $n \in \NN_{\ge 2}$ \emph{groupable} if some quantity consisting of $k \ge 2$
+identical packages, each containing $m \ge 2$ atoms, flattens to $n$ --- that is, if
+$n = km$ with $k, m \ge 2$. Call $n$ \emph{prime} if it is not groupable.
+\end{definition}
+
+This is, of course, the classical definition of primality --- that is the point. It is
+expressible entirely inside the grouped additive world, using only $\odot$ and
+$\alpha$, with no imported number labels. One can therefore \emph{define} the leaf
+alphabet as the set of non-groupable heap sizes and generate $\cT$ freely on it; the
+numerical label of a leaf is recovered as the observable $\alpha$ of its heap. The
+foundational question ``are prime leaves labeled by known primes, or can the labels be
+derived?'' is thus answered: derived. What cannot be derived from the free multiplicative
+structure alone (\S\ref{sec:priorart}) is derivable the moment the additive world and the
+action are in place, because primality is an additive-observational property: a prime is
+a heap size at which uniform regrouping is impossible.
+
+%======================================================================
+\section{Arithmetic functions on trees}\label{sec:functions}
+
+Classical arithmetic functions pull back along $N$. For the Euler totient,
+\[
+\varphi_\cT(T) \;=\; N(T) \prod_{p \in \supp(T)} \Bigl(1 - \frac1p\Bigr)
+\;=\; \varphi\bigl(N(T)\bigr)
+\]
+by Euler's product formula; e.g.\ $\varphi_\cT(L_2 \boxtimes L_3) = 6\cdot\tfrac12\cdot\tfrac23 = 2$.
+But this pullback factors through the double quotient: it cannot distinguish
+$L_2\boxtimes L_3$ from $L_3 \boxtimes L_2$. A genuinely tree-theoretic totient should
+satisfy: (i) a recursion in $\boxtimes$; (ii) compatibility, i.e.\ it descends to
+$\varphi \circ N$ after the double quotient; (iii) sensitivity, i.e.\ it separates some
+pair of trees with equal shadow. No canonical candidate is known to us; we record this
+as Problem~\ref{prob:totient}. The same design brief applies to M\"obius $\mu$,
+divisor functions, and to two-variable refinements
+$Z_\cT(s, q) = \sum_T q^{\,\mathrm{stat}(T)} N(T)^{-s}$ for shape statistics
+$\mathrm{stat}$ (depth, right-branch count, Tamari rank): the interesting ones are
+exactly those \emph{not} expressible through $P$ alone (\S\ref{sec:analytic}).
+
+%======================================================================
+\section{Open problems}\label{sec:open}
+
+\begin{question}[Tree-zero distribution]\label{prob:zeros}
+Describe the solution set of $P(s) = \tfrac14$ in $0 < \operatorname{Re} s < \sigma^{*}$:
+density of ordinates up to height $T$; closure of the set of real parts; the left edge
+$\sigma_{\min}$. Almost-periodicity of $P$ on vertical lines is the natural tool. More
+generally, develop the ``spectral theory'' of the level sets $P(s) = c$ for
+$0 < c < P(1^{+})$, of which the tree zeros are the case $c = \tfrac14$ and the word
+poles the case $c = 1$.
+\end{question}
+
+\begin{question}[Tauberian rigor]\label{prob:tauberian}
+Prove $\sum_{n \le x} g_\cT(n) \sim c\, x^{\sigma^{*}} (\log x)^{-3/2}$ (a Delange-type
+theorem for Dirichlet series with a square-root singularity), and its analogue for
+$g_\cB$.
+\end{question}
+
+\begin{question}[The cascade of the bush zeta]\label{prob:cascade}
+The continuation $Z_\cB(s) = 1 - \sqrt{1 - 2P(s) - Z_\cB(2s)}$ propagates each
+singularity of $Z_\cB$ at $s_0$ to potential singularities at $s_0/2, s_0/4, \dots$ and
+mixes them with those of $P$. Map this self-similar singularity structure; determine
+whether $Z_\cB$ has a natural boundary strictly to the right of
+$\operatorname{Re} s = 0$.
+\end{question}
+
+\begin{question}[Beyond $P$]\label{prob:twovar}
+Every one-variable zeta of \S\ref{sec:zeta} is a function of $P(s), P(2s), \dots$ Find a
+natural two-variable zeta $Z_\cT(s,q)$ (weighting a shape statistic) that is provably
+\emph{not} a function of the $P(ks)$, and study its singularities in $(s,q)$.
+\end{question}
+
+\begin{question}[Tree-sensitive totient]\label{prob:totient}
+Construct $\varphi^{\mathrm{tree}}$ satisfying (i)--(iii) of \S\ref{sec:functions},
+ideally with an inclusion--exclusion (M\"obius) interpretation over subtrees, perhaps
+via the Connes--Kreimer-style coproduct on rooted trees.
+\end{question}
+
+\begin{question}[The full expression calculus]\label{prob:calculus}
+\S\ref{sec:bridge} lets trees act on quantities but does not yet allow sums \emph{inside}
+trees. Build the two-sorted expression grammar with both $\oplus$ and $\boxtimes$,
+where distributivity becomes a directed rewrite rule (evaluation step) rather than an
+equation, and relate its normal forms to Loday's grove addition~\cite{loday,brunoyasaki}.
+\end{question}
+
+\begin{question}[Axiomatics of the bridge]\label{prob:axioms}
+Characterize the pair $(\cG, \alpha)$ abstractly: for which ``grouping worlds'' does
+Theorem~\ref{thm:assoc} hold with \emph{exactly} $\approx_a$, and is $(\cG,\alpha)$
+universal among them?
+\end{question}
+
+%======================================================================
+\appendix
+\section{Computational verification}\label{app:verification}
+
+All computations are reproducible from the two scripts in the \texttt{verification/}
+directory of this repository (\texttt{verify\_combinatorics.py}, standard library only;
+\texttt{analytic.py}, requiring \texttt{mpmath} and \texttt{numpy}).
+
+\subsection{Combinatorial checks}
+
+For every $n \le 20000$: the closed formula of Proposition~\ref{prop:gT} agrees with a
+direct recursive enumeration $g_\cT(n) = [n \in \mathbb{P}] + \sum_{d \mid n,\, 1<d<n}
+g_\cT(d)\, g_\cT(n/d)$; the multinomial of Proposition~\ref{prop:gW} agrees with the
+first-letter recursion; and the unordered recursion of Proposition~\ref{prop:gB}
+reproduces the Wedderburn--Etherington numbers $1,1,1,2,3,6,11,23,46,98,207,451,983,2179$
+at $n = 2^k$, $k \le 14$, as well as the hand-enumerated values $g_\cB(12)=2$,
+$g_\cB(24)=4$, $g_\cB(30)=3$. The OEIS near-miss A375120 (which uses ordered pairs on
+the diagonal) first diverges at $n = 144$: $42$ against the true $41$; a control query
+confirmed the OEIS search interface finds A375120 from its own terms while the
+$g_\cB$ terms return no match (July 2026).
+
+\subsection{Analytic checks and constants}
+
+With $g_\cT(n)$, $g_\cB(n)$ enumerated for $n \le 20000$, partial sums of the Dirichlet
+series were compared with the closed/functional forms of Theorem~\ref{thm:funceq}:
+
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+series & $s$ & partial sum vs.\ closed form & difference \\
+\midrule
+$Z_\cT$ & $3$ & $0.225547637865\ldots$ vs.\ $0.225705704214\ldots$ & $-1.6\cdot10^{-4}$ (tail) \\
+$Z_\cT$ & $4$ & $0.084059063652\ldots$ vs.\ $0.084059066410\ldots$ & $-2.8\cdot10^{-9}$ \\
+$Z_\cT$ & $6$ & agreement & $-3.1\cdot10^{-18}$ \\
+$Z_\cB$ & $3$ & agreement & $-4.0\cdot10^{-7}$ \\
+$Z_\cB$ & $4$ & agreement & $-1.1\cdot10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+the residual differences being exactly the truncation tails expected from the critical
+exponents. Constants (via \texttt{mpmath.primezeta} at 25--30 significant digits):
+\[
+\begin{aligned}
+\sigma^{*} &= 2.59738512713467162\dots, &\quad P'(\sigma^{*}) &= -0.230054805474\dots,\\
+\sigma_\cB &= 1.98847685180090810\dots, &\quad Z_\cB(\sigma_\cB) &= 1\ (\text{verified to } 10^{-6}),\\
+\sigma_\cW &= 1.39943332872633032\dots, &\quad P'(\sigma_\cW) &= -1.73115620186\dots,\\
+\rho_{\text{Kalm\'ar}} &= 1.72864723899818362\dots, &\quad P(2) &= 0.45224742004106550\dots
+\end{aligned}
+\]
+
+\subsection{Tree zeros}
+
+The zeros of Table~\ref{tab:zeros} were located by a grid scan of
+$|P_{\le 20000}(s) - \tfrac14|$ (truncated prime sum, step $0.02$) over
+$[1.40, 2.70] \times [0.3, 50]$, followed by Newton polishing on the full
+$\texttt{primezeta}$ at 20 significant digits; each reported zero satisfies
+$|P(s) - \tfrac14| < 10^{-15}$. A coarser sweep of $[1.05, 1.40) \times [0.5, 50]$
+(step $0.05 \times 0.25$) found no additional candidates; its only sub-threshold dip
+flowed to zero \#1 of the table.
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{bostconnes}
+J.-B.~Bost and A.~Connes,
+\emph{Hecke algebras, type III factors and phase transitions with spontaneous symmetry
+breaking in number theory},
+Selecta Math. (N.S.) \textbf{1} (1995), 411--457.
+
+\bibitem{brunoyasaki}
+A.~Bruno and D.~Yasaki,
+\emph{The arithmetic of trees},
+arXiv:0809.4448 (2008).
+
+\bibitem{flajolet}
+P.~Flajolet and R.~Sedgewick,
+\emph{Analytic Combinatorics},
+Cambridge University Press, 2009.
+
+\bibitem{julia}
+B.~L.~Julia,
+\emph{Statistical theory of numbers},
+in: Number Theory and Physics (Les Houches, 1989), Springer Proceedings in Physics
+\textbf{47}, Springer, 1990, pp.~276--293.
+
+\bibitem{kalmar}
+L.~Kalm\'ar,
+\emph{\"Uber die mittlere Anzahl der Produktdarstellungen der Zahlen},
+Acta Litt. Sci. Szeged \textbf{5} (1931), 95--107.
+
+\bibitem{landauwalfisz}
+E.~Landau and A.~Walfisz,
+\emph{\"Uber die Nichtfortsetzbarkeit einiger durch Dirichletsche Reihen definierter
+Funktionen},
+Rend. Circ. Mat. Palermo \textbf{44} (1920), 82--86.
+
+\bibitem{loday}
+J.-L.~Loday,
+\emph{Arithmetree},
+J. Algebra \textbf{267} (2003), 507--539; arXiv:math/0112034.
+
+\bibitem{otter}
+R.~Otter,
+\emph{The number of trees},
+Ann. of Math. \textbf{49} (1948), 583--599.
+
+\bibitem{oeis}
+N.~J.~A.~Sloane (ed.),
+\emph{The On-Line Encyclopedia of Integer Sequences},
+\url{https://oeis.org}. Entries A000108, A001190, A008480, A144757, A375120.
+
+\bibitem{spector}
+D.~Spector,
+\emph{Supersymmetry and the M\"obius inversion function},
+Comm. Math. Phys. \textbf{127} (1990), 239--252.
+
+\bibitem{stanley}
+R.~P.~Stanley,
+\emph{Catalan Numbers},
+Cambridge University Press, 2015.
+
+\bibitem{tamari}
+F.~M\"uller-Hoissen, J.~M.~Pallo, and J.~Stasheff (eds.),
+\emph{Associahedra, Tamari Lattices and Related Structures},
+Progress in Mathematics \textbf{299}, Birkh\"auser, 2012.
+
+\end{thebibliography}
+
+\end{document}

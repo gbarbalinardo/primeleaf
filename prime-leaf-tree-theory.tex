@@ -1,0 +1,1675 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amscd}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+
+% ---------- macros ----------
+\newcommand{\cT}{\mathcal{T}}   % planar binary trees (free magma)
+\newcommand{\cW}{\mathcal{W}}   % words (free semigroup)
+\newcommand{\cB}{\mathcal{B}}   % unordered binary trees (free commutative magma)
+\newcommand{\cM}{\mathcal{M}}   % prime multisets (free commutative semigroup)
+\newcommand{\cG}{\mathcal{G}}   % grouped quantities
+\newcommand{\cA}{\mathcal{A}}   % flat quantities
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\pkg}[1]{\boxed{#1}}
+\newcommand{\act}{\rho}
+\newcommand{\physread}{\medskip\noindent\textbf{Physical reading.}\ }
+\DeclareMathOperator{\supp}{supp}
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Prime-Leaf Tree Theory\\[2mm]
+\large Arithmetic as the statistical mechanics of multiplication histories}
+\author{Giuseppe Barbalinardo}
+\date{Working draft --- \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We treat the integers as a gas. The single-particle spectrum is the set of
+\emph{primons}: one mode per prime $p$, of energy $\log p$. In the usual reading ---
+the primon gas of Julia and of Bost--Connes --- an integer is a Fock state (its prime
+factorization is an occupation-number configuration) and the Riemann zeta function is
+the free bosonic partition function. This paper studies the same gas \emph{before}
+symmetrization and \emph{before} the interaction history is forgotten. A microstate is
+then a \emph{multiplication tree}: a fireball built by recorded pairwise fusions of
+primons, ordered and parenthesized, whose only conserved quantity is the integer
+$N(T) = e^{E(T)}$ it evaluates to. Multiplication is not commutative or associative at
+this level, because microstates remember their formation; ordinary arithmetic is the
+fully coarse-grained description, and the Fundamental Theorem of Arithmetic is
+precisely the statement that the occupation-number description is faithful (zero
+residual entropy). Forgetting history and symmetrizing are independent
+coarse-grainings, so there are four gases, each with an exact partition function
+determined by the prime zeta function $P(\beta)$: the Riemann gas $\zeta(\beta)$, a
+distinguishable-particle gas with inverse Hagedorn temperature $1.39943\dots$, a
+non-planar fireball gas at $1.98847\dots$, and the full planar fireball gas, whose
+partition function obeys the statistical bootstrap equation $Z = P + Z^2$ of
+Hagedorn--Frautschi type and reaches its Hagedorn point at
+$\beta_H = \sigma^{*} = 2.59738\dots$, where $P(\sigma^{*}) = \tfrac14$. There the
+partition function is finite and exactly $\tfrac12$, with the square-root branch point
+universal for branched polymers: the transition is continuous, whereas the symmetrized
+gases diverge at theirs --- associativity is, in this precise sense, a first-order
+axiom. The complex-$\beta$ singularities of the fireball gas (its Fisher zeros) are
+computed: they inherit the Riemann zeros through $P$, and their new branch points,
+the solutions of $P(\beta) = \tfrac14$, do \emph{not} lie on a vertical line. Finally,
+the bridge to addition: fireballs act as \emph{processes} on states of hierarchically
+clustered matter. Under this action associativity becomes unobservable (processes
+compose), commutativity fails at the level of states and survives only in expectation,
+and distributivity is a theorem about the extensive observable rather than an axiom.
+Primes themselves emerge as the cluster sizes that cannot crystallize into identical
+cells. All combinatorial claims are verified by exhaustive enumeration and all
+constants to high precision (Appendix~\ref{app:verification}).
+\end{abstract}
+
+\tableofcontents
+
+%======================================================================
+\section{Introduction}
+
+\subsection{Multiplication before evaluation}
+
+Ordinary arithmetic writes
+\[
+3 \times 2 = 6
+\qquad\text{and}\qquad
+1+1+1+1+1+1 = 6
+\]
+and treats the two results as the same kind of object. The starting intuition of this
+paper is that they are not. Six liters obtained by pouring is a flat additive quantity.
+``Three groups of two'' is a \emph{structured} object --- and a differently structured
+object than ``two groups of three'' --- whose measured value happens to be $6$. The
+slogan:
+
+\begin{quote}
+\emph{You never get six liters from multiplication. You get a structured object whose
+shadow is $6$.}
+\end{quote}
+
+Physics has a standard name for this situation: $6$ is a \emph{macrostate}, and the
+ways of building it are \emph{microstates}. We therefore refuse to let multiplication
+collapse into numbers. A product is a \emph{multiplication tree}: the recorded fusion
+history of the primes involved, ordered and parenthesized, unevaluated. The familiar
+integer is produced only by an evaluator --- the shadow map $N$ --- which plays the
+role of the measurement: it reads off the single conserved quantity and discards the
+history. The classical laws of multiplication are then not properties of
+multiplication at all. They are properties of the \emph{coarse-graining}: statements
+about which distinct microstates the measurement fails to distinguish. In one line:
+
+\begin{quote}
+\emph{The primes are the particles; an integer is a calorimeter reading; the Riemann
+zeta function is a partition function; and ordinary arithmetic is what survives total
+coarse-graining.}
+\end{quote}
+
+\subsection{The dictionary}\label{sec:dictionary}
+
+The paper is written for readers who think in statistical mechanics. Every physical
+term below is either an \emph{exact structural identity} (the object on the left
+satisfies, verbatim, the defining equation of the object on the right) or is flagged
+as imagery. Theorems remain theorems; the physics is load-bearing, not decorative.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+tree theory & physics \\
+\midrule
+prime $p$ & primon: single-particle mode of energy $\varepsilon_p = \log p$ \\
+multiplication tree $T \in \cT$ & fireball: a recorded history of pairwise fusions \\
+$\boxtimes$ (pair formation) & fusion; on energies $E = \log N$ it is addition \\
+shadow $N(T)$ & the calorimeter reading: the measured integer $e^{E(T)}$ \\
+left--right order kept & ordered channels, as for planar diagrams \\
+parenthesization kept & interaction history retained \\
+quotient by associativity & forget the history, keep the beam: asymptotic state \\
+quotient by commutativity & Bose symmetrization \\
+words $\cW$ & basis of the full (Boltzmann) Fock space \\
+multisets $\cM$ & occupation numbers: the primon gas of Julia \\
+degeneracy $g(n)$; \ $S(n) = \log g(n)$ & microstate count and Boltzmann entropy of the integer $n$ \\
+Fund.\ Thm.\ of Arithmetic & the occupation-number description is faithful: $S_\cM \equiv 0$ \\
+$Z(s) = \sum N^{-s}$, \ $s = \beta$ & canonical partition function at inverse temperature $\beta$ \\
+$Z = P + Z^2$ & statistical bootstrap equation (Hagedorn--Frautschi--Nahm) \\
+critical exponents $\sigma$ & inverse Hagedorn temperatures $\beta_H$ \\
+solutions of $P(s) = \tfrac14$ & Fisher singularities: complex-$\beta$ singularities of $Z$ \\
+grouped quantities $\cG$ & states of hierarchically clustered matter \\
+the action $\act(T)$ & a process applied to states; $\boxtimes \mapsto$ composition \\
+flattening $\alpha$ & the extensive observable (particle number); expectation level \\
+\bottomrule
+\end{tabular}
+\caption{The dictionary. ``Calorimeter'', ``fireball'', ``beam'' and ``cluster'' are
+imagery; every other row is an exact identity established in the text.}
+\label{tab:dictionary}
+\end{table}
+
+Everything is elementary and self-contained: finite combinatorics plus one-variable
+complex analysis. No result depends on the imagery.
+
+\subsection{Results}
+
+\begin{enumerate}
+\item \textbf{The microstate space} (\S\ref{sec:trees}). The fireball world is the
+free magma $\cT$ on the set of primes; the measurement is the unique magma morphism
+$N\colon \cT \to (\NN_{\ge2},\cdot)$ with $N(L_p) = p$; energies
+$E = \log N$ add under fusion. The interacting world has no vacuum: $1$ is not the
+shadow of any fireball, and the empty state exists only in the Fock description.
+
+\item \textbf{Coarse-graining is two-dimensional} (\S\ref{sec:square}). Forgetting the
+interaction history (associativity) and symmetrizing (commutativity) are
+\emph{independent} operations, giving a commuting square of four state spaces
+$\cT, \cW, \cB, \cM$. The Fundamental Theorem of Arithmetic says exactly that the
+final corner has one microstate per macrostate. Each level carries a computable
+entropy: e.g.\ $S_\cT(12) = \log 6$. The degeneracies are Catalan $\times$ multinomial
+for $\cT$, multinomial for $\cW$ (OEIS A008480), a sequence for $\cB$ that restricts
+to the Wedderburn--Etherington numbers on prime powers and appears not to have been
+recorded before, and $1$ for $\cM$. All verified exhaustively for $n \le 20000$.
+
+\item \textbf{Four partition functions and a Hagedorn ladder} (\S\ref{sec:zeta}). All
+four are exact functionals of the prime zeta function $P$: the free Bose gas
+$\zeta(\beta)$ (the Euler product \emph{is} the textbook free-boson computation), a
+geometric gas $P/(1-P)$, an Otter gas with argument-doubling equation, and the planar
+fireball gas obeying the bootstrap equation $Z = P + Z^2$. The inverse Hagedorn
+temperatures form a strict ladder
+\[
+1 \;<\; 1.3994333287263303 \;<\; 1.9884768518009081 \;<\; \sigma^{*} = 2.5973851271346716 ,
+\]
+one rung per layer of remembered structure. At its Hagedorn point the fireball gas
+converges with $Z_\cT(\sigma^{*}) = \tfrac12$ exactly and a square-root branch point
+--- the universal branched-polymer singularity, the same criticality that governs
+planar-diagram counting in the Gaussian matrix model. The symmetrized gases instead
+have poles: whether the Hagedorn temperature is attainable is decided by
+associativity. The classical Hagedorn--Frautschi--Nahm bootstrap, transplanted onto
+the primon spectrum, slots into the same family with
+$\beta_H = 2.1487511659\dots$ (Boltzmann counting) and $2.3072314551\dots$ (Bose
+counting).
+
+\item \textbf{Fisher zeros} (\S\ref{sec:analytic}). $Z_\cT$ is algebraic in $P$, so
+its complex-$\beta$ singularities are inherited from $P$ --- which carries a branch
+point at $\beta = \rho/k$ for every nontrivial Riemann zero $\rho$, with the imaginary
+axis a natural boundary --- plus new branch points where $P(\beta) = \tfrac14$. We
+compute the five with $0 < \operatorname{Im}\beta < 50$: they recur near integer
+multiples of $2\pi/\log 2$ (the lightest primon sets the frequency) and do \emph{not}
+lie on a vertical line. The naive tree analogue of the Riemann Hypothesis is false;
+the right question is the distribution of these Fisher singularities --- and that
+question we answer: in every substrip of $\operatorname{Re} s > 1$ the tree zeros
+have an exact asymptotic density (Theorem~\ref{thm:density}, via the
+Jessen--Tornehave theory of almost periodic functions). Each singularity occurs when
+a single primon mode outshines the coherent rest, and the density is the total
+dominance rate $\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of all $59$ zeros to
+height $500$ matches the formula's Monte Carlo prediction of $58.3$ to one percent.
+
+\item \textbf{The additive bridge} (\S\ref{sec:bridge}). Fireballs act as
+\emph{processes} on states of clustered matter (boxed heaps of unit quanta), and the
+classical laws stratify by observability: associativity is invisible to the action
+--- exactly, because processes compose --- while commutativity fails on states and
+holds only in expectation, and distributivity holds only in expectation. ``You never
+get six liters from multiplication'' becomes a theorem about the image of the action.
+The primes themselves are then derivable inside the additive world: a size is
+composite iff its heap can crystallize into $k \ge 2$ identical cells of $m \ge 2$
+quanta; primes are the non-crystallizable sizes.
+
+\item \textbf{Computational content} (\S\ref{sec:comp}). Two theorems mark what the
+gas can and cannot compute. Microstate counting is \emph{shape-blind}: every
+degeneracy depends only on the exponent profile of $n$, so no counting of histories
+can locate primes --- the no-free-lunch face of freeness. In the other direction, a
+random integer seen at full resolution is a universal random object: a uniform
+Catalan tree with a Gaussian, $\log\log x$, number of primons (Erd\H{o}s--Kac lifted
+to fireballs). The interface where the theory genuinely meets the complexity of
+finding primes is \emph{expression cost}: integer complexity is the first invariant
+here that escapes $P$ (it distinguishes $4$ from $9$), Wilson's theorem makes
+primality one factorial-expression away, and the open frontier --- deterministic
+prime generation --- is a derandomization problem, mapped but not shortened.
+\end{enumerate}
+
+\subsection{Relation to existing work}\label{sec:priorart}
+
+The Fock-level reading is classical: the primon gas of Julia~\cite{julia} and
+Spector~\cite{spector}, deepened by Bost--Connes~\cite{bostconnes}, identifies
+$\zeta(\beta)$ with a free bosonic partition function over the spectrum
+$\{\log p\}$ and locates a Hagedorn catastrophe at $\beta = 1$. Hagedorn's limiting
+temperature and the statistical bootstrap are from~\cite{hagedorn,frautschi}, with the
+analytical solution and the square-root criticality due to Nahm~\cite{nahm}.
+Lee--Yang and Fisher zeros are from~\cite{leeyang,fisher}. On the mathematical side,
+the free magma and its Catalan combinatorics are standard~\cite{stanley}; the
+degeneracy $g_\cT(n)$ appears as OEIS A144757 and the ordered-factorization count as
+A008480~\cite{oeis}; ordered factorizations with arbitrary parts go back to
+Kalm\'ar~\cite{kalmar}; the natural boundary of the prime zeta function is due to
+Landau and Walfisz~\cite{landauwalfisz}. Closest in spirit to our refusal to
+symmetrize is Loday's \emph{arithmetree}~\cite{loday,brunoyasaki}: arithmetic on
+planar binary trees with non-commutative addition and one-sided distributivity.
+
+Against this background the contributions here are: the two-dimensional
+coarse-graining (the square, with the new non-planar corner, its Otter equation and
+its Hagedorn point); the exact critical value $Z_\cT(\sigma^{*}) = \tfrac12$ and the
+attainability dichotomy; the computation and non-collinearity of the Fisher zeros;
+the process/state/expectation stratification of the arithmetic laws; and the internal
+derivation of the primes. One caution runs through the paper: a \emph{free} structure
+carries no secrets about the primes themselves. Everything classically hard enters
+through the single-particle spectrum --- that is, through $P(\beta)$ --- or through
+the additive bridge. What the theory offers is a clean separation of the structural
+from the arithmetic, and computable invariants in the separated layers.
+
+%======================================================================
+\section{The fireball algebra}\label{sec:trees}
+
+\subsection{Primons and fusion histories}
+
+\begin{definition}[Multiplication trees]\label{def:trees}
+Fix the set of prime leaves $\{L_p : p \text{ prime}\}$. The set $\cT$ of
+\emph{multiplication trees} is defined by the grammar
+\[
+T \;::=\; L_p \;\mid\; (T_1 \boxtimes T_2).
+\]
+Thus $\cT$ is the \emph{free magma} on the set of primes: $\boxtimes$ is ordered-pair
+formation, subject to no laws whatsoever.
+\end{definition}
+
+\physread $L_p$ is a single primon, of energy $\varepsilon_p = \log p$. A tree is a
+fireball that remembers how it was assembled: $T_1 \boxtimes T_2$ is the fusion of the
+fireballs $T_1$ and $T_2$, in that order. Examples of \emph{distinct} microstates:
+\[
+L_2, \qquad
+L_2 \boxtimes L_3, \qquad
+L_3 \boxtimes L_2, \qquad
+(L_2 \boxtimes L_3) \boxtimes L_5, \qquad
+L_2 \boxtimes (L_3 \boxtimes L_5).
+\]
+Non-commutativity and non-associativity are not axioms we impose; they are the
+\emph{absence} of axioms. Keeping the left--right order is keeping the fusion channels
+ordered, as one does for planar diagrams of matrix-valued fields~\cite{thooft};
+keeping the parenthesization is keeping the interaction history --- which pair fused
+first. A multiplication tree is the parse tree of a multiplication expression before
+evaluation; equivalently, a tree-level diagram built from a single cubic vertex whose
+external legs are primons.
+
+For $T \in \cT$ write $|T|$ for the number of leaves and $\mathrm{word}(T)$ for the
+left-to-right sequence of leaf labels; $\supp(T)$ denotes the set of primes occurring.
+
+\subsection{The measurement}
+
+\begin{definition}[Shadow]\label{def:shadow}
+The \emph{shadow map} $N \colon \cT \to \NN_{\ge 2}$ is defined recursively by
+\[
+N(L_p) = p, \qquad N(T_1 \boxtimes T_2) = N(T_1)\,N(T_2).
+\]
+Equivalently: $N$ is the unique magma morphism from $\cT$ to the multiplicative
+semigroup $(\NN_{\ge2},\cdot)$ sending $L_p$ to $p$.
+\end{definition}
+
+\physread Define the energy $E(T) = \log N(T)$. Then $E(L_p) = \varepsilon_p$ and
+$E(T_1 \boxtimes T_2) = E(T_1) + E(T_2)$: energies add under fusion \emph{because}
+shadows multiply. The shadow is the calorimeter reading --- the single conserved
+quantity, blind to history and to order. An integer is not a microstate; it is the
+measured value $e^{E}$ shared by many microstates.
+
+\begin{remark}[No vacuum]\label{rem:nounit}
+$\cT$ has no unit object and $1$ is not the shadow of any tree: the image of
+$N$ is exactly $\NN_{\ge 2}$. One could freely adjoin an empty tree $I$, but then
+$I \boxtimes T \neq T$ (freeness again), which buys nothing. In gas language: the
+interacting world has no vacuum state; the vacuum ($n = 1$, zero energy) exists only
+in the Fock description, as the empty occupation configuration
+(\S\ref{sec:square}).
+\end{remark}
+
+Composite numbers are not primitive objects of this world. There is no $L_6$; the
+value $6$ occurs only as the common reading of the two fireballs $L_2\boxtimes L_3$
+and $L_3\boxtimes L_2$. Likewise $8$ is the common reading of
+$(L_2\boxtimes L_2)\boxtimes L_2$ and $L_2\boxtimes(L_2\boxtimes L_2)$: distinct
+formation histories, one observable. Quantifying this degeneracy is the subject of the
+next section.
+
+%======================================================================
+\section{Coarse-graining: from histories to Fock space}\label{sec:square}
+
+\subsection{Two independent coarse-grainings}
+
+\begin{definition}\label{def:congruences}
+Let $\approx_a$ be the smallest congruence on $(\cT,\boxtimes)$ with
+$(T_1\boxtimes T_2)\boxtimes T_3 \approx_a T_1\boxtimes(T_2\boxtimes T_3)$ for all
+$T_i$, and $\approx_c$ the smallest congruence with
+$T_1\boxtimes T_2 \approx_c T_2\boxtimes T_1$. Write
+\[
+\cW = \cT/\!\approx_a, \qquad
+\cB = \cT/\!\approx_c, \qquad
+\cM = \cT/(\approx_a \vee \approx_c).
+\]
+\end{definition}
+
+Each quotient is a familiar free object: $\cW$ is the free semigroup on the primes
+(nonempty \emph{words} in primes, i.e.\ ordered prime factorizations); $\cB$ is the
+free \emph{commutative} magma (trees with unordered branches); $\cM$ is the free
+commutative semigroup (nonempty finite \emph{multisets} of primes). The shadow map
+descends to all four corners, and the two identifications commute:
+\[
+\begin{CD}
+\cT @>\text{forget history}>> \cW \\
+@V\text{symmetrize}VV @VV\text{symmetrize}V \\
+\cB @>>\text{forget history}> \cM
+\end{CD}
+\]
+The shadow map of the final corner is where classical arithmetic begins:
+
+\begin{proposition}[FTA as exactness of the collapse]\label{prop:fta}
+The induced map $N \colon \cM \to \NN_{\ge2}$ is a bijection. This statement is
+equivalent to the Fundamental Theorem of Arithmetic.
+\end{proposition}
+
+\begin{proof}
+Elements of $\cM$ are nonempty prime multisets $\{p_1,\dots,p_k\}$ with
+$N = p_1\cdots p_k$. Surjectivity of $N$ is the existence of a prime factorization;
+injectivity is its uniqueness. \end{proof}
+
+\physread The two arrows are the two things an observer can throw away.
+\emph{Forgetting the history} keeps only the ordered list of constituent primons ---
+the asymptotic content of the fireball, an S-matrix state with the internal dynamics
+integrated out. \emph{Symmetrizing} declares the primons indistinguishable: Bose
+statistics. Doing both lands in the occupation-number description: an element of
+$\cM$ is exactly a configuration $(\alpha_2, \alpha_3, \alpha_5, \dots)$, a basis
+vector of the symmetric Fock space over the single-particle spectrum. $\cW$, the
+half-way house that keeps order but forgets history, is a basis of the \emph{full}
+(Boltzmann) Fock space. Proposition~\ref{prop:fta} then says: \emph{the
+occupation-number description of the integers is faithful}. Unique factorization is
+the absence of residual entropy at the Fock level.
+
+\begin{remark}[The identifications are themselves structured]
+The associativity identification is not a group action: two trees with the same word
+are connected by a sequence of reassociations, and the set of parenthesizations of a
+fixed word carries the \emph{Tamari lattice} structure, realized geometrically by the
+associahedron~\cite{tamari}. Commutativity moves similarly generate the permutohedron.
+The quotient square therefore has polytopal fibers, a refinement we do not pursue
+here.
+\end{remark}
+
+\subsection{Degeneracies: the entropy of an integer}
+
+For $n \ge 2$ with factorization $n = \prod_p p^{\alpha_p}$ write
+$\Omega(n) = \sum_p \alpha_p$. For each corner $\mathcal{X}$ of the square let
+\[
+g_{\mathcal X}(n) = \#\{X \in \mathcal{X} : N(X) = n\},
+\qquad
+S_{\mathcal X}(n) = \log g_{\mathcal X}(n),
+\]
+the microstate count and the Boltzmann entropy of the macrostate $n$ at level
+$\mathcal X$. Proposition~\ref{prop:fta} says $S_\cM \equiv 0$; the other three levels
+have genuine entropy.
+
+\begin{proposition}[Planar fireballs]\label{prop:gT}
+\[
+g_\cT(n) \;=\; C_{\Omega(n)-1}\;\frac{\Omega(n)!}{\prod_p \alpha_p!},
+\qquad C_k = \frac{1}{k+1}\binom{2k}{k}.
+\]
+\end{proposition}
+
+\begin{proof}
+A tree with shadow $n$ has exactly $\Omega(n)$ leaves, by induction and
+multiplicativity of $N$. The map $T \mapsto (\text{shape}(T), \mathrm{word}(T))$ is a
+bijection from $\{T : N(T)=n\}$ to (binary tree shapes with $k=\Omega(n)$ leaves)
+$\times$ (sequences of primes with product $n$). There are $C_{k-1}$
+shapes~\cite{stanley} and $\Omega!/\prod \alpha_p!$ sequences (permutations of the
+prime multiset). The two factors are independent: the fiber of the full collapse
+$\cT \to \cM$ splits as histories $\times$ orderings.
+\end{proof}
+
+\begin{proposition}[Words]\label{prop:gW}
+$g_\cW(n) = \Omega(n)!/\prod_p \alpha_p!$, with recursion
+$g_\cW(n) = \sum_{p \mid n} g_\cW(n/p)$ and $g_\cW(p)=1$. This is OEIS A008480.
+\end{proposition}
+
+\begin{proposition}[Non-planar fireballs]\label{prop:gB}
+$g_\cB$ satisfies $g_\cB(p) = 1$ and, for composite $n$,
+\[
+g_\cB(n) \;=\; \frac12 \sum_{\substack{d \mid n \\ 1<d<n}} g_\cB(d)\, g_\cB(n/d)
+\;+\; \frac12\,[\,n \text{ is a square}\,]\; g_\cB(\sqrt n).
+\]
+On prime powers, $g_\cB(p^k)$ is the $k$-th Wedderburn--Etherington number
+(OEIS A001190): 1, 1, 1, 2, 3, 6, 11, 23, \dots
+\end{proposition}
+
+\begin{proof}
+An element of $\cB$ over composite $n$ is an unordered pair $\{B_1,B_2\}$ with
+$N(B_1)N(B_2) = n$. Ordered pairs are counted by $\sum_{1<d<n} g_\cB(d)g_\cB(n/d)$;
+the diagonal (possible only when $n$ is a square, both factors of shadow $\sqrt n$ and
+equal as trees) is counted by $g_\cB(\sqrt n)$; unordered pairs with repetition are
+(ordered $+$ diagonal)$/2$. On $p^k$ all leaves are identical and the count reduces to
+unordered binary trees with $k$ indistinguishable leaves, the defining recursion of
+the Wedderburn--Etherington numbers.
+\end{proof}
+
+\begin{remark}[A sequence not in the OEIS]\label{rem:newseq}
+At the time of writing, the sequence $g_\cB(2), g_\cB(3), \dots =
+1,1,1,1,1,1,1,1,1,1,2,\dots$ does not appear in the OEIS. The closest entry, A375120
+(``complete binary unordered tree-factorizations''), uses a different convention: it
+counts the two children as an \emph{ordered} pair whenever the factor split is
+$(d,d)$, so it disagrees with Proposition~\ref{prop:gB} first at $n=144$ (it gives
+$42$ where the true unordered count is $41$) and disagrees with
+Wedderburn--Etherington on prime powers. Submitting $g_\cB$ is a small item of
+independent interest.
+\end{remark}
+
+\begin{example}[The four levels over $n = 12$]\label{ex:twelve}
+\[
+\begin{array}{lll}
+\cT: & 6 \text{ trees} &
+(L_2\boxtimes L_2)\boxtimes L_3,\;
+(L_2\boxtimes L_3)\boxtimes L_2,\;
+(L_3\boxtimes L_2)\boxtimes L_2, \\
+& & L_2\boxtimes(L_2\boxtimes L_3),\;
+L_2\boxtimes(L_3\boxtimes L_2),\;
+L_3\boxtimes(L_2\boxtimes L_2); \\[1mm]
+\cW: & 3 \text{ words} & (2,2,3),\; (2,3,2),\; (3,2,2); \\[1mm]
+\cB: & 2 \text{ bushes} & \{\{L_2,L_2\},L_3\},\; \{\{L_2,L_3\},L_2\}; \\[1mm]
+\cM: & 1 \text{ multiset} & \{2,2,3\}.
+\end{array}
+\]
+So the entropy of $12$ is $S_\cT(12) = \log 6$ at the history level,
+$S_\cW(12) = \log 3$ for the beam, $S_\cB(12) = \log 2$ non-planar, and $0$ in Fock
+space. And $g_\cT(12) = C_2 \cdot \tfrac{3!}{2!\,1!} = 2\cdot 3 = 6$, as predicted.
+\end{example}
+
+Table~\ref{tab:degeneracies} lists the three nontrivial counts for small $n$. All
+formulas and recursions of this subsection were verified against brute-force
+enumeration for every $n \le 20000$ (Appendix~\ref{app:verification}).
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}rrrrr@{\hspace{9mm}}rrrrr@{}}
+\toprule
+$n$ & $\Omega$ & $g_\cT$ & $g_\cB$ & $g_\cW$ &
+$n$ & $\Omega$ & $g_\cT$ & $g_\cB$ & $g_\cW$ \\
+\midrule
+ 2 & 1 &  1 & 1 & 1 &  20 & 3 &  6 & 2 & 3 \\
+ 4 & 2 &  1 & 1 & 1 &  24 & 4 & 20 & 4 & 4 \\
+ 6 & 2 &  2 & 1 & 2 &  27 & 3 &  2 & 1 & 1 \\
+ 8 & 3 &  2 & 1 & 1 &  28 & 3 &  6 & 2 & 3 \\
+10 & 2 &  2 & 1 & 2 &  30 & 3 & 12 & 3 & 6 \\
+12 & 3 &  6 & 2 & 3 &  32 & 5 & 14 & 3 & 1 \\
+16 & 4 &  5 & 2 & 1 &  36 & 4 & 30 & 6 & 6 \\
+18 & 3 &  6 & 2 & 3 &  64 & 6 & 42 & 6 & 1 \\
+\bottomrule
+\end{tabular}
+\caption{Degeneracies over $n$ at the three structured levels (primes and other rows
+with all counts $1$ omitted). Note $g_\cT = C_{\Omega-1}\cdot g_\cW$ throughout, and
+$g_\cB(2^k) = 1,1,1,2,3,6$ for $k=1,\dots,6$ (Wedderburn--Etherington).}
+\label{tab:degeneracies}
+\end{table}
+
+%======================================================================
+\section{Partition functions: bootstrap equations and the Hagedorn ladder}
+\label{sec:zeta}
+
+\subsection{Four gases, four functional equations}
+
+Write $E(X) = \log N(X)$ and let $\beta = s$ be the inverse temperature. Let
+$P(s) = \sum_p p^{-s} = \sum_p e^{-s\varepsilon_p}$ denote the prime zeta function ---
+physically, the single-particle (single-primon) partition function. For each corner
+$\mathcal{X} \in \{\cT, \cW, \cB, \cM\}$ define the canonical partition function
+\[
+Z_{\mathcal X}(s) \;=\; \sum_{X \in \mathcal X} e^{-s E(X)}
+\;=\; \sum_{X \in \mathcal X} \frac{1}{N(X)^{s}}
+\;=\; \sum_{n \ge 2} \frac{g_{\mathcal X}(n)}{n^{s}}
+\]
+(for $\cM$ we include the empty configuration, of shadow $1$, so that
+$Z_\cM = \zeta$ exactly).
+
+\begin{theorem}[Functional equations]\label{thm:funceq}
+As identities of Dirichlet series,
+\begin{align}
+Z_\cT(s) &= P(s) + Z_\cT(s)^2,
+& Z_\cT &= \frac{1 - \sqrt{1 - 4P(s)}}{2} = \sum_{k\ge1} C_{k-1}\,P(s)^k,
+\label{eq:cat}\\
+Z_\cW(s) &= P(s) + P(s)\,Z_\cW(s),
+& Z_\cW &= \frac{P(s)}{1-P(s)} = \sum_{k \ge 1} P(s)^k,
+\label{eq:geo}\\
+Z_\cB(s) &= P(s) + \tfrac12\bigl(Z_\cB(s)^2 + Z_\cB(2s)\bigr),
+& Z_\cB &= 1 - \sqrt{1 - 2P(s) - Z_\cB(2s)},
+\label{eq:otter}\\
+Z_\cM(s) &= \zeta(s) = \prod_p \frac{1}{1-p^{-s}},
+& \zeta &= \exp\Bigl(\sum_{k \ge 1} \frac{P(ks)}{k}\Bigr).
+\label{eq:euler}
+\end{align}
+In \eqref{eq:cat} and \eqref{eq:otter} the branch of the square root is fixed by
+$Z \to 0$ as $\operatorname{Re} s \to \infty$.
+\end{theorem}
+
+\begin{proof}
+\eqref{eq:cat}: a tree is a leaf or an ordered pair of trees, and $N^{-s}$ is
+multiplicative over $\boxtimes$, so the sum over pairs factors as $Z_\cT^2$. Solving
+the quadratic and expanding gives the Catalan series.
+\eqref{eq:geo}: a word is a prime or a prime followed by a word.
+\eqref{eq:otter}: an element of $\cB$ is a leaf or an unordered pair
+$\{B_1,B_2\}$, possibly equal; ordered pairs contribute $Z_\cB^2$, the diagonal
+contributes $\sum_B N(B)^{-2s} = Z_\cB(2s)$, and unordered pairs with repetition are
+half their sum --- the same P\'olya computation as in Proposition~\ref{prop:gB}.
+\eqref{eq:euler}: independence of the occupation numbers gives the Euler product, and
+$\log \zeta(s) = \sum_p \sum_{k\ge1} p^{-ks}/k = \sum_k P(ks)/k$.
+\end{proof}
+
+\physread Each equation is a named piece of physics.
+\emph{(\ref{eq:euler}) is the free Bose gas}: mode $p$ with occupancy $k$ costs energy
+$k \log p$, so
+\[
+Z_\cM(\beta) \;=\; \prod_p \sum_{k \ge 0} e^{-\beta k \log p}
+\;=\; \prod_p \frac{1}{1 - p^{-\beta}} \;=\; \zeta(\beta):
+\]
+the Euler product \emph{is} the textbook free-boson partition function --- this is the
+primon gas of Julia~\cite{julia}.
+\emph{(\ref{eq:geo}) is the distinguishable-particle gas}: ordered $k$-particle states
+with no $1/k!$, the counting that produces the Gibbs paradox.
+\emph{(\ref{eq:cat}) is a statistical bootstrap equation} in the sense of
+Hagedorn--Frautschi~\cite{hagedorn,frautschi}: \emph{a fireball is either an input
+particle or a fusion of two fireballs}, with energy exactly conserved; here the input
+spectrum is the primons and the fusion is ordered and binary.
+\emph{(\ref{eq:otter}) is the non-planar bootstrap}: unordered fusion, with the
+$Z(2s)$ term the standard exchange correction for the two branches being
+\emph{identical} --- the same mechanism that separates Bose from Boltzmann counting.
+Finally, Remark~\ref{rem:species} places all four in one family.
+
+\begin{remark}[One gas per statistics]\label{rem:species}
+The four right-hand sides are the four classical constructions of the symbolic
+method~\cite{flajolet} --- sequence, multiset, planar binary tree, unordered binary
+tree --- each applied to the single-particle element $P$. Choosing a corner of the
+square is choosing a \emph{statistics}: what to remember of order and of history.
+There is one partition function per statistics, all exact functionals of
+$P(s), P(2s), \dots$, and the Riemann zeta function is the Bose member of the family.
+Note where the vacuum lives: only the multiset construction has an empty structure,
+which is why $n=1$ belongs to $\zeta$ and to no other corner
+(Remark~\ref{rem:nounit}).
+\end{remark}
+
+\subsection{The Hagedorn ladder}
+
+\begin{theorem}[Inverse Hagedorn temperatures]\label{thm:ladder}
+Each series has a finite abscissa of convergence $\sigma_{\mathcal X}$, determined by
+$P$:
+\[
+\begin{array}{llll}
+\cM: & \sigma_\cM = 1 & \text{(pole of } \zeta), & Z \to \infty; \\[0.5mm]
+\cW: & P(\sigma_\cW) = 1, & \sigma_\cW = 1.3994333287263303\dots, & Z \to \infty; \\[0.5mm]
+\cB: & 2P(\sigma_\cB) + Z_\cB(2\sigma_\cB) = 1, & \sigma_\cB = 1.9884768518009081\dots, & Z \to 1; \\[0.5mm]
+\cT: & P(\sigma^{*}) = \tfrac14, & \sigma^{*} = 2.5973851271346716\dots, & Z \to \tfrac12,
+\end{array}
+\]
+and $1 < \sigma_\cW < \sigma_\cB < \sigma^{*}$: every remembered layer of structure
+strictly raises the critical inverse temperature.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+All coefficients are nonnegative, so each abscissa is located by the real singularity.
+For $\cW$, the geometric series diverges exactly when $P \ge 1$. For $\cT$, the
+Catalan series $\sum C_{k-1}P^k$ has radius of convergence $\tfrac14$ in $P$; since
+$C_{k-1}4^{-k} \sim k^{-3/2}/(4\sqrt{\pi})$ is summable, the series still converges at
+$P = \tfrac14$, with value $\sum_k C_{k-1}4^{-k} = \tfrac12$. For $\cB$, equation
+\eqref{eq:otter} defines $Z_\cB$ by descending the argument-doubling cascade
+($Z_\cB(2s)$ lies deep in the convergent region), and the singularity occurs where the
+discriminant $1 - 2P(s) - Z_\cB(2s)$ vanishes, at which point $Z_\cB = 1$: this is
+Otter's criticality condition for unordered trees~\cite{otter,flajolet}. The numerical
+values are computed to the stated precision in Appendix~\ref{app:verification}; the
+strict ordering follows from $g_\cM \le g_\cW, g_\cB \le g_\cT$ together with strict
+inequality on a positive-density set of $n$.
+\end{proof}
+
+\physread The mechanism is Hagedorn's~\cite{hagedorn}. The number of microstates at
+energy $E = \log n$ grows like $e^{\sigma_{\mathcal X} E}$ (up to powers), so the
+Boltzmann sum $\sum e^{(\sigma_{\mathcal X} - \beta)E}$ diverges for
+$\beta < \sigma_{\mathcal X}$: the gas has a maximal temperature
+$T_H = 1/\sigma_{\mathcal X}$. Remembering order and history multiplies the microstate
+count at each energy, raises the entropy per unit energy, and lowers the Hagedorn
+temperature:
+
+\begin{center}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+gas & states & $\beta_H$ & $T_H = 1/\beta_H$ & transition \\
+\midrule
+Bose (primon) & occupation numbers & $1$ & $1$ & pole \\
+Boltzmann & ordered factorizations & $1.399433\dots$ & $0.714575\dots$ & pole \\
+non-planar fireball & unordered histories & $1.988477\dots$ & $0.502897\dots$ & cusp, $Z_\cB \to 1$ \\
+planar fireball & ordered histories & $2.597385\dots$ & $0.385003\dots$ & cusp, $Z_\cT \to \tfrac12$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[Pole versus cusp: is the Hagedorn temperature attainable?]
+\label{rem:cusp}
+The symmetrized (associative) gases diverge at their critical point: $\zeta$ and
+$Z_\cW$ have simple poles ($Z_\cW$ because $P'(\sigma_\cW) = -1.7311562\dots \ne 0$).
+The history-keeping (non-associative) gases converge at theirs: expanding
+\eqref{eq:cat} at $\sigma^{*}$,
+\[
+Z_\cT(s) \;=\; \tfrac12 - \sqrt{\,|P'(\sigma^{*})|\,}\,(s-\sigma^{*})^{1/2} + O(s-\sigma^{*}),
+\qquad \sqrt{|P'(\sigma^{*})|} = 0.4796402876\dots,
+\]
+a square-root branch point with finite value, and similarly $Z_\cB \to 1$ at
+$\sigma_\cB$. The canonical ensemble exists \emph{at} $T_H$, but the mean energy
+\[
+U(\beta) = -\frac{\partial}{\partial \beta} \log Z_\cT(\beta)
+\;\sim\; \frac{\sqrt{|P'(\sigma^{*})|}}{2\,Z_\cT(\sigma^{*})}\,(\beta - \sigma^{*})^{-1/2}
+\;\to\; \infty
+\]
+diverges as $\beta \to \sigma^{*+}$: a continuous transition with divergent
+susceptibility, rather than a divergent partition function. Whether the Hagedorn
+temperature is attainable --- the classic question of the bootstrap
+literature~\cite{nahm} --- is here decided by a single algebraic choice:
+\emph{associativity is a first-order axiom}. The square-root branch point itself is
+the universal singularity of tree and branched-polymer generating functions
+(susceptibility exponent $\tfrac12$)~\cite{adj}, the same criticality that governs
+planar-diagram counting in the Gaussian matrix model, where the Catalan numbers arise
+as the planar moments and $\tfrac14$ is the edge of the Wigner
+semicircle~\cite{bipz}.
+\end{remark}
+
+\begin{remark}[The classical bootstrap on the primon spectrum]\label{rem:bootstrap}
+The historical statistical bootstrap model fuses in one shot: a fireball is an input
+particle \emph{or an unordered cluster of $k \ge 2$ fireballs}, Boltzmann-weighted by
+$1/k!$. Its generating equation is $G = \varphi + (e^{G} - 1 - G)$, whose square-root
+singularity --- first remarked by Nahm~\cite{nahm} --- occurs when the input function
+reaches the universal value
+\[
+\varphi_c \;=\; 2\log 2 - 1 \;=\; 0.3862943611\dots,
+\qquad G_c = \log 2 .
+\]
+Transplanted onto the primon spectrum ($\varphi = P$), this gives the inverse Hagedorn
+temperatures
+\[
+\beta_H^{\mathrm{Boltz}} = 2.1487511659\dots,
+\qquad
+\beta_H^{\mathrm{Bose}} = 2.3072314551\dots,
+\]
+the Bose value arising from full multiset statistics
+($e^{G} \mapsto \exp\sum_{k\ge1} G(ks)/k$, with criticality when
+$P(s) + 2\sum_{k \ge 2} G(ks)/k$ reaches $2\log2 - 1$; see
+Appendix~\ref{app:verification}). These classical gases
+slot into the same family as the four corners --- same input spectrum, same
+square-root mechanism --- but sit off the ladder of Theorem~\ref{thm:ladder} because
+their symmetry-factor weights are fractional rather than integer counts. In bootstrap
+language, the fireball world $\cT$ is a bootstrap model whose decay chains are fully
+resolved: an integer's prime factorization is its ultimate decay inventory, and the
+primes are the stable particles.
+\end{remark}
+
+\begin{remark}[Growth of the counting functions]\label{rem:growth}
+By the Wiener--Ikehara theorem applied to $Z_\cW$ (legitimate: the line
+$\operatorname{Re} s = \sigma_\cW$ lies in the half-plane of analyticity of $P$, and
+$|P(\sigma_\cW + it)| < 1$ for $t \ne 0$ by Lemma~\ref{lem:strict} below),
+\[
+\sum_{n \le x} g_\cW(n) \;\sim\; \frac{x^{\sigma_\cW}}{\sigma_\cW\,|P'(\sigma_\cW)|}
+\;\approx\; 0.4128\, x^{1.39943\dots}.
+\]
+For the fireball level, transfer heuristics for the square-root singularity suggest
+$\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$; making this rigorous
+is Problem~\ref{prob:tauberian}. Note also the extreme values: along $n = 2^k$ one has
+$g_\cT(n) = C_{k-1}$, which grows like $n^{2}/(\log n)^{3/2}$ up to constants --- the
+microstate count over a single observable can approach the \emph{square} of the
+observable. For comparison, Kalm\'ar's classical problem~\cite{kalmar} of ordered
+factorizations with arbitrary parts $\ge 2$ has Dirichlet series $1/(2 - \zeta(s))$
+and growth exponent $\rho = 1.7286472389981836\dots$ with $\zeta(\rho) = 2$; it sits
+between our Boltzmann and non-planar rungs but belongs to a different family (its
+parts need not be stable particles).
+\end{remark}
+
+%======================================================================
+\section{Fisher zeros of the arithmetic gas}\label{sec:analytic}
+
+Lee and Yang taught that the thermodynamics of a system is encoded in the complex
+singularities of its partition function --- in complex fugacity for them, in complex
+temperature for Fisher~\cite{leeyang,fisher}. We now locate the complex-$\beta$
+singularities of the fireball gas. Since $Z_\cT = \tfrac12(1 - \sqrt{1-4P})$ is an
+\emph{algebraic} function of $P$, they come in exactly two kinds: those inherited from
+the single-particle input $P$, and the new branch points where the discriminant
+vanishes.
+
+\subsection{What the gas inherits: the Riemann zeros}
+
+The prime zeta function continues to the right half-plane by M\"obius inversion of
+\eqref{eq:euler}:
+\begin{equation}\label{eq:Pcont}
+P(s) \;=\; \sum_{k \ge 1} \frac{\mu(k)}{k}\, \log \zeta(ks),
+\qquad \operatorname{Re} s > 0,
+\end{equation}
+valid off the singular set. Equation \eqref{eq:Pcont} shows that $P$ has logarithmic
+branch points at $s = 1/k$ (from the pole of $\zeta$) \emph{and at $s = \rho/k$ for
+every nontrivial zero $\rho$ of $\zeta$}; these points cluster on the imaginary axis,
+which is a natural boundary (Landau--Walfisz~\cite{landauwalfisz}). Two consequences:
+
+\begin{enumerate}
+\item Lifting arithmetic to fireballs does not dissolve the Riemann Hypothesis. The
+zeros of $\zeta$ reappear, relocated, inside $Z_\cT$ as branch points at $\rho/k$.
+Where the Hilbert--P\'olya program seeks a Hamiltonian whose \emph{spectrum} is the
+Riemann zeros~\cite{berrykeating}, the arithmetic gas offers the complementary
+picture: the zeros enter as singularities of the single-particle input, while the gas
+contributes its own --- computable --- critical singularities on top.
+\item No one-variable partition function of this family can contain more analytic
+information than $P$ itself. Genuinely new invariants must either weight the
+\emph{shape} of histories (two-variable partition functions,
+Problem~\ref{prob:twovar}) or couple to the additive world (\S\ref{sec:bridge}).
+\end{enumerate}
+
+\subsection{The new singularities: tree zeros}
+
+The new singularities of $Z_\cT$ are the solutions of
+\begin{equation}\label{eq:treezero}
+P(s) = \tfrac14,
+\end{equation}
+square-root branch points of $Z_\cT$ --- the Fisher singularities of the fireball gas.
+We call them \emph{tree zeros} (they are the zeros of the discriminant $1 - 4P$). On
+the real axis there is exactly one, $\sigma^{*}$, since $P$ is strictly decreasing
+there. Off the axis:
+
+\begin{lemma}\label{lem:strict}
+For $\sigma > 0$ where $P(\sigma)$ converges and $t \neq 0$:
+$|P(\sigma + it)| < P(\sigma)$.
+\end{lemma}
+
+\begin{proof}
+$|\sum_p p^{-\sigma} p^{-it}| \le \sum_p p^{-\sigma}$ with equality iff all phases
+$t \log p$ agree modulo $2\pi$. For $t \ne 0$ this fails already for $p = 2, 3$ since
+$\log 3/\log 2$ is irrational.
+\end{proof}
+
+\begin{proposition}\label{prop:strip}
+Every non-real tree zero satisfies $\operatorname{Re} s < \sigma^{*}$.
+\end{proposition}
+
+\begin{proof}
+If $\sigma \ge \sigma^{*}$ and $t \neq 0$ then
+$|P(\sigma+it)| < P(\sigma) \le P(\sigma^{*}) = \tfrac14$.
+\end{proof}
+
+The tree zeros with $0 < t < 50$ are listed in Table~\ref{tab:zeros} (method in
+Appendix~\ref{app:verification}).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}cllc@{}}
+\toprule
+$k$ & $\operatorname{Re} s$ & $\operatorname{Im} s$ & $t \big/ \tfrac{2\pi}{\log 2}$ \\
+\midrule
+1 & $1.54427014392$ & $10.0122461654$ & $1.105$ \\
+2 & $2.14220467429$ & $17.8224730193$ & $1.966$ \\
+3 & $2.24736156780$ & $27.6431435747$ & $3.050$ \\
+4 & $2.15502047591$ & $35.5407136013$ & $3.921$ \\
+5 & $2.39048394209$ & $45.5394484588$ & $5.024$ \\
+\bottomrule
+\end{tabular}
+\caption{All solutions of $P(s) = \tfrac14$ with $1.4 < \operatorname{Re} s < 2.7$,
+$0 < \operatorname{Im} s < 50$ (each accompanied by its complex conjugate). A coarser
+sweep of $1.05 < \operatorname{Re} s < 1.4$ found no further solutions in this height
+range.}
+\label{tab:zeros}
+\end{table}
+
+Two empirical observations. First, the ordinates hug integer multiples of
+$2\pi/\log 2 = 9.0647\dots$: the partition function is almost periodic in
+$\operatorname{Im}\beta$, and the recurrence frequency is set by the \emph{lightest
+primon}, $\varepsilon_2 = \log 2$, whose Boltzmann factor $2^{-\beta}$ dominates $P$;
+the interference of $3^{-\beta}$ and later modes then shifts each singularity
+(violently so for $k=1$). Second, and decisively: \emph{the real parts wander}. The
+naive tree analogue of the Riemann Hypothesis --- Fisher singularities on a vertical
+line --- is simply false. The correct lifted question is distributional, and it has a
+precise answer.
+
+\subsection{The density of tree zeros}\label{sec:density}
+
+Within the half-plane of almost periodicity the tree zeros have an exact asymptotic
+density, computable from a random-phase model of the gas.
+
+\begin{theorem}[Density of the Fisher singularities]\label{thm:density}
+For $\sigma > 1$ let $X_\sigma = \sum_p p^{-\sigma} e^{i\theta_p}$ with $(\theta_p)$
+independent and uniform on $[0, 2\pi)$, and define the \emph{Jensen function} and the
+\emph{dominance probabilities}
+\[
+\Phi(\sigma) = \mathbb{E}\,\log\bigl|X_\sigma - \tfrac14\bigr|,
+\qquad
+q_p(\sigma) = \mathbb{P}\Bigl(\,\bigl|X_\sigma - p^{-\sigma}e^{i\theta_p} -
+\tfrac14\bigr| < p^{-\sigma}\Bigr).
+\]
+\begin{enumerate}
+\item[(i)] For every $\sigma > 1$,
+$\frac1T \int_0^T \log|P(\sigma + it) - \tfrac14|\,dt \to \Phi(\sigma)$ as
+$T \to \infty$; $\Phi$ is convex, and $\Phi(\sigma) = \log\tfrac14$ for
+$\sigma \ge \sigma^{*}$.
+\item[(ii)] For $1 < \sigma_1 < \sigma_2$, the number $N_{[\sigma_1,\sigma_2]}(T)$ of
+tree zeros with real part in $[\sigma_1, \sigma_2]$ and $0 < t \le T$ satisfies
+\[
+\frac{N_{[\sigma_1,\sigma_2]}(T)}{T} \;\longrightarrow\;
+\frac{\Phi'(\sigma_2) - \Phi'(\sigma_1)}{2\pi}.
+\]
+\item[(iii)] $\Phi'(\sigma) = -\sum_p (\log p)\, q_p(\sigma)$. In particular the
+density of tree zeros to the right of the line $\operatorname{Re} s = \sigma_1$ is
+$\frac{1}{2\pi}\sum_p (\log p)\, q_p(\sigma_1)$, and $q_p(\sigma) = 0$ for
+$\sigma \ge \sigma^{*}$, reproving Proposition~\ref{prop:strip}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+In closed substrips of $\operatorname{Re} s > 1$ the series $P(s) - \tfrac14$
+converges absolutely and uniformly, so it is a uniformly almost periodic analytic
+function with frequency set $\{\log p\}$ --- linearly independent over $\mathbb{Q}$,
+which is once more unique factorization. By Kronecker--Weyl the flow
+$t \mapsto (t \log p \bmod 2\pi)_p$ equidistributes on the torus, identifying time
+averages with expectations over the phases $(\theta_p)$: this is Bohr and Jessen's
+argument for $\log\zeta$~\cite{bohrjessen}, and gives (i). The value $\log\tfrac14$
+for $\sigma \ge \sigma^{*}$ follows by integrating out the phases one at a time: if
+$\sum_p p^{-\sigma} \le \tfrac14$ then $|{-\tfrac14} + \text{rest}| \ge p^{-\sigma}$
+pointwise for each peeled mode, and the circular average of $\log|W + a e^{i\theta}|$
+equals $\log|W|$ whenever $|W| \ge a$. Statement (ii) is the fundamental theorem of
+Jessen--Tornehave on mean motions and zeros of almost periodic
+functions~\cite{jessentornehave}. For (iii), differentiate under the expectation and
+average over $\theta_p$ first: for fixed $W$ with $|W| \neq a$,
+\[
+\frac{1}{2\pi}\int_0^{2\pi} \frac{a e^{i\theta}}{W + a e^{i\theta}}\, d\theta
+\;=\;
+\begin{cases} 1 & |W| < a, \\ 0 & |W| > a, \end{cases}
+\]
+by residues, and the boundary event has probability zero since the law of $X_\sigma$
+is absolutely continuous (already the sum of two circle modes is).
+\end{proof}
+
+\physread Each Fisher singularity occurs at a moment when a \emph{single primon mode
+outshines the coherent sum of all the others} (together with the constant
+$-\tfrac14$); the density of singularities is the total rate of mode dominance. At
+$\sigma_1 = 1.30$ the Monte Carlo values are $q_2 = 0.624$, $q_3 = 0.148$,
+$q_5 = 0.042$, $q_7 = 0.017$ (Appendix~\ref{app:verification}): the lightest primon
+accounts for only about $59\%$ of the singularities, which is exactly why the
+observed density \emph{exceeds} the naive one-per-period guess $\log 2/2\pi$.
+
+The numbers confirm the theorem with pleasing force. A census to height $500$
+(Appendix~\ref{app:verification}) finds exactly $59$ zeros with
+$\operatorname{Re} s > 1.3$: the dominance formula predicts
+$\frac{500}{2\pi}\sum_p (\log p)\, q_p(1.30) = 58.3$ --- agreement to one percent
+between two entirely independent computations (Newton root-finding on
+$\texttt{primezeta}$ against a random-phase Monte Carlo) --- while one-per-period
+would give $55.2$. The running counts are $N(100), \dots, N(500) = 11, 23, 35, 47,
+59$; the mean spacing is $8.42$ against $2\pi/\log 2 = 9.06$; individual spacings
+range from $1.31$ to $10.54$. The left edge, meanwhile, drifts: a coarser sweep of
+$1.05 < \operatorname{Re} s < 1.30$ finds at least eight further zeros below the
+strip, with real parts as low as $1.0130$ (at $t \approx 470.2$). The real parts
+approach $1$ as the height grows, where almost periodicity fails and the continuation
+\eqref{eq:Pcont} --- with its Riemann-zero branch points --- takes over: what happens
+there is Problem~\ref{prob:zeros}.
+
+%======================================================================
+\section{The additive bridge: states, processes, and classical observables}
+\label{sec:bridge}
+
+The additive world of the theory is flat: $\cA = \{\,n\,\ell : n \in \NN_{\ge1}\}$,
+heaps of a unit quantum $\ell$ (``one liter''), with
+$+\colon \cA \times \cA \to \cA$ ordinary accumulation. The question left open so far
+is how $\cT$ and $\cA$ interact. The answer proposed here: they do not interact by a
+map $\cT \to \cA$. \emph{Multiplication acts on quantities} --- fireballs are
+\emph{processes}, not amounts --- and the output of the action is neither a tree nor
+a flat quantity but a third kind of object: a state of clustered matter.
+
+\subsection{States: grouped quantities}
+
+\begin{definition}[Grouped quantities]\label{def:grouped}
+Define \emph{packages} $t$ and \emph{quantities} $f$ by the mutual grammar
+\[
+t \;::=\; \ell \;\mid\; \pkg{f}\,,
+\qquad\qquad
+f \;::=\; t_1 \oplus t_2 \oplus \cdots \oplus t_m \quad (m \ge 1),
+\]
+where $\pkg{f}$ is a box containing the quantity $f$, and $\oplus$ is concatenation of
+finite sequences of packages. Let $\cG$ denote the set of quantities. For $k \ge 2$
+define the \emph{uniform grouping}
+\[
+k \odot f \;=\; \underbrace{\pkg{f} \oplus \pkg{f} \oplus \cdots \oplus \pkg{f}}_{k}.
+\]
+The \emph{flattening} $\alpha \colon \cG \to \cA$ counts atoms:
+$\alpha(\ell) = \ell$, $\alpha(\pkg f) = \alpha(f)$,
+$\alpha(f \oplus g) = \alpha(f) + \alpha(g)$. We identify $\cA$ with
+$(\NN_{\ge1}, +)$ and write $\alpha(f) \in \NN_{\ge 1}$.
+\end{definition}
+
+\physread A quantity is matter with a cluster hierarchy --- quanta in bottles,
+bottles in cartons; nucleons in nuclei, nuclei in atoms. $\oplus$ places systems side
+by side; $\alpha$ is the extensive observable, total particle number, blind to
+packaging. $\cG$ refines $\cA$: a state remembers how it is packed. ($\oplus$ is
+associative by construction --- sequences --- and one may further quotient $\cG$ by
+reordering of packages; nothing below changes, as the proofs never use the order.)
+
+\begin{definition}[The action]\label{def:action}
+Define $\act \colon \cT \to \mathrm{Maps}(\cG, \cG)$ by
+\[
+\act(L_p)(f) = p \odot f,
+\qquad
+\act(T_1 \boxtimes T_2) = \act(T_1) \circ \act(T_2).
+\]
+\end{definition}
+
+\begin{example}\label{ex:liters}
+$\act(L_3)(\ell) = \pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}$ --- three bottles of one liter.
+Then
+\[
+\act(L_2 \boxtimes L_3)(\ell)
+= 2 \odot \bigl(\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\bigr)
+= \pkg{\,\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\,}\;\pkg{\,\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\,}\,,
+\]
+two cartons each holding three bottles; whereas $\act(L_3 \boxtimes L_2)(\ell)$ is
+three cartons each holding two bottles. Neither is ``six liters''; both flatten to
+$6\ell$. The slogan of \S1 is now a statement about the image of $\act$:
+multiplication outputs clustered states, never flat ones.
+\end{example}
+
+\subsection{The stratification theorems}
+
+The three classical laws now separate into three different layers of observability.
+
+\begin{theorem}[Associativity is additively invisible --- exactly]\label{thm:assoc}
+The action $\act$ factors through the associativity quotient $\cT \to \cW$, and the
+induced map $\cW \to \mathrm{Maps}(\cG,\cG)$ is injective. Consequently the congruence
+$\{(T, T') : \act(T) = \act(T')\}$ is precisely $\approx_a$.
+\end{theorem}
+
+\begin{proof}
+\emph{Factoring:} $\mathrm{Maps}(\cG,\cG)$ is a monoid under composition, composition
+is associative, and $\act$ sends $\boxtimes$ to $\circ$; hence
+$\act((T_1 \boxtimes T_2)\boxtimes T_3) = \act(T_1)\circ\act(T_2)\circ\act(T_3)
+= \act(T_1 \boxtimes(T_2 \boxtimes T_3))$, and $\act(T)$ depends only on
+$\mathrm{word}(T)$.
+
+\emph{Injectivity:} let $w = p_1 p_2 \cdots p_k$ and evaluate on the single quantum:
+$F = \act(w)(\ell) = p_1 \odot \act(p_2\cdots p_k)(\ell)$ consists of exactly $p_1$
+identical top-level packages whose common content is $\act(p_2 \cdots p_k)(\ell)$.
+So from $F$ one reads off $p_1$ (the number of top-level packages) and recurses on the
+content; the recursion terminates at the boxless quantum $\ell$. Distinct words
+therefore give distinct maps.
+\end{proof}
+
+\physread Why does associativity feel inevitable, when nothing in \S\ref{sec:trees}
+imposes it? Because \emph{processes compose}: any semantics that interprets
+multiplication as something one \emph{does} --- anything of the form
+$\boxtimes \mapsto \circ$ into an endomorphism monoid --- must identify at least
+$\approx_a$, since composition of maps is associative whether we like it or not. Our
+semantics identifies \emph{exactly} $\approx_a$: nothing more is lost. Interaction
+history is unobservable in any operational reading of multiplication; to observe it,
+one would have to make states out of the processes themselves (currying), which is
+precisely to leave the additive world. By contrast, nothing forces the process monoid
+to be commutative --- and indeed it is not.
+
+\begin{theorem}[Commutativity survives until expectation]\label{thm:shadowaction}
+For all $T \in \cT$ and $f \in \cG$:
+\[
+\alpha\bigl(\act(T)(f)\bigr) \;=\; N(T)\cdot \alpha(f).
+\]
+Hence the induced action on flat quantities $\cA$ is multiplication by the shadow, and
+two trees act identically on $\cA$ iff $N(T) = N(T')$, i.e.\ (by
+Proposition~\ref{prop:fta}) iff $T \approx_{ac} T'$. In particular
+$\act(L_2 \boxtimes L_3) \ne \act(L_3 \boxtimes L_2)$ as maps of $\cG$, yet both have
+the same expectation: every observer reading only particle number sees
+multiplication by $6$.
+\end{theorem}
+
+\begin{proof}
+Induction: $\alpha(p \odot f) = p\,\alpha(f)$ since boxes are $\alpha$-transparent,
+and $\alpha(\act(T_1\boxtimes T_2)(f)) = N(T_1)\,\alpha(\act(T_2)(f)) =
+N(T_1)N(T_2)\,\alpha(f)$. The characterization of equal flat actions is unique
+factorization. Distinctness on $\cG$ is Theorem~\ref{thm:assoc} (different words).
+\end{proof}
+
+The two observation layers thus recover the two axes of the coarse-graining square:
+\emph{clustered} observation quotients by exactly associativity; \emph{extensive}
+observation quotients by exactly associativity and commutativity --- and the
+``exactly'' of the second statement is one more disguise of the Fundamental Theorem
+of Arithmetic.
+
+\begin{theorem}[Distributivity holds only in expectation]\label{thm:distrib}
+For every $T \in \cT$ and $f, g \in \cG$:
+\[
+\act(T)(f \oplus g) \;\neq\; \act(T)(f) \oplus \act(T)(g)
+\quad\text{in } \cG,
+\qquad\text{yet}\qquad
+\alpha\bigl(\act(T)(f \oplus g)\bigr) \;=\;
+\alpha\bigl(\act(T)(f) \oplus \act(T)(g)\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Let $p_1$ be the first letter of $\mathrm{word}(T)$. The left state consists of $p_1$
+top-level packages; the right state consists of $2p_1$; since $p_1 \ge 2$ these
+differ. Flattening both sides gives $N(T)(\alpha f + \alpha g)$ by
+Theorem~\ref{thm:shadowaction}.
+\end{proof}
+
+``Process the merged system'' and ``process the parts, then merge'' are genuinely
+different protocols with the same extensive outcome --- the informal claim of \S1,
+now a theorem. Note also the built-in one-sidedness: there is no
+$(f \oplus g) \cdot T$ at all, because states are not processes. It is striking that
+in Loday's arithmetree~\cite{loday}, where both arguments \emph{are} trees,
+distributivity likewise survives on one side only.
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+law & in $\cT$ (microstates) & on states $\cG$ & in expectation ($\alpha$) \\
+\midrule
+associativity & fails (free) & \textbf{holds} & holds \\
+commutativity & fails (free) & fails & \textbf{holds} \\
+distributivity & not formulable & fails & \textbf{holds} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Where the primes come from}\label{sec:primesfrom}
+
+The theory so far imports its particle spectrum from classical arithmetic. The bridge
+removes this dependency: the primes can be \emph{found} inside $\cG$.
+
+\begin{definition}\label{def:groupable}
+Call $n \in \NN_{\ge 2}$ \emph{groupable} if some quantity consisting of $k \ge 2$
+identical packages, each containing $m \ge 2$ quanta, flattens to $n$ --- that is, if
+$n = km$ with $k, m \ge 2$. Call $n$ \emph{prime} if it is not groupable.
+\end{definition}
+
+\physread A size is composite iff a heap of that size can crystallize into $k$
+identical unit cells; the primes are the non-crystallizable sizes --- the stable
+particles of the decay chains of Remark~\ref{rem:bootstrap}. This is, of course, the
+classical definition of primality; that is the point. It is expressible entirely
+inside the clustered additive world, using only $\odot$ and $\alpha$, with no imported
+number labels. One can therefore \emph{define} the particle spectrum as the set of
+non-groupable heap sizes and generate $\cT$ freely on it; the numerical label of a
+primon is recovered as the observable $\alpha$ of its heap. The foundational question
+``are prime leaves labeled by known primes, or can the labels be derived?'' is thus
+answered: derived. What cannot be derived from the free multiplicative structure alone
+(\S\ref{sec:priorart}) becomes derivable the moment the additive world and the action
+are in place, because primality is an observational property of clustering.
+
+%======================================================================
+\section{Arithmetic functions on trees}\label{sec:functions}
+
+Classical arithmetic functions pull back along $N$. For the Euler totient,
+\[
+\varphi_\cT(T) \;=\; N(T) \prod_{p \in \supp(T)} \Bigl(1 - \frac1p\Bigr)
+\;=\; \varphi\bigl(N(T)\bigr)
+\]
+by Euler's product formula; e.g.\
+$\varphi_\cT(L_2 \boxtimes L_3) = 6\cdot\tfrac12\cdot\tfrac23 = 2$.
+But this pullback factors through the double quotient: it cannot distinguish
+$L_2\boxtimes L_3$ from $L_3 \boxtimes L_2$. A genuinely history-sensitive totient
+should satisfy: (i) a recursion in $\boxtimes$; (ii) compatibility, i.e.\ it descends
+to $\varphi \circ N$ after the double quotient; (iii) sensitivity, i.e.\ it separates
+some pair of trees with equal shadow. No canonical candidate is known to us; we record
+this as Problem~\ref{prob:totient}. The same design brief applies to M\"obius $\mu$,
+divisor functions, and to two-variable partition functions
+$Z_\cT(s, q) = \sum_T q^{\,\mathrm{stat}(T)} N(T)^{-s}$ for shape statistics
+$\mathrm{stat}$ (depth, right-branch count, Tamari rank): the interesting ones are
+exactly those \emph{not} expressible through $P$ alone (\S\ref{sec:analytic}).
+
+%======================================================================
+\section{Computational content}\label{sec:comp}
+
+If the primes are the particles of this gas, can the gas help us \emph{find} them?
+The question deserves a precise answer, because the temptation to answer yes is
+strong, and wrong in an instructive way. Two theorems mark the boundary: microstate
+counting is blind to primality (\S\ref{sec:nofreelunch}), while the microstate view
+describes exactly what a random integer looks like (\S\ref{sec:randomfireball}). We
+then identify the one interface where the theory genuinely touches the complexity of
+primes --- the cost of \emph{expressions} (\S\ref{sec:cost}) --- and close with a map
+of what ``finding a prime'' actually costs and where the open frontier lies
+(\S\ref{sec:costlandscape}).
+
+\subsection{No free lunch: degeneracy is shape-blind}\label{sec:nofreelunch}
+
+\begin{proposition}[No free lunch]\label{prop:nofreelunch}
+Let $n \ge 2$ have factorization $\prod_p p^{\alpha_p}$.
+\begin{enumerate}
+\item[(i)] $\displaystyle [\,n \text{ prime}\,] \;=\; g_\cT(n) \;-\;
+\sum_{\substack{d \mid n \\ 1<d<n}} g_\cT(d)\, g_\cT(n/d)$.
+\item[(ii)] For every corner $\mathcal X$ of the square, $g_{\mathcal X}(n)$ depends
+only on the exponent multiset $\{\alpha_p\}$, not on which primes carry the exponents.
+\item[(iii)] Given the factorization of $n$, the values $g_\cT(n)$ and $g_\cW(n)$ are
+computable in time polynomial in $\log n$, and $g_\cB(n)$ in time $n^{o(1)}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) is the defining recursion of $g_\cT$ rearranged. (ii): for $\cT$ and $\cW$ by the
+closed formulas of Propositions~\ref{prop:gT}--\ref{prop:gW}; for $\cB$ by induction
+along the divisor lattice, which is a product of chains of lengths $\alpha_p$ and
+hence determined by the exponents alone (the square condition reads ``all $\alpha_p$
+even''); for $\cM$ trivially. (iii): the closed formulas involve factorials of
+$\Omega(n) = O(\log n)$, hence numbers with $O(\log n \log\log n)$ bits; the $\cB$
+recursion runs over the divisor lattice, of size $d(n) = n^{o(1)}$.
+\end{proof}
+
+\physread The degeneracies cannot even distinguish $12 = 2^2\cdot3$ from
+$18 = 2\cdot3^2$ from $20 = 2^2\cdot 5$ (all have $g_\cT = 6$, $g_\cB = 2$,
+$g_\cW = 3$): they see the occupation \emph{profile}, never the identities of the
+occupied modes. Identity (i) does determine primality --- but its right-hand side
+consumes the divisor structure of $n$, precisely what one would be trying to find,
+and by (ii)--(iii) the entire structural layer is cheap dressing over the
+factorization. This is the computational face of the caution of \S\ref{sec:priorart}:
+freeness means the fireball layer is polynomial-time syntax over its input spectrum.
+Counting histories, at any corner of the square, can never be the hard step; whatever
+algorithmic leverage exists must come from outside the counting.
+
+\subsection{The random fireball}\label{sec:randomfireball}
+
+What the microstate view \emph{does} compute is the statistics of a typical integer
+seen at full resolution.
+
+\begin{theorem}[Random fireball]\label{thm:randomfireball}
+Draw $n$ uniformly from $\{2, \dots, \lfloor x\rfloor\}$, then draw $T$ uniformly
+from the fiber $N^{-1}(n) \subset \cT$.
+\begin{enumerate}
+\item[(i)] Conditionally on $n$, the shape and the leaf word of $T$ are independent,
+the shape uniform on the $C_{\Omega(n)-1}$ binary shapes and the word uniform on the
+$\Omega(n)!/\prod_p \alpha_p!$ orderings of the prime multiset.
+\item[(ii)] As $x \to \infty$,
+$\bigl(\Omega(n) - \log\log x\bigr)/\sqrt{\log\log x}$ converges in distribution to a
+standard Gaussian.
+\item[(iii)] Consequently, conditionally on $\Omega(n) = k$ the fireball is exactly a
+uniform random binary tree with $k$ leaves; in particular its expected height, given
+$k$, is asymptotic to $2\sqrt{\pi k}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) The bijection of Proposition~\ref{prop:gT} identifies the fiber with
+(shapes) $\times$ (words); the uniform measure on a product set has independent
+uniform marginals. (ii) is the Erd\H{o}s--Kac theorem~\cite{erdoskac} for
+$\omega(n)$, transferred to $\Omega$: since
+$\mathbb{E}[\Omega - \omega] = \frac1x\sum_p \sum_{j \ge 2} \lfloor x/p^j \rfloor
+\le \sum_p \frac{1}{p(p-1)} = O(1)$ and $\Omega \ge \omega$, the difference is
+$o(\sqrt{\log\log x})$ in probability. (iii) The first claim restates (i); the height
+asymptotic for uniform binary trees is Flajolet--Odlyzko~\cite{flajoletodlyzko}.
+\end{proof}
+
+\physread At full resolution a random integer is a small branched polymer: a Gaussian
+number of constituents concentrated at $\log\log x$ (for $x = 10^{100}$, five or six
+primons), a shape drawn from the \emph{universal} Catalan ensemble carrying no
+arithmetic information at all --- that is Proposition~\ref{prop:nofreelunch}(ii)
+again --- and height of order $\sqrt{\log\log x}$. Erd\H{o}s--Kac becomes the central
+limit theorem for the constituent number of the arithmetic gas, and the literature on
+random Catalan trees (profiles, path lengths, continuum limits) imports wholesale
+into arithmetic through (iii). Sampling is equally well organized: one can generate a
+uniform random integer below $x$ \emph{together with its Fock state} in polynomial
+expected time, using primality tests as an oracle (Bach~\cite{bach}, simplified by
+Kalai~\cite{kalai}) --- the occupation-number description is efficiently samplable
+even though, as we now discuss, deterministically \emph{aiming} at a prime is not
+known to be.
+
+\subsection{Expression cost: the invariant that escapes $P$}\label{sec:cost}
+
+Everything so far in this paper is a functional of the input spectrum: the partition
+functions of \S\ref{sec:zeta} through $P(s), P(2s), \dots$ (\S\ref{sec:analytic}),
+the degeneracies through the exponent profile
+(Proposition~\ref{prop:nofreelunch}). Here is the first invariant that is not.
+Extend the grammar of \S\ref{sec:trees} with addition, as anticipated by the bridge:
+define \emph{expressions}
+\[
+E \;::=\; 1 \;\mid\; (E_1 \oplus E_2) \;\mid\; (E_1 \boxtimes E_2),
+\]
+with evaluator $\mathrm{ev}(1) = 1$,
+$\mathrm{ev}(E_1 \oplus E_2) = \mathrm{ev}(E_1) + \mathrm{ev}(E_2)$,
+$\mathrm{ev}(E_1 \boxtimes E_2) = \mathrm{ev}(E_1)\,\mathrm{ev}(E_2)$, and cost the
+number of $1$-leaves. The minimum cost
+\[
+\|n\| \;=\; \min\{\,\mathrm{cost}(E) : \mathrm{ev}(E) = n\,\}
+\]
+is the classical \emph{integer complexity} of Mahler--Popken~\cite{mahlerpopken}
+(OEIS A005245~\cite{oeis}), with $3\log_3 n \le \|n\| \le 3\log_2 n$ for $n > 1$;
+allowing subexpression reuse (straight-line programs) gives the Shub--Smale measure
+$\tau(n) = O(\log n)$~\cite{shubsmale}.
+
+Cost sees what no degeneracy can: $\|4\| = 4$ while $\|9\| = 6$, although $4 = 2^2$
+and $9 = 3^2$ have the same exponent profile. It is, structurally, a bridge quantity:
+it measures how expensively a fireball can be synthesized once additions are allowed
+inside the build. And it is exactly where the known connections between the structure
+of multiplication and the complexity of primes live:
+
+\begin{proposition}[Wilson's theorem as an expression statement]\label{prop:wilson}
+\begin{enumerate}
+\item[(i)] $n \ge 2$ is prime if and only if $(n-1)! \equiv -1 \pmod n$.
+\item[(ii)] If $(x, N) \mapsto x! \bmod N$ were computable in time polynomial in
+$\log N$, then factoring would be in polynomial time.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) is Wilson's theorem. (ii): $\gcd(x! \bmod N,\, N) = \gcd(x!,\, N)$, which equals
+$1$ exactly when $x$ is smaller than the least prime factor of $N$ and exceeds $1$
+from that point on; binary search over $x \in [1, N]$ therefore finds the least prime
+factor with $O(\log N)$ evaluations, and recursion factors $N$ completely.
+\end{proof}
+
+The same object carries the deeper conjectures. If $n!$ had straight-line programs of
+size polylogarithmic in $n$, factoring would have polynomial-size circuits (folklore;
+see Blum--Cucker--Shub--Smale~\cite{bcss}), and the Shub--Smale $\tau$-conjecture ---
+a polynomial bound on the integer roots of a polynomial in terms of its program size
+--- implies $\mathrm{P}_{\mathbb C} \neq \mathrm{NP}_{\mathbb C}$~\cite{shubsmale}.
+In the vocabulary of this paper: \emph{the computational hardness of arithmetic is a
+statement about the additive--multiplicative interface of \S\ref{sec:bridge} ---
+about the cost of synthesizing specific fireballs with additions --- and Wilson's
+theorem says primality is one factorial-expression away.}
+
+The theory also suggests its own cost observable. Define the \emph{factored cost} and
+the \emph{addition dividend}
+\[
+A(n) \;=\; \sum_{p^a \parallel n} a\,\|p\|,
+\qquad
+\delta(n) \;=\; A(n) - \|n\| \;\ge\; 0:
+\]
+$A(n)$ is the cost of the cheapest expression that respects the prime factorization
+(synthesize each primon additively, then fuse), and $\delta(n)$ is the saving that
+additions \emph{above} the factorization can buy. The long-standing open question
+whether $\|2^k\| = 2k$ is exactly the statement $\delta \equiv 0$ on powers of two;
+and $\delta$ is not identically zero: $\delta(55) \ge 1$, since
+$A(55) = \|5\| + \|11\| = 13$ while $55 = 2 \cdot 27 + 1$ gives $\|55\| \le 12$.
+Nothing about the distribution of $\delta$ appears to be known; see
+Problem~\ref{prob:cost}.
+
+\subsection{What finding a prime costs}\label{sec:costlandscape}
+
+Finally, the target itself, stated honestly. \emph{Recognizing} primes is solved:
+PRIMES $\in$ P~\cite{aks}. \emph{Hitting} one randomly is easy: by the prime number
+theorem a random $n$-bit integer is prime with probability $\sim 1/(n \log 2)$, so
+sampling plus testing generates an $n$-bit prime in expected time
+$\widetilde{O}(n^3)$~\cite{crandallpomerance}. The genuine open problem --- the
+Polymath~4 problem~\cite{polymath} --- is \emph{deterministic} generation:
+
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+task & best known & status \\
+\midrule
+test an $n$-bit integer & deterministic $\mathrm{poly}(n)$~\cite{aks} & solved \\
+generate, randomized & $\widetilde O(n^3)$: sample and test & routine \\
+generate, deterministic & $\sim 2^{n/2}$: analytic $\pi(x)$ methods~\cite{polymath} & open, even under RH \\
+generate, pseudodeterministic & $\mathrm{poly}(n)$, infinitely many $n$~\cite{chenluors} & frontier \\
+quantum search & $\sim 2^{0.2625\,n}$: Grover~\cite{grover} on~\cite{bhp} & quadratic-type gain \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Even the Riemann Hypothesis only bounds prime gaps by $O(\sqrt{x}\log x)$, leaving a
+$2^{n/2}$ search; a Cram\'er-type gap bound $O(\log^2 x)$~\cite{cramer} would make
+``scan forward and test'' polynomial. The two attack surfaces are exactly the two
+places this paper has located all remaining hardness. \emph{Gaps} are quantitative
+statements about the additive--multiplicative interface: \S\ref{sec:bridge} names the
+interface but is not yet quantitative. \emph{Derandomization}: the primes are dense
+and efficiently recognizable, so deterministic generation is a problem of
+\emph{aiming} --- pseudorandomness rather than number-theoretic search --- and the
+natural formal home of ``dense yet hard to aim at'' is expression cost
+(\S\ref{sec:cost}): a deterministic generator is, in the end, a short expression that
+evaluates to a prime. The honest summary: the theory contributes a sharp map of where
+the hardness cannot be (Proposition~\ref{prop:nofreelunch}), well-posed cost
+questions at the interface where it can be, and no shortcut --- by its own
+no-free-lunch proposition, none was available from counting alone.
+
+%======================================================================
+\section{Open problems}\label{sec:open}
+
+\begin{question}[Fisher-zero distribution: beyond the almost periodic region]
+\label{prob:zeros}
+Theorem~\ref{thm:density} settles the density of tree zeros in substrips of
+$\operatorname{Re} s > 1$. Remaining: (a) the left edge --- the census finds real
+parts as low as $1.013$ by height $500$; do they accumulate at $1$? Do zeros of the
+continued $P - \tfrac14$ exist with $\operatorname{Re} s \le 1$, where almost
+periodicity fails and the Riemann zeros enter through \eqref{eq:Pcont}? (b) the total
+density $\lim_{\sigma_1 \downarrow 1} \frac{1}{2\pi}\sum_p (\log p)\,
+q_p(\sigma_1)$: expected finite (the tail should behave like
+$\sum_p (\log p)\, p^{-2\sigma}$), but its value and the speed of the leftward drift
+are open. (c) pair correlations and the gap law of the ordinates: the census gives
+spacings from $1.31$ to $10.54$ around mean $8.42$ --- is there level repulsion?
+(d) a Lee--Yang-type question: is there a natural deformation of the gas for which
+the singularities align on a line? (e) the same program for the level sets
+$P(s) = c$, $0 < c < 1$: the tree zeros are $c = \tfrac14$, the Boltzmann-gas poles
+$c = 1$.
+\end{question}
+
+\begin{question}[Tauberian rigor]\label{prob:tauberian}
+Prove $\sum_{n \le x} g_\cT(n) \sim c\, x^{\sigma^{*}} (\log x)^{-3/2}$ (a
+Delange-type theorem for Dirichlet series with a square-root singularity), and its
+analogue for $g_\cB$.
+\end{question}
+
+\begin{question}[The cascade of the non-planar gas]\label{prob:cascade}
+The continuation
+\[
+Z_\cB(s) = 1 - \sqrt{1 - 2P(s) - Z_\cB(2s)}
+\]
+propagates each singularity of $Z_\cB$ at $s_0$ to potential singularities at
+$s_0/2, s_0/4, \dots$ and mixes them with those of $P$. Map this self-similar singularity structure;
+determine whether $Z_\cB$ has a natural boundary strictly to the right of
+$\operatorname{Re} s = 0$.
+\end{question}
+
+\begin{question}[Beyond the single-particle input]\label{prob:twovar}
+Every one-variable partition function of \S\ref{sec:zeta} is a functional of
+$P(s), P(2s), \dots$ Find a natural two-variable $Z_\cT(s,q)$ (weighting a shape
+statistic of the history) that is provably \emph{not} such a functional, and study its
+phase diagram in $(s,q)$.
+\end{question}
+
+\begin{question}[History-sensitive totient]\label{prob:totient}
+Construct $\varphi^{\mathrm{tree}}$ satisfying (i)--(iii) of \S\ref{sec:functions},
+ideally with an inclusion--exclusion (M\"obius) interpretation over subtrees.
+\end{question}
+
+\begin{question}[The full expression calculus]\label{prob:calculus}
+\S\ref{sec:bridge} lets processes act on states, and \S\ref{sec:cost} equips the
+two-sorted expression grammar with a cost. What is missing is its \emph{rewriting
+theory}: treat distributivity as a directed rewrite rule (an evaluation step) rather
+than an equation, study normal forms and confluence, and relate them to Loday's grove
+addition~\cite{loday,brunoyasaki}.
+\end{question}
+
+\begin{question}[The addition dividend]\label{prob:cost}
+Determine the behavior of $\delta(n) = A(n) - \|n\|$ (\S\ref{sec:cost}). Is
+$\delta \equiv 0$ on powers of two (equivalently, $\|2^k\| = 2k$)? Is $\delta$
+unbounded? What is its average order? Is $\|n\|$ computable in time polynomial in
+$\log n$? And the structured refinement: quantify the \emph{cost of remembering} ---
+the minimal cost of an expression whose multiplicative skeleton is constrained to a
+fixed corner of the coarse-graining square.
+\end{question}
+
+\begin{question}[Axiomatics of the bridge]\label{prob:axioms}
+Characterize the pair $(\cG, \alpha)$ abstractly: for which ``clustering worlds'' does
+Theorem~\ref{thm:assoc} hold with \emph{exactly} $\approx_a$, and is $(\cG,\alpha)$
+universal among them?
+\end{question}
+
+%======================================================================
+\appendix
+\section{Computational verification}\label{app:verification}
+
+All computations are reproducible from the two scripts in the \texttt{verification/}
+directory of this repository (\texttt{verify\_combinatorics.py}, standard library
+only; \texttt{analytic.py}, requiring \texttt{mpmath} and \texttt{numpy}).
+
+\subsection{Combinatorial checks}
+
+For every $n \le 20000$: the closed formula of Proposition~\ref{prop:gT} agrees with a
+direct recursive enumeration $g_\cT(n) = [n \in \mathbb{P}] + \sum_{d \mid n,\, 1<d<n}
+g_\cT(d)\, g_\cT(n/d)$; the multinomial of Proposition~\ref{prop:gW} agrees with the
+first-letter recursion; and the unordered recursion of Proposition~\ref{prop:gB}
+reproduces the Wedderburn--Etherington numbers
+$1,1,1,2,3,6,11,23,46,98,207,451,983,2179$ at $n = 2^k$, $k \le 14$, as well as the
+hand-enumerated values $g_\cB(12)=2$, $g_\cB(24)=4$, $g_\cB(30)=3$. The OEIS near-miss
+A375120 (which uses ordered pairs on the diagonal) first diverges at $n = 144$: $42$
+against the true $41$; a control query confirmed the OEIS search interface finds
+A375120 from its own terms while the $g_\cB$ terms return no match (July 2026).
+
+\subsection{Analytic checks and constants}
+
+With $g_\cT(n)$, $g_\cB(n)$ enumerated for $n \le 20000$, partial sums of the
+Dirichlet series were compared with the closed/functional forms of
+Theorem~\ref{thm:funceq}:
+
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+series & $s$ & partial sum vs.\ closed form & difference \\
+\midrule
+$Z_\cT$ & $3$ & $0.225547637865\ldots$ vs.\ $0.225705704214\ldots$ & $-1.6\cdot10^{-4}$ (tail) \\
+$Z_\cT$ & $4$ & $0.084059063652\ldots$ vs.\ $0.084059066410\ldots$ & $-2.8\cdot10^{-9}$ \\
+$Z_\cT$ & $6$ & agreement & $-3.1\cdot10^{-18}$ \\
+$Z_\cB$ & $3$ & agreement & $-4.0\cdot10^{-7}$ \\
+$Z_\cB$ & $4$ & agreement & $-1.1\cdot10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+the residual differences being exactly the truncation tails expected from the critical
+exponents. Constants (via \texttt{mpmath.primezeta} at 25--30 significant digits):
+\[
+\begin{aligned}
+\sigma^{*} &= 2.59738512713467162\dots, &\quad P'(\sigma^{*}) &= -0.230054805474\dots,\\
+\sigma_\cB &= 1.98847685180090810\dots, &\quad Z_\cB(\sigma_\cB) &= 1\ (\text{verified to } 10^{-6}),\\
+\sigma_\cW &= 1.39943332872633032\dots, &\quad P'(\sigma_\cW) &= -1.73115620186\dots,\\
+\rho_{\text{Kalm\'ar}} &= 1.72864723899818362\dots, &\quad P(2) &= 0.45224742004106550\dots
+\end{aligned}
+\]
+For the classical bootstrap of Remark~\ref{rem:bootstrap} on the primon spectrum:
+Boltzmann counting, $P(\beta_H) = 2\log2 - 1$, gives
+$\beta_H = 2.14875116590273\dots$; Bose counting, solving
+$P(s) + 2\sum_{k\ge2} G(ks)/k = 2\log 2 - 1$ with $G$ computed by the
+argument-doubling cascade, gives $\beta_H = 2.30723145510135\dots$ with
+$G(\beta_H) = 0.6646652572\dots$
+
+\subsection{Tree zeros}
+
+The zeros of Table~\ref{tab:zeros} were located by a grid scan of
+$|P_{\le 20000}(s) - \tfrac14|$ (truncated prime sum, step $0.02$) over
+$[1.40, 2.70] \times [0.3, 50]$, followed by Newton polishing on the full
+$\texttt{primezeta}$ at 20 significant digits; each reported zero satisfies
+$|P(s) - \tfrac14| < 10^{-15}$. A coarser sweep of $[1.05, 1.40) \times [0.5, 50]$
+(step $0.05 \times 0.25$) found no additional candidates; its only sub-threshold dip
+flowed to zero \#1 of the table.
+
+\subsection{Zero census and the density check}
+
+The census of \S\ref{sec:density} (script \texttt{zero\_census.py}) extends the scan
+to $[1.30, 2.72] \times [0.3, 500]$ with primes up to $10^5$ (grid
+$0.02 \times 0.05$, seed threshold $0.06$, Newton polish at 18 significant digits,
+residuals below $10^{-14}$): $59$ zeros, real parts in $(1.3149,\, 2.5396)$, listed
+in \texttt{verification/zeros\_t500.txt}. The running counts are
+$N(100), \dots, N(500) = 11, 23, 35, 47, 59$; the one-per-period line
+$T\log 2/2\pi$ would give $11.0, 22.1, 33.1, 44.1, 55.2$; the mean spacing is
+$8.417$, with extremes $1.31$ and $10.54$. A
+coarse sweep of $[1.05, 1.30) \times [0.5, 500]$ (steps $0.05 \times 0.25$, not
+exhaustive) finds eight further zeros with real parts down to $1.01298$ (at
+$t \approx 470.24$). The dominance probabilities at $\sigma = 1.30$ were estimated
+from $4 \cdot 10^5$ random-phase samples over the primes up to $10^4$:
+\[
+q_2 = 0.6237, \quad q_3 = 0.1484, \quad q_5 = 0.0416, \quad q_7 = 0.0167, \quad
+q_{11} = 0.0051, \quad q_{13} = 0.0031,
+\]
+giving predicted density $0.11659$ per unit height, i.e.\ $58.3$ zeros to height
+$500$, against $59$ observed.
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{aks}
+M.~Agrawal, N.~Kayal, and N.~Saxena,
+\emph{PRIMES is in P},
+Ann. of Math. \textbf{160} (2004), 781--793.
+
+\bibitem{adj}
+J.~Ambj\o rn, B.~Durhuus, and T.~Jonsson,
+\emph{Quantum Geometry: A Statistical Field Theory Approach},
+Cambridge University Press, 1997.
+
+\bibitem{berrykeating}
+M.~V.~Berry and J.~P.~Keating,
+\emph{The Riemann zeros and eigenvalue asymptotics},
+SIAM Review \textbf{41} (1999), 236--266.
+
+\bibitem{bipz}
+E.~Br\'ezin, C.~Itzykson, G.~Parisi, and J.-B.~Zuber,
+\emph{Planar diagrams},
+Comm. Math. Phys. \textbf{59} (1978), 35--51.
+
+\bibitem{bostconnes}
+J.-B.~Bost and A.~Connes,
+\emph{Hecke algebras, type III factors and phase transitions with spontaneous symmetry
+breaking in number theory},
+Selecta Math. (N.S.) \textbf{1} (1995), 411--457.
+
+\bibitem{brunoyasaki}
+A.~Bruno and D.~Yasaki,
+\emph{The arithmetic of trees},
+arXiv:0809.4448 (2008).
+
+\bibitem{bach}
+E.~Bach,
+\emph{How to generate factored random numbers},
+SIAM J. Comput. \textbf{17} (1988), 179--193.
+
+\bibitem{bhp}
+R.~C.~Baker, G.~Harman, and J.~Pintz,
+\emph{The difference between consecutive primes, II},
+Proc. London Math. Soc. \textbf{83} (2001), 532--562.
+
+\bibitem{bcss}
+L.~Blum, F.~Cucker, M.~Shub, and S.~Smale,
+\emph{Complexity and Real Computation},
+Springer, 1998.
+
+\bibitem{bohrjessen}
+H.~Bohr and B.~Jessen,
+\emph{\"Uber die Werteverteilung der Riemannschen Zetafunktion},
+Acta Math. \textbf{54} (1930), 1--35; \textbf{58} (1932), 1--55.
+
+\bibitem{chenluors}
+L.~Chen, Z.~Lu, I.~C.~Oliveira, H.~Ren, and R.~Santhanam,
+\emph{Polynomial-time pseudodeterministic construction of primes},
+Proc. 64th IEEE Symposium on Foundations of Computer Science (FOCS), 2023.
+
+\bibitem{cramer}
+H.~Cram\'er,
+\emph{On the order of magnitude of the difference between consecutive prime numbers},
+Acta Arith. \textbf{2} (1936), 23--46.
+
+\bibitem{crandallpomerance}
+R.~Crandall and C.~Pomerance,
+\emph{Prime Numbers: A Computational Perspective},
+2nd ed., Springer, 2005.
+
+\bibitem{erdoskac}
+P.~Erd\H{o}s and M.~Kac,
+\emph{The Gaussian law of errors in the theory of additive number theoretic
+functions},
+Amer. J. Math. \textbf{62} (1940), 738--742.
+
+\bibitem{fisher}
+M.~E.~Fisher,
+\emph{The nature of critical points},
+in: Lectures in Theoretical Physics, vol.~VII~C,
+University of Colorado Press, Boulder, 1965, pp.~1--159.
+
+\bibitem{flajoletodlyzko}
+P.~Flajolet and A.~Odlyzko,
+\emph{The average height of binary trees and other simple trees},
+J. Comput. System Sci. \textbf{25} (1982), 171--213.
+
+\bibitem{flajolet}
+P.~Flajolet and R.~Sedgewick,
+\emph{Analytic Combinatorics},
+Cambridge University Press, 2009.
+
+\bibitem{frautschi}
+S.~Frautschi,
+\emph{Statistical bootstrap model of hadrons},
+Phys. Rev. D \textbf{3} (1971), 2821--2834.
+
+\bibitem{grover}
+L.~K.~Grover,
+\emph{A fast quantum mechanical algorithm for database search},
+Proc. 28th ACM Symposium on Theory of Computing (STOC), 1996, pp.~212--219.
+
+\bibitem{hagedorn}
+R.~Hagedorn,
+\emph{Statistical thermodynamics of strong interactions at high energies},
+Nuovo Cimento Suppl. \textbf{3} (1965), 147--186.
+
+\bibitem{jessentornehave}
+B.~Jessen and H.~Tornehave,
+\emph{Mean motions and zeros of almost periodic functions},
+Acta Math. \textbf{77} (1945), 137--279.
+
+\bibitem{julia}
+B.~L.~Julia,
+\emph{Statistical theory of numbers},
+in: Number Theory and Physics (Les Houches, 1989), Springer Proceedings in Physics
+\textbf{47}, Springer, 1990, pp.~276--293.
+
+\bibitem{kalai}
+A.~Kalai,
+\emph{Generating random factored numbers, easily},
+J. Cryptology \textbf{16} (2003), 287--289.
+
+\bibitem{kalmar}
+L.~Kalm\'ar,
+\emph{\"Uber die mittlere Anzahl der Produktdarstellungen der Zahlen},
+Acta Litt. Sci. Szeged \textbf{5} (1931), 95--107.
+
+\bibitem{landauwalfisz}
+E.~Landau and A.~Walfisz,
+\emph{\"Uber die Nichtfortsetzbarkeit einiger durch Dirichletsche Reihen definierter
+Funktionen},
+Rend. Circ. Mat. Palermo \textbf{44} (1920), 82--86.
+
+\bibitem{leeyang}
+C.~N.~Yang and T.~D.~Lee,
+\emph{Statistical theory of equations of state and phase transitions. I. Theory of
+condensation}, Phys. Rev. \textbf{87} (1952), 404--409;
+T.~D.~Lee and C.~N.~Yang, \emph{II. Lattice gas and Ising model}, ibid., 410--419.
+
+\bibitem{loday}
+J.-L.~Loday,
+\emph{Arithmetree},
+J. Algebra \textbf{267} (2003), 507--539; arXiv:math/0112034.
+
+\bibitem{mahlerpopken}
+K.~Mahler and J.~Popken,
+\emph{On a maximum problem in arithmetic},
+Nieuw Arch. Wiskd. (3) \textbf{1} (1953), 1--15.
+
+\bibitem{nahm}
+W.~Nahm,
+\emph{Analytical solution of the statistical bootstrap model},
+Nucl. Phys. B \textbf{45} (1972), 525--553.
+
+\bibitem{otter}
+R.~Otter,
+\emph{The number of trees},
+Ann. of Math. \textbf{49} (1948), 583--599.
+
+\bibitem{polymath}
+D.~H.~J.~Polymath,
+\emph{Deterministic methods to find primes},
+Math. Comp. \textbf{81} (2012), 1233--1246.
+
+\bibitem{shubsmale}
+M.~Shub and S.~Smale,
+\emph{On the intractability of Hilbert's Nullstellensatz and an algebraic version of
+``NP $\neq$ P?''},
+Duke Math. J. \textbf{81} (1995), 47--54.
+
+\bibitem{oeis}
+N.~J.~A.~Sloane (ed.),
+\emph{The On-Line Encyclopedia of Integer Sequences},
+\url{https://oeis.org}. Entries A000108, A001190, A005245, A008480, A144757, A375120.
+
+\bibitem{spector}
+D.~Spector,
+\emph{Supersymmetry and the M\"obius inversion function},
+Comm. Math. Phys. \textbf{127} (1990), 239--252.
+
+\bibitem{stanley}
+R.~P.~Stanley,
+\emph{Catalan Numbers},
+Cambridge University Press, 2015.
+
+\bibitem{tamari}
+F.~M\"uller-Hoissen, J.~M.~Pallo, and J.~Stasheff (eds.),
+\emph{Associahedra, Tamari Lattices and Related Structures},
+Progress in Mathematics \textbf{299}, Birkh\"auser, 2012.
+
+\bibitem{thooft}
+G.~'t~Hooft,
+\emph{A planar diagram theory for strong interactions},
+Nucl. Phys. B \textbf{72} (1974), 461--473.
+
+\end{thebibliography}
+
+\end{document}
