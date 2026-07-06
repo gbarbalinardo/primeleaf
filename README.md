@@ -2,12 +2,13 @@
 
 Arithmetic in which multiplication does not return a number. The product of two
 objects is a multiplication tree over prime leaves, and the ordinary integer is the
-shadow of that tree. In physics language: the primes are primons (energy log p),
-trees are fireballs with recorded fusion histories, the Riemann zeta function is a
-free-boson partition function, `Z = P + Z^2` is a statistical bootstrap equation,
-critical exponents are inverse Hagedorn temperatures, and ordinary arithmetic is what
-survives total coarse-graining. The Fundamental Theorem of Arithmetic is exactly the
-statement that the coarse-grained description is faithful.
+shadow of that tree. Read as statistical mechanics: the primes are the modes of a gas
+(mode `p` has energy `log p`), a tree is one microstate (a recorded fusion history),
+the Riemann zeta function is the free-boson partition function, `Z = P + Z^2` is a
+statistical bootstrap equation, critical exponents are inverse Hagedorn temperatures,
+and ordinary arithmetic is what survives total coarse-graining. The Fundamental
+Theorem of Arithmetic is exactly the statement that the coarse-grained description is
+faithful.
 
 **Paper:** [`paper/prime-leaf-tree-theory.pdf`](paper/prime-leaf-tree-theory.pdf)
 

@@ -166,11 +166,11 @@ complex analysis. No result depends on the imagery.
 \subsection{Results}
 
 \begin{enumerate}
-\item \textbf{The microstate space} (\S\ref{sec:trees}). The fireball world is the
+\item \textbf{The microstate space} (\S\ref{sec:trees}). The world of trees is the
 free magma $\cT$ on the set of primes; the measurement is the unique magma morphism
 $N\colon \cT \to (\NN_{\ge2},\cdot)$ with $N(L_p) = p$; energies
 $E = \log N$ add under fusion. The interacting world has no vacuum: $1$ is not the
-shadow of any fireball, and the empty state exists only in the Fock description.
+shadow of any tree, and the empty state exists only in the Fock description.
 
 \item \textbf{Coarse-graining is two-dimensional} (\S\ref{sec:square}). Forgetting the
 interaction history (associativity) and symmetrizing (commutativity) are
@@ -186,18 +186,18 @@ recorded before, and $1$ for $\cM$. All verified exhaustively for $n \le 20000$.
 four are exact functionals of the prime zeta function $P$: the free Bose gas
 $\zeta(\beta)$ (the Euler product \emph{is} the textbook free-boson computation), a
 geometric gas $P/(1-P)$, an Otter gas with argument-doubling equation, and the planar
-fireball gas obeying the bootstrap equation $Z = P + Z^2$. The inverse Hagedorn
+tree gas obeying the bootstrap equation $Z = P + Z^2$. The inverse Hagedorn
 temperatures form a strict ladder
 \[
 1 \;<\; 1.3994333287263303 \;<\; 1.9884768518009081 \;<\; \sigma^{*} = 2.5973851271346716 ,
 \]
-one rung per layer of remembered structure. At its Hagedorn point the fireball gas
+one rung per layer of remembered structure. At its Hagedorn point the tree gas
 converges with $Z_\cT(\sigma^{*}) = \tfrac12$ exactly and a square-root branch point:
 the universal branched-polymer singularity, the same criticality that governs
 planar-diagram counting in the Gaussian matrix model. The symmetrized gases instead
 have poles: whether the Hagedorn temperature is attainable is decided by
 associativity. The classical Hagedorn--Frautschi--Nahm bootstrap, transplanted onto
-the primon spectrum, slots into the same family with
+the prime spectrum, slots into the same family with
 $\beta_H = 2.1487511659\dots$ (Boltzmann counting) and $2.3072314551\dots$ (Bose
 counting).
 
@@ -206,17 +206,18 @@ its complex-$\beta$ singularities are inherited from $P$ (which carries a branch
 point at $\beta = \rho/k$ for every nontrivial Riemann zero $\rho$, and has the
 imaginary axis as a natural boundary), plus new branch points where $P(\beta) = \tfrac14$. We
 compute the five with $0 < \operatorname{Im}\beta < 50$: they recur near integer
-multiples of $2\pi/\log 2$ (the lightest primon sets the frequency) and do \emph{not}
+multiples of $2\pi/\log 2$ (the lightest mode, of energy $\log 2$, sets the
+frequency) and do \emph{not}
 lie on a vertical line. The naive tree analogue of the Riemann Hypothesis is false;
 the right question is the distribution of these Fisher singularities, and that
 question we answer: in every substrip of $\operatorname{Re} s > 1$ the tree zeros
 have an exact asymptotic density (Theorem~\ref{thm:density}, via the
 Jessen--Tornehave theory of almost periodic functions). Each singularity occurs when
-a single primon mode outshines the coherent rest, and the density is the total
+a single mode outshines the coherent rest, and the density is the total
 dominance rate $\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of all $59$ zeros to
 height $500$ matches the formula's Monte Carlo prediction of $58.3$ to one percent.
 
-\item \textbf{The additive bridge} (\S\ref{sec:bridge}). Fireballs act as
+\item \textbf{The additive bridge} (\S\ref{sec:bridge}). Trees act as
 \emph{processes} on states of clustered matter (boxed heaps of unit quanta), and the
 classical laws stratify by observability: associativity is invisible to the action
 (exactly, because processes compose), while commutativity fails on states and
@@ -231,8 +232,8 @@ gas can and cannot compute. Microstate counting is \emph{shape-blind}: every
 degeneracy depends only on the exponent profile of $n$, so no counting of histories
 can locate primes: the no-free-lunch face of freeness. In the other direction, a
 random integer seen at full resolution is a universal random object: a uniform
-Catalan tree with a Gaussian, $\log\log x$, number of primons (Erd\H{o}s--Kac lifted
-to fireballs). The interface where the theory genuinely meets the complexity of
+Catalan tree with a Gaussian, $\log\log x$, number of prime factors (Erd\H{o}s--Kac
+lifted to trees). The interface where the theory genuinely meets the complexity of
 finding primes is \emph{expression cost}: integer complexity is the first invariant
 here that escapes $P$ (it distinguishes $4$ from $9$), Wilson's theorem makes
 primality one factorial-expression away, and the open frontier, deterministic
@@ -268,9 +269,9 @@ the additive bridge. What the theory offers is a clean separation of the structu
 from the arithmetic, and computable invariants in the separated layers.
 
 %======================================================================
-\section{The fireball algebra}\label{sec:trees}
+\section{Multiplication trees}\label{sec:trees}
 
-\subsection{Primons and fusion histories}
+\subsection{Modes and fusion histories}
 
 \begin{definition}[Multiplication trees]\label{def:trees}
 Fix the set of prime leaves $\{L_p : p \text{ prime}\}$. The set $\cT$ of
@@ -282,9 +283,9 @@ Thus $\cT$ is the \emph{free magma} on the set of primes: $\boxtimes$ is ordered
 formation, subject to no laws whatsoever.
 \end{definition}
 
-\physread $L_p$ is a single primon, of energy $\varepsilon_p = \log p$. A tree is a
-fireball that remembers how it was assembled: $T_1 \boxtimes T_2$ is the fusion of the
-fireballs $T_1$ and $T_2$, in that order. Examples of \emph{distinct} microstates:
+\physread $L_p$ is one particle in the mode of energy $\varepsilon_p = \log p$. A
+tree is a composite that remembers how it was assembled: $T_1 \boxtimes T_2$ is the
+fusion of $T_1$ and $T_2$, in that order. Examples of \emph{distinct} microstates:
 \[
 L_2, \qquad
 L_2 \boxtimes L_3, \qquad
@@ -298,7 +299,7 @@ ordered, as one does for planar diagrams of matrix-valued fields~\cite{thooft};
 keeping the parenthesization is keeping the interaction history: which pair fused
 first. A multiplication tree is the parse tree of a multiplication expression before
 evaluation; equivalently, a tree-level diagram built from a single cubic vertex whose
-external legs are primons.
+external legs are labeled by primes.
 
 For $T \in \cT$ write $|T|$ for the number of leaves and $\mathrm{word}(T)$ for the
 left-to-right sequence of leaf labels; $\supp(T)$ denotes the set of primes occurring.
@@ -330,7 +331,7 @@ in the Fock description, as the empty occupation configuration
 \end{remark}
 
 Composite numbers are not primitive objects of this world. There is no $L_6$; the
-value $6$ occurs only as the common reading of the two fireballs $L_2\boxtimes L_3$
+value $6$ occurs only as the common reading of the two trees $L_2\boxtimes L_3$
 and $L_3\boxtimes L_2$. Likewise $8$ is the common reading of
 $(L_2\boxtimes L_2)\boxtimes L_2$ and $L_2\boxtimes(L_2\boxtimes L_2)$: distinct
 formation histories, one observable. Quantifying this degeneracy is the subject of the
@@ -378,9 +379,9 @@ $N = p_1\cdots p_k$. Surjectivity of $N$ is the existence of a prime factorizati
 injectivity is its uniqueness. \end{proof}
 
 \physread The two arrows are the two things an observer can throw away.
-\emph{Forgetting the history} keeps only the ordered list of constituent primons:
-the asymptotic content of the fireball, an S-matrix state with the internal dynamics
-integrated out. \emph{Symmetrizing} declares the primons indistinguishable: Bose
+\emph{Forgetting the history} keeps only the ordered list of constituent particles:
+an asymptotic state, with the internal dynamics integrated out.
+\emph{Symmetrizing} declares the particles indistinguishable: Bose
 statistics. Doing both lands in the occupation-number description: an element of
 $\cM$ is exactly a configuration $(\alpha_2, \alpha_3, \alpha_5, \dots)$, a basis
 vector of the symmetric Fock space over the single-particle spectrum. $\cW$, the
@@ -411,7 +412,7 @@ the microstate count and the Boltzmann entropy of the macrostate $n$ at level
 $\mathcal X$. Proposition~\ref{prop:fta} says $S_\cM \equiv 0$; the other three levels
 have genuine entropy.
 
-\begin{proposition}[Planar fireballs]\label{prop:gT}
+\begin{proposition}[Planar trees]\label{prop:gT}
 \[
 g_\cT(n) \;=\; C_{\Omega(n)-1}\;\frac{\Omega(n)!}{\prod_p \alpha_p!},
 \qquad C_k = \frac{1}{k+1}\binom{2k}{k}.
@@ -433,7 +434,7 @@ $g_\cW(n) = \Omega(n)!/\prod_p \alpha_p!$, with recursion
 $g_\cW(n) = \sum_{p \mid n} g_\cW(n/p)$ and $g_\cW(p)=1$. This is OEIS A008480.
 \end{proposition}
 
-\begin{proposition}[Non-planar fireballs]\label{prop:gB}
+\begin{proposition}[Non-planar trees]\label{prop:gB}
 $g_\cB$ satisfies $g_\cB(p) = 1$ and, for composite $n$,
 \[
 g_\cB(n) \;=\; \frac12 \sum_{\substack{d \mid n \\ 1<d<n}} g_\cB(d)\, g_\cB(n/d)
@@ -475,13 +476,13 @@ independent interest.
 L_2\boxtimes(L_3\boxtimes L_2),\;
 L_3\boxtimes(L_2\boxtimes L_2); \\[1mm]
 \cW: & 3 \text{ words} & (2,2,3),\; (2,3,2),\; (3,2,2); \\[1mm]
-\cB: & 2 \text{ bushes} & \{\{L_2,L_2\},L_3\},\; \{\{L_2,L_3\},L_2\}; \\[1mm]
+\cB: & 2 \text{ unordered trees} & \{\{L_2,L_2\},L_3\},\; \{\{L_2,L_3\},L_2\}; \\[1mm]
 \cM: & 1 \text{ multiset} & \{2,2,3\}.
 \end{array}
 \]
 So the entropy of $12$ is $S_\cT(12) = \log 6$ at the history level,
-$S_\cW(12) = \log 3$ for the beam, $S_\cB(12) = \log 2$ non-planar, and $0$ in Fock
-space. And $g_\cT(12) = C_2 \cdot \tfrac{3!}{2!\,1!} = 2\cdot 3 = 6$, as predicted.
+$S_\cW(12) = \log 3$ for the particle list, $S_\cB(12) = \log 2$ non-planar, and $0$
+in Fock space. And $g_\cT(12) = C_2 \cdot \tfrac{3!}{2!\,1!} = 2\cdot 3 = 6$, as predicted.
 \end{example}
 
 Table~\ref{tab:degeneracies} lists the three nontrivial counts for small $n$. All
@@ -519,7 +520,8 @@ $g_\cB(2^k) = 1,1,1,2,3,6$ for $k=1,\dots,6$ (Wedderburn--Etherington).}
 
 Write $E(X) = \log N(X)$ and let $\beta = s$ be the inverse temperature. Let
 $P(s) = \sum_p p^{-s} = \sum_p e^{-s\varepsilon_p}$ denote the prime zeta function,
-physically the single-particle (single-primon) partition function. For each corner
+physically the single-particle partition function of the mode spectrum
+$\{\log p\}$. For each corner
 $\mathcal{X} \in \{\cT, \cW, \cB, \cM\}$ define the canonical partition function
 \[
 Z_{\mathcal X}(s) \;=\; \sum_{X \in \mathcal X} e^{-s E(X)}
@@ -574,9 +576,10 @@ primon gas of Julia~\cite{julia}.
 \emph{(\ref{eq:geo}) is the distinguishable-particle gas}: ordered $k$-particle states
 with no $1/k!$, the counting that produces the Gibbs paradox.
 \emph{(\ref{eq:cat}) is a statistical bootstrap equation} in the sense of
-Hagedorn--Frautschi~\cite{hagedorn,frautschi}: \emph{a fireball is either an input
-particle or a fusion of two fireballs}, with energy exactly conserved; here the input
-spectrum is the primons and the fusion is ordered and binary.
+Hagedorn--Frautschi~\cite{hagedorn,frautschi}, whose composite particles were called
+\emph{fireballs}: a fireball is either an input particle or a fusion of two
+fireballs, with energy exactly conserved. Here the input spectrum is the primes and
+the fusion is ordered and binary.
 \emph{(\ref{eq:otter}) is the non-planar bootstrap}: unordered fusion, with the
 $Z(2s)$ term the standard exchange correction for the two branches being
 \emph{identical}, the same mechanism that separates Bose from Boltzmann counting.
@@ -639,10 +642,10 @@ temperature:
 \toprule
 gas & states & $\beta_H$ & $T_H = 1/\beta_H$ & transition \\
 \midrule
-Bose (primon) & occupation numbers & $1$ & $1$ & pole \\
+Bose & occupation numbers & $1$ & $1$ & pole \\
 Boltzmann & ordered factorizations & $1.399433\dots$ & $0.714575\dots$ & pole \\
-non-planar fireball & unordered histories & $1.988477\dots$ & $0.502897\dots$ & cusp, $Z_\cB \to 1$ \\
-planar fireball & ordered histories & $2.597385\dots$ & $0.385003\dots$ & cusp, $Z_\cT \to \tfrac12$ \\
+non-planar tree & unordered histories & $1.988477\dots$ & $0.502897\dots$ & cusp, $Z_\cB \to 1$ \\
+planar tree & ordered histories & $2.597385\dots$ & $0.385003\dots$ & cusp, $Z_\cT \to \tfrac12$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -676,7 +679,7 @@ as the planar moments and $\tfrac14$ is the edge of the Wigner
 semicircle~\cite{bipz}.
 \end{remark}
 
-\begin{remark}[The classical bootstrap on the primon spectrum]\label{rem:bootstrap}
+\begin{remark}[The classical bootstrap on the prime spectrum]\label{rem:bootstrap}
 The historical statistical bootstrap model fuses in one shot: a fireball is an input
 particle \emph{or an unordered cluster of $k \ge 2$ fireballs}, Boltzmann-weighted by
 $1/k!$. Its generating equation is $G = \varphi + (e^{G} - 1 - G)$, whose square-root
@@ -687,7 +690,7 @@ reaches the universal value
 \qquad G_c = \log 2 .
 \]
 Evaluated on the empirical hadron spectrum, this criticality condition is what fixed
-the original $T_H \approx 160$\,MeV. Transplanted onto the primon spectrum
+the original $T_H \approx 160$\,MeV. Transplanted onto the prime spectrum
 ($\varphi = P$), it gives the inverse Hagedorn temperatures
 \[
 \beta_H^{\mathrm{Boltz}} = 2.1487511659\dots,
@@ -701,7 +704,7 @@ Appendix~\ref{app:verification}). These classical gases
 slot into the same family as the four corners (same input spectrum, same
 square-root mechanism) but sit off the ladder of Theorem~\ref{thm:ladder} because
 their symmetry-factor weights are fractional rather than integer counts. In bootstrap
-language, the fireball world $\cT$ is a bootstrap model whose decay chains are fully
+language, the tree world $\cT$ is a bootstrap model whose decay chains are fully
 resolved: an integer's prime factorization is its ultimate decay inventory, and the
 primes are the stable particles.
 \end{remark}
@@ -714,7 +717,7 @@ $|P(\sigma_\cW + it)| < 1$ for $t \ne 0$ by Lemma~\ref{lem:strict} below),
 \sum_{n \le x} g_\cW(n) \;\sim\; \frac{x^{\sigma_\cW}}{\sigma_\cW\,|P'(\sigma_\cW)|}
 \;\approx\; 0.4128\, x^{1.39943\dots}.
 \]
-For the fireball level, transfer heuristics for the square-root singularity suggest
+For the tree level, transfer heuristics for the square-root singularity suggest
 $\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$; making this rigorous
 is Problem~\ref{prob:tauberian}. Note also the extreme values: along $n = 2^k$ one has
 $g_\cT(n) = C_{k-1}$, which grows like $n^{2}/(\log n)^{3/2}$ up to constants: the
@@ -732,7 +735,7 @@ parts need not be stable particles).
 Lee and Yang taught that the thermodynamics of a system is encoded in the complex
 singularities of its partition function, in complex fugacity for them and in complex
 temperature for Fisher~\cite{leeyang,fisher}. We now locate the complex-$\beta$
-singularities of the fireball gas. Since $Z_\cT = \tfrac12(1 - \sqrt{1-4P})$ is an
+singularities of the tree gas. Since $Z_\cT = \tfrac12(1 - \sqrt{1-4P})$ is an
 \emph{algebraic} function of $P$, they come in exactly two kinds: those inherited from
 the single-particle input $P$, and the new branch points where the discriminant
 vanishes.
@@ -751,7 +754,7 @@ every nontrivial zero $\rho$ of $\zeta$}; these points cluster on the imaginary 
 which is a natural boundary (Landau--Walfisz~\cite{landauwalfisz}). Two consequences:
 
 \begin{enumerate}
-\item Lifting arithmetic to fireballs does not dissolve the Riemann Hypothesis. The
+\item Lifting arithmetic to trees does not dissolve the Riemann Hypothesis. The
 zeros of $\zeta$ reappear, relocated, inside $Z_\cT$ as branch points at $\rho/k$.
 Where the Hilbert--P\'olya program seeks a Hamiltonian whose \emph{spectrum} is the
 Riemann zeros~\cite{berrykeating}, the arithmetic gas offers the complementary
@@ -769,7 +772,7 @@ The new singularities of $Z_\cT$ are the solutions of
 \begin{equation}\label{eq:treezero}
 P(s) = \tfrac14,
 \end{equation}
-square-root branch points of $Z_\cT$: the Fisher singularities of the fireball gas.
+square-root branch points of $Z_\cT$: the Fisher singularities of the tree gas.
 We call them \emph{tree zeros} (they are the zeros of the discriminant $1 - 4P$). On
 the real axis there is exactly one, $\sigma^{*}$, since $P$ is strictly decreasing
 there. Off the axis:
@@ -820,7 +823,7 @@ range.}
 Two empirical observations. First, the ordinates hug integer multiples of
 $2\pi/\log 2 = 9.0647\dots$: the partition function is almost periodic in
 $\operatorname{Im}\beta$, and the recurrence frequency is set by the \emph{lightest
-primon}, $\varepsilon_2 = \log 2$, whose Boltzmann factor $2^{-\beta}$ dominates $P$;
+mode}, $\varepsilon_2 = \log 2$, whose Boltzmann factor $2^{-\beta}$ dominates $P$;
 the interference of $3^{-\beta}$ and later modes then shifts each singularity
 (violently so for $k=1$). Second, and decisively: \emph{the real parts wander}. The
 naive tree analogue of the Riemann Hypothesis (Fisher singularities on a vertical
@@ -898,7 +901,7 @@ origin and forces one zero per revolution: this is the event measured by $q_p$. 
 $\sigma = 1.30$ the hands have lengths $2^{-1.3} = 0.41$, $3^{-1.3} = 0.24$,
 $5^{-1.3} = 0.12$, \dots, and the Monte Carlo values are $q_2 = 0.624$,
 $q_3 = 0.148$, $q_5 = 0.042$, $q_7 = 0.017$ (Appendix~\ref{app:verification}).
-Weighted by speed, the lightest primon accounts for only $59\%$ of the
+Weighted by speed, the lightest mode accounts for only $59\%$ of the
 singularities, which is exactly why the observed density \emph{exceeds} the naive
 one-per-period guess $\log 2/2\pi$. Chains of rotating arms are the classical
 mean-motion problem of celestial mechanics, Lagrange's secular perturbations; the
@@ -927,7 +930,7 @@ The additive world of the theory is flat: $\cA = \{\,n\,\ell : n \in \NN_{\ge1}\
 heaps of a unit quantum $\ell$ (``one liter''), with
 $+\colon \cA \times \cA \to \cA$ ordinary accumulation. The question left open so far
 is how $\cT$ and $\cA$ interact. The answer proposed here: they do not interact by a
-map $\cT \to \cA$. \emph{Multiplication acts on quantities} (fireballs are
+map $\cT \to \cA$. \emph{Multiplication acts on quantities} (trees are
 \emph{processes}, not amounts), and the output of the action is neither a tree nor
 a flat quantity but a third kind of object: a state of clustered matter.
 
@@ -1099,7 +1102,7 @@ classical definition of primality; that is the point. It is expressible entirely
 inside the clustered additive world, using only $\odot$ and $\alpha$, with no imported
 number labels. One can therefore \emph{define} the particle spectrum as the set of
 non-groupable heap sizes and generate $\cT$ freely on it; the numerical label of a
-primon is recovered as the observable $\alpha$ of its heap. The foundational question
+prime leaf is recovered as the observable $\alpha$ of its heap. The foundational question
 ``are prime leaves labeled by known primes, or can the labels be derived?'' is thus
 answered: derived. What cannot be derived from the free multiplicative structure alone
 (\S\ref{sec:priorart}) becomes derivable the moment the additive world and the action
@@ -1133,7 +1136,7 @@ If the primes are the particles of this gas, can the gas help us \emph{find} the
 The question deserves a precise answer, because the temptation to answer yes is
 strong, and wrong in an instructive way. Two theorems mark the boundary: microstate
 counting is blind to primality (\S\ref{sec:nofreelunch}), while the microstate view
-describes exactly what a random integer looks like (\S\ref{sec:randomfireball}). We
+describes exactly what a random integer looks like (\S\ref{sec:randomtree}). We
 then identify the one interface where the theory genuinely touches the complexity of
 primes, the cost of \emph{expressions} (\S\ref{sec:cost}), and close with a map
 of what ``finding a prime'' actually costs and where the open frontier lies
@@ -1170,16 +1173,16 @@ occupied modes. Identity (i) does determine primality, but its right-hand side
 consumes the divisor structure of $n$, precisely what one would be trying to find,
 and by (ii)--(iii) the entire structural layer is cheap dressing over the
 factorization. This is the computational face of the caution of \S\ref{sec:priorart}:
-freeness means the fireball layer is polynomial-time syntax over its input spectrum.
+freeness means the tree layer is polynomial-time syntax over its input spectrum.
 Counting histories, at any corner of the square, can never be the hard step; whatever
 algorithmic leverage exists must come from outside the counting.
 
-\subsection{The random fireball}\label{sec:randomfireball}
+\subsection{The random tree}\label{sec:randomtree}
 
 What the microstate view \emph{does} compute is the statistics of a typical integer
 seen at full resolution.
 
-\begin{theorem}[Random fireball]\label{thm:randomfireball}
+\begin{theorem}[Random tree]\label{thm:randomtree}
 Draw $n$ uniformly from $\{2, \dots, \lfloor x\rfloor\}$, then draw $T$ uniformly
 from the fiber $N^{-1}(n) \subset \cT$.
 \begin{enumerate}
@@ -1189,7 +1192,7 @@ $\Omega(n)!/\prod_p \alpha_p!$ orderings of the prime multiset.
 \item[(ii)] As $x \to \infty$,
 $\bigl(\Omega(n) - \log\log x\bigr)/\sqrt{\log\log x}$ converges in distribution to a
 standard Gaussian.
-\item[(iii)] Consequently, conditionally on $\Omega(n) = k$ the fireball is exactly a
+\item[(iii)] Consequently, conditionally on $\Omega(n) = k$ the tree is exactly a
 uniform random binary tree with $k$ leaves; in particular its expected height, given
 $k$, is asymptotic to $2\sqrt{\pi k}$.
 \end{enumerate}
@@ -1208,7 +1211,7 @@ asymptotic for uniform binary trees is Flajolet--Odlyzko~\cite{flajoletodlyzko}.
 
 \physread At full resolution a random integer is a small branched polymer: a Gaussian
 number of constituents concentrated at $\log\log x$ (for $x = 10^{100}$, five or six
-primons), a shape drawn from the \emph{universal} Catalan ensemble carrying no
+prime factors), a shape drawn from the \emph{universal} Catalan ensemble carrying no
 arithmetic information at all (Proposition~\ref{prop:nofreelunch}(ii)
 again), and height of order $\sqrt{\log\log x}$. Erd\H{o}s--Kac becomes the central
 limit theorem for the constituent number of the arithmetic gas, and the literature on
@@ -1245,7 +1248,7 @@ $\tau(n) = O(\log n)$~\cite{shubsmale}.
 
 Cost sees what no degeneracy can: $\|4\| = 4$ while $\|9\| = 6$, although $4 = 2^2$
 and $9 = 3^2$ have the same exponent profile. It is, structurally, a bridge quantity:
-it measures how expensively a fireball can be synthesized once additions are allowed
+it measures how expensively an integer can be synthesized once additions are allowed
 inside the build. And it is exactly where the known connections between the structure
 of multiplication and the complexity of primes live:
 
@@ -1271,7 +1274,7 @@ see Blum--Cucker--Shub--Smale~\cite{bcss}), and the Shub--Smale $\tau$-conjectur
 size) implies $\mathrm{P}_{\mathbb C} \neq \mathrm{NP}_{\mathbb C}$~\cite{shubsmale}.
 In the vocabulary of this paper: \emph{the computational hardness of arithmetic is a
 statement about the additive--multiplicative interface of \S\ref{sec:bridge}, about
-the cost of synthesizing specific fireballs with additions, and Wilson's
+the cost of synthesizing specific integers with additions, and Wilson's
 theorem says primality is one factorial-expression away.}
 
 The theory also suggests its own cost observable. Define the \emph{factored cost} and
@@ -1282,7 +1285,7 @@ A(n) \;=\; \sum_{p^a \parallel n} a\,\|p\|,
 \delta(n) \;=\; A(n) - \|n\| \;\ge\; 0:
 \]
 $A(n)$ is the cost of the cheapest expression that respects the prime factorization
-(synthesize each primon additively, then fuse), and $\delta(n)$ is the saving that
+(synthesize each prime additively, then fuse), and $\delta(n)$ is the saving that
 additions \emph{above} the factorization can buy. The long-standing open question
 whether $\|2^k\| = 2k$ is exactly the statement $\delta \equiv 0$ on powers of two;
 and $\delta$ is not identically zero: $\delta(55) \ge 1$, since
@@ -1455,7 +1458,7 @@ exponents. Constants (via \texttt{mpmath.primezeta} at 25--30 significant digits
 \rho_{\text{Kalm\'ar}} &= 1.72864723899818362\dots, &\quad P(2) &= 0.45224742004106550\dots
 \end{aligned}
 \]
-For the classical bootstrap of Remark~\ref{rem:bootstrap} on the primon spectrum:
+For the classical bootstrap of Remark~\ref{rem:bootstrap} on the prime spectrum:
 Boltzmann counting, $P(\beta_H) = 2\log2 - 1$, gives
 $\beta_H = 2.14875116590273\dots$; Bose counting, solving
 $P(s) + 2\sum_{k\ge2} G(ks)/k = 2\log 2 - 1$ with $G$ computed by the
