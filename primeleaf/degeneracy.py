@@ -28,7 +28,7 @@ from primeleaf.primes import (
 
 
 def omega(n: int) -> int:
-    """Number of prime factors with multiplicity: the fireball's leaf count."""
+    """Number of prime factors with multiplicity: the tree's leaf count."""
     return sum(factorize(n).values())
 
 
@@ -46,7 +46,7 @@ def _orderings(exponents: List[int]) -> int:
 
 
 def g_tree(n: int) -> int:
-    """Planar-fireball degeneracy C_{Omega-1} * Omega!/prod(alpha_p!)."""
+    """Planar-tree degeneracy C_{Omega-1} * Omega!/prod(alpha_p!)."""
     if n < 2:
         raise ValueError("degeneracies are defined for n >= 2")
     exponents = list(factorize(n).values())

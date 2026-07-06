@@ -21,7 +21,7 @@ import numpy as np
 
 from primeleaf.primes import primes_up_to
 
-#: Recurrence period of the lightest primon, 2 pi / log 2.
+#: Recurrence period of the lightest mode (energy log 2), 2 pi / log 2.
 LIGHTEST_MODE_PERIOD = 2 * math.pi / math.log(2)
 
 

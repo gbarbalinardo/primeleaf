@@ -1,8 +1,8 @@
 """Partition functions of the four gases and the paper's critical constants.
 
-Implements Theorem 4.1 (functional equations), Theorem 4.3 (the Hagedorn
+Implements Theorem 4.1 (functional equations), Theorem 4.3 (the temperature
 ladder), Remark 4.5 (the classical Hagedorn-Frautschi-Nahm bootstrap on the
-primon spectrum), and the analytic checks of Appendix A.2.
+prime spectrum), and the analytic checks of Appendix A.2.
 
 Requires ``mpmath``.
 """
@@ -26,12 +26,12 @@ REFERENCE: Dict[str, str] = {
 
 
 def prime_zeta(s):
-    """The single-primon partition function P(s) = sum_p p^(-s)."""
+    """The single-mode partition function P(s) = sum_p p^(-s)."""
     return mp.primezeta(s)
 
 
 def z_tree(s):
-    """Planar fireball gas: (1 - sqrt(1 - 4 P(s))) / 2, eq. (4.1)."""
+    """Planar tree gas: (1 - sqrt(1 - 4 P(s))) / 2, eq. (4.1)."""
     return (1 - mp.sqrt(1 - 4 * mp.primezeta(s))) / 2
 
 
@@ -42,7 +42,7 @@ def z_word(s):
 
 
 def z_bush(s, ceiling: int = 60):
-    """Non-planar fireball gas by the Otter cascade, eq. (4.3).
+    """Non-planar tree gas by the Otter cascade, eq. (4.3).
 
     Descends Z(s) = 1 - sqrt(1 - 2 P(s) - Z(2s)) from deep in the convergent
     region, where Z is well approximated by P.
@@ -86,7 +86,7 @@ def critical_exponents(dps: int = 25) -> Dict[str, object]:
 
 
 def bootstrap_criticality(dps: int = 30) -> Dict[str, object]:
-    """Hagedorn points of the classical bootstrap on the primon spectrum.
+    """Limiting temperatures of the classical bootstrap on the prime spectrum.
 
     Remark 4.5: Boltzmann counting is critical where P reaches Nahm's constant
     2 log 2 - 1; Bose counting solves P(s) + 2 sum_{k>=2} G(ks)/k = 2 log 2 - 1

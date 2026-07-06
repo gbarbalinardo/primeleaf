@@ -3,7 +3,7 @@
 Arithmetic in which multiplication does not return a number. The product of two
 objects is a multiplication tree over prime leaves, and the ordinary integer is the
 shadow of that tree. Read as statistical mechanics: the primes are the modes of a gas
-(mode `p` has energy `log p`), a tree is one microstate (a recorded fusion history),
+(mode `p` has energy `log p`), a tree is one microstate (a recorded combination history),
 the Riemann zeta function is the free-boson partition function, `Z = P + Z^2` is a
 statistical bootstrap equation, critical exponents are inverse Hagedorn temperatures,
 and ordinary arithmetic is what survives total coarse-graining. The Fundamental
@@ -52,13 +52,13 @@ pytest                                     # fast test suite
 | bushes | unordered binary trees | 1.9884768518009081 (Otter condition) |
 | trees | planar binary trees | 2.5973851271346716 (P = 1/4), Z = 1/2 there |
 
-Tree zeros (solutions of P(s) = 1/4, the Fisher singularities of the fireball gas):
+Tree zeros (solutions of P(s) = 1/4, the complex-temperature zeros of the tree gas):
 59 zeros with Re s > 1.3 and 0 < t < 500, not on a vertical line. Their density is
 given exactly by the mode-dominance formula of Theorem 5.3, which predicts 58.3
 zeros for that window by an independent Monte Carlo (q_2 = 0.624, q_3 = 0.148).
 Eight more zeros sit below the strip, with real parts drifting down to 1.013.
 
-The classical Hagedorn-Frautschi-Nahm bootstrap transplanted onto the primon
+The classical Hagedorn-Frautschi-Nahm bootstrap transplanted onto the prime
 spectrum has beta_H = 2.14875116590273 (Boltzmann counting) and
 beta_H = 2.30723145510135 (Bose counting).
 

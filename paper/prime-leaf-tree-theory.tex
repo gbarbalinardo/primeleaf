@@ -8,9 +8,9 @@
 \usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
 
 % ---------- macros ----------
-\newcommand{\cT}{\mathcal{T}}   % planar binary trees (free magma)
+\newcommand{\cT}{\mathcal{T}}   % planar binary trees (free binary-tree structure)
 \newcommand{\cW}{\mathcal{W}}   % words (free semigroup)
-\newcommand{\cB}{\mathcal{B}}   % unordered binary trees (free commutative magma)
+\newcommand{\cB}{\mathcal{B}}   % unordered binary trees (free commutative structure)
 \newcommand{\cM}{\mathcal{M}}   % prime multisets (free commutative semigroup)
 \newcommand{\cG}{\mathcal{G}}   % grouped quantities
 \newcommand{\cA}{\mathcal{A}}   % flat quantities
@@ -44,12 +44,13 @@
 
 \begin{abstract}
 We treat the integers as a gas with one mode per prime $p$, of energy $\log p$: the
-setting of Julia's primon gas and of Bost--Connes. In the usual reading, an integer
+setting of Julia's gas of numbers~\cite{julia} and of Bost--Connes. In the usual
+reading, an integer
 is a Fock state (its prime factorization is an occupation-number configuration) and
 the Riemann zeta function is the free bosonic partition function. This paper studies
 the same gas \emph{before} symmetrization and \emph{before} the interaction history
 is forgotten. A microstate is then a \emph{multiplication tree}: an ordered,
-parenthesized record of pairwise fusions, whose only conserved quantity is the
+parenthesized record of pairwise combinations, whose only conserved quantity is the
 integer $N(T) = e^{E(T)}$ it evaluates to. Multiplication is not commutative or
 associative at this level, because microstates remember their formation; ordinary
 arithmetic is the fully coarse-grained description, and the Fundamental Theorem of
@@ -105,7 +106,7 @@ shadow is $6$.}
 Physics has standard names for this situation: $6$ is a \emph{macrostate}, and the
 packings that produce it are \emph{microstates}. We therefore refuse to let
 multiplication collapse into numbers. A product is a \emph{multiplication tree}: the
-recorded fusion history of the primes involved, ordered and parenthesized,
+recorded history of how the primes involved were combined, ordered and parenthesized,
 unevaluated. (The cartons and bottles return in \S\ref{sec:bridge}, where the slogan
 becomes a theorem.) The familiar integer is produced only by an evaluator, the shadow
 map $N$, which plays the role of the measurement: it reads off the single conserved
@@ -114,7 +115,7 @@ multiplication at all. They are properties of the \emph{coarse-graining}: statem
 about which distinct microstates the measurement fails to distinguish. In one line:
 
 \begin{quote}
-\emph{The primes are the particles; an integer is a calorimeter reading; the Riemann
+\emph{The primes are the particles; an integer is a measured energy; the Riemann
 zeta function is a partition function; and ordinary arithmetic is what survives total
 coarse-graining.}
 \end{quote}
@@ -132,16 +133,16 @@ as imagery. Theorems remain theorems; the physics is load-bearing, not decorativ
 \toprule
 tree theory & physics \\
 \midrule
-prime $p$ & a mode of energy $\varepsilon_p = \log p$ (Julia's ``primon'') \\
-multiplication tree $T \in \cT$ & a recorded history of pairwise fusions (Hagedorn's ``fireball'') \\
-$\boxtimes$ (pair formation) & fusion; on energies $E = \log N$ it is addition \\
-shadow $N(T)$ & the calorimeter reading: the measured integer $e^{E(T)}$ \\
+prime $p$ & a mode of energy $\varepsilon_p = \log p$ \\
+multiplication tree $T \in \cT$ & a composite: a recorded history of pairwise combinations \\
+$\boxtimes$ (pair formation) & combination; on energies $E = \log N$ it is addition \\
+shadow $N(T)$ & the measurement: the measured integer $e^{E(T)}$ \\
 left--right order kept & ordered channels, as for planar diagrams \\
 parenthesization kept & interaction history retained \\
 quotient by associativity & forget the history, keep the particle list: asymptotic state \\
 quotient by commutativity & Bose symmetrization \\
 words $\cW$ & basis of the full (Boltzmann) Fock space \\
-multisets $\cM$ & occupation numbers: the primon gas of Julia \\
+multisets $\cM$ & occupation numbers: the gas of numbers of Julia \\
 degeneracy $g(n)$; \ $S(n) = \log g(n)$ & microstate count and Boltzmann entropy of the integer $n$ \\
 Fund.\ Thm.\ of Arithmetic & the occupation-number description is faithful: $S_\cM \equiv 0$ \\
 $Z(s) = \sum N^{-s}$, \ $s = \beta$ & canonical partition function at inverse temperature $\beta$ \\
@@ -153,11 +154,10 @@ the action $\act(T)$ & a process applied to states; $\boxtimes \mapsto$ composit
 flattening $\alpha$ & the extensive observable (particle number); expectation level \\
 \bottomrule
 \end{tabular}
-\caption{The dictionary. ``Calorimeter'' and ``cluster'' are imagery. ``Primon'',
-``fireball'', ``Hagedorn temperature'' and ``Fisher zeros'' are the historical names
-(Julia's primon gas, Hagedorn's statistical bootstrap, Fisher's complex-temperature
-zeros); we use plainer terms as primary and give these once, where the corresponding
-work is cited. Every other row is an exact identity established in the text.}
+\caption{The dictionary. The ``measurement'' and ``clustered matter'' rows are
+imagery; the limiting temperature and complex-temperature zeros carry the standard
+names (Hagedorn, Fisher) where the corresponding work is cited in the text. Every
+other row is an exact identity.}
 \label{tab:dictionary}
 \end{table}
 
@@ -168,10 +168,11 @@ complex analysis. No result depends on the imagery.
 
 \begin{enumerate}
 \item \textbf{The microstate space} (\S\ref{sec:trees}). The world of trees is the
-free magma $\cT$ on the set of primes; the measurement is the unique magma morphism
-$N\colon \cT \to (\NN_{\ge2},\cdot)$ with $N(L_p) = p$; energies
-$E = \log N$ add under fusion. The interacting world has no vacuum: $1$ is not the
-shadow of any tree, and the empty state exists only in the Fock description.
+free binary-tree structure $\cT$ on the set of primes; the measurement is the unique
+multiplication-preserving map $N\colon \cT \to (\NN_{\ge2},\cdot)$ with $N(L_p) = p$;
+energies $E = \log N$ add under combination. The interacting world has no vacuum: $1$
+is not the shadow of any tree, and the empty state exists only in the Fock
+description.
 
 \item \textbf{Coarse-graining is two-dimensional} (\S\ref{sec:square}). Forgetting the
 interaction history (associativity) and symmetrizing (commutativity) are
@@ -244,14 +245,15 @@ prime generation, is a derandomization problem, mapped but not shortened.
 
 \subsection{Relation to existing work}\label{sec:priorart}
 
-The Fock-level reading is classical: the primon gas of Julia~\cite{julia} and
+The Fock-level reading is classical: the gas of numbers of Julia~\cite{julia} and
 Spector~\cite{spector}, deepened by Bost--Connes~\cite{bostconnes}, identifies
 $\zeta(\beta)$ with a free bosonic partition function over the spectrum
-$\{\log p\}$ and locates a Hagedorn catastrophe at $\beta = 1$. Hagedorn's limiting
-temperature and the statistical bootstrap are from~\cite{hagedorn,frautschi}, with the
+$\{\log p\}$ and locates a limiting temperature at $\beta = 1$. The statistical
+bootstrap and its limiting temperature are from~\cite{hagedorn,frautschi}, with the
 analytical solution and the square-root criticality due to Nahm~\cite{nahm}.
 Lee--Yang and Fisher zeros are from~\cite{leeyang,fisher}. On the mathematical side,
-the free magma and its Catalan combinatorics are standard~\cite{stanley}; the
+the free binary-tree structure on a set and its Catalan combinatorics are
+standard~\cite{stanley}; the
 degeneracy $g_\cT(n)$ appears as OEIS A144757 and the ordered-factorization count as
 A008480~\cite{oeis}; ordered factorizations with arbitrary parts go back to
 Kalm\'ar~\cite{kalmar}; the natural boundary of the prime zeta function is due to
@@ -274,7 +276,7 @@ from the arithmetic, and computable invariants in the separated layers.
 %======================================================================
 \section{Multiplication trees}\label{sec:trees}
 
-\subsection{Modes and fusion histories}
+\subsection{Modes and combination histories}
 
 \begin{definition}[Multiplication trees]\label{def:trees}
 Fix the set of prime leaves $\{L_p : p \text{ prime}\}$. The set $\cT$ of
@@ -282,13 +284,14 @@ Fix the set of prime leaves $\{L_p : p \text{ prime}\}$. The set $\cT$ of
 \[
 T \;::=\; L_p \;\mid\; (T_1 \boxtimes T_2).
 \]
-Thus $\cT$ is the \emph{free magma} on the set of primes: $\boxtimes$ is ordered-pair
-formation, subject to no laws whatsoever.
+Thus $\cT$ is the \emph{free binary-tree structure} on the set of primes: $\boxtimes$
+is ordered-pair formation, subject to no laws whatsoever.
 \end{definition}
 
 \physread $L_p$ is one particle in the mode of energy $\varepsilon_p = \log p$. A
 tree is a composite that remembers how it was assembled: $T_1 \boxtimes T_2$ is the
-fusion of $T_1$ and $T_2$, in that order. Examples of \emph{distinct} microstates:
+combination of $T_1$ and $T_2$, in that order. Examples of \emph{distinct}
+microstates:
 \[
 L_2, \qquad
 L_2 \boxtimes L_3, \qquad
@@ -297,12 +300,12 @@ L_3 \boxtimes L_2, \qquad
 L_2 \boxtimes (L_3 \boxtimes L_5).
 \]
 Non-commutativity and non-associativity are not axioms we impose; they are the
-\emph{absence} of axioms. Keeping the left--right order is keeping the fusion channels
-ordered, as one does for planar diagrams of matrix-valued fields~\cite{thooft};
-keeping the parenthesization is keeping the interaction history: which pair fused
-first. A multiplication tree is the parse tree of a multiplication expression before
-evaluation; equivalently, a tree-level diagram built from a single cubic vertex whose
-external legs are labeled by primes.
+\emph{absence} of axioms. Keeping the left--right order is keeping the combination
+channels ordered, as one does for planar diagrams of matrix-valued
+fields~\cite{thooft}; keeping the parenthesization is keeping the interaction history:
+which pair combined first. A multiplication tree is the parse tree of a
+multiplication expression before evaluation; equivalently, a tree-level diagram built
+from a single cubic vertex whose external legs are labeled by primes.
 
 For $T \in \cT$ write $|T|$ for the number of leaves and $\mathrm{word}(T)$ for the
 left-to-right sequence of leaf labels; $\supp(T)$ denotes the set of primes occurring.
@@ -314,13 +317,15 @@ The \emph{shadow map} $N \colon \cT \to \NN_{\ge 2}$ is defined recursively by
 \[
 N(L_p) = p, \qquad N(T_1 \boxtimes T_2) = N(T_1)\,N(T_2).
 \]
-Equivalently: $N$ is the unique magma morphism from $\cT$ to the multiplicative
-semigroup $(\NN_{\ge2},\cdot)$ sending $L_p$ to $p$.
+Equivalently: $N$ is the unique multiplication-preserving map from $\cT$ to the
+multiplicative semigroup $(\NN_{\ge2},\cdot)$ sending $L_p$ to $p$ (that is, the
+unique map with $N(L_p)=p$ that respects $\boxtimes$).
 \end{definition}
 
 \physread Define the energy $E(T) = \log N(T)$. Then $E(L_p) = \varepsilon_p$ and
-$E(T_1 \boxtimes T_2) = E(T_1) + E(T_2)$: energies add under fusion \emph{because}
-shadows multiply. The shadow is the calorimeter reading: the single conserved
+$E(T_1 \boxtimes T_2) = E(T_1) + E(T_2)$: energies add under combination
+\emph{because} shadows multiply. The shadow is the measured value: the single
+conserved
 quantity, blind to history and to order. An integer is not a microstate; it is the
 measured value $e^{E}$ shared by many microstates.
 
@@ -359,8 +364,9 @@ $T_1\boxtimes T_2 \approx_c T_2\boxtimes T_1$. Write
 
 Each quotient is a familiar free object: $\cW$ is the free semigroup on the primes
 (nonempty \emph{words} in primes, i.e.\ ordered prime factorizations); $\cB$ is the
-free \emph{commutative} magma (trees with unordered branches); $\cM$ is the free
-commutative semigroup (nonempty finite \emph{multisets} of primes). The shadow map
+free \emph{commutative} binary-tree structure (trees with unordered branches); $\cM$
+is the free commutative semigroup (nonempty finite \emph{multisets} of primes). The
+shadow map
 descends to all four corners, and the two identifications commute:
 \[
 \begin{CD}
@@ -575,15 +581,15 @@ Z_\cM(\beta) \;=\; \prod_p \sum_{k \ge 0} e^{-\beta k \log p}
 \;=\; \prod_p \frac{1}{1 - p^{-\beta}} \;=\; \zeta(\beta):
 \]
 the Euler product \emph{is} the textbook free-boson partition function: the
-primon gas of Julia~\cite{julia}.
+gas of numbers of Julia~\cite{julia}.
 \emph{(\ref{eq:geo}) is the distinguishable-particle gas}: ordered $k$-particle states
 with no $1/k!$, the counting that produces the Gibbs paradox.
 \emph{(\ref{eq:cat}) is a self-consistency equation}: a composite is either an input
-particle or a fusion of two composites, with energy exactly conserved, so
+particle or a combination of two composites, with energy exactly conserved, so
 $Z = P + Z^2$. This is the statistical bootstrap of
-Hagedorn--Frautschi~\cite{hagedorn,frautschi} (whose composites were the
-\emph{fireballs}), here with input spectrum the primes and fusion ordered and binary.
-\emph{(\ref{eq:otter}) is the unordered version}: unordered fusion, with the
+Hagedorn--Frautschi~\cite{hagedorn,frautschi}, here with input spectrum the primes
+and the combination ordered and binary.
+\emph{(\ref{eq:otter}) is the unordered version}: unordered combination, with the
 $Z(2s)$ term the standard exchange correction for the two branches being
 \emph{identical}, the same mechanism that separates Bose from Boltzmann counting.
 Finally, Remark~\ref{rem:species} places all four in one family.
@@ -684,9 +690,10 @@ semicircle~\cite{bipz}.
 \end{remark}
 
 \begin{remark}[The classical bootstrap on the prime spectrum]\label{rem:bootstrap}
-The historical statistical bootstrap model fuses in one shot: a fireball is an input
-particle \emph{or an unordered cluster of $k \ge 2$ fireballs}, Boltzmann-weighted by
-$1/k!$. Its generating equation is $G = \varphi + (e^{G} - 1 - G)$, whose square-root
+The historical statistical bootstrap model combines in one shot: a composite is an
+input particle \emph{or an unordered cluster of $k \ge 2$ composites},
+Boltzmann-weighted by $1/k!$. Its generating equation is
+$G = \varphi + (e^{G} - 1 - G)$, whose square-root
 singularity, first remarked by Nahm~\cite{nahm}, occurs when the input function
 reaches the universal value
 \[
@@ -1290,7 +1297,7 @@ A(n) \;=\; \sum_{p^a \parallel n} a\,\|p\|,
 \delta(n) \;=\; A(n) - \|n\| \;\ge\; 0:
 \]
 $A(n)$ is the cost of the cheapest expression that respects the prime factorization
-(synthesize each prime additively, then fuse), and $\delta(n)$ is the saving that
+(synthesize each prime additively, then multiply), and $\delta(n)$ is the saving that
 additions \emph{above} the factorization can buy. The long-standing open question
 whether $\|2^k\| = 2k$ is exactly the statement $\delta \equiv 0$ on powers of two;
 and $\delta$ is not identically zero: $\delta(55) \ge 1$, since
