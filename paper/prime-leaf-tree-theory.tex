@@ -57,16 +57,16 @@ Arithmetic is precisely the statement that the occupation-number description is
 faithful (zero residual entropy). Forgetting history and symmetrizing are independent
 coarse-grainings, so there are four gases, each with an exact partition function
 determined by the prime zeta function $P(\beta)$: the Riemann gas $\zeta(\beta)$, a
-distinguishable-particle gas with inverse Hagedorn temperature $1.39943\dots$, a
+distinguishable-particle gas with inverse limiting temperature $1.39943\dots$, a
 non-planar tree gas at $1.98847\dots$, and the full planar tree gas, whose
-partition function obeys the statistical bootstrap equation $Z = P + Z^2$ of
-Hagedorn--Frautschi type and reaches its Hagedorn point at
+partition function obeys the self-consistency equation $Z = P + Z^2$ (a tree is a
+prime or a pair of trees) and reaches its limiting temperature at
 $\beta_H = \sigma^{*} = 2.59738\dots$, where $P(\sigma^{*}) = \tfrac14$. There the
 partition function is finite and exactly $\tfrac12$, with the square-root branch point
 universal for branched polymers: the transition is continuous, whereas the symmetrized
 gases diverge at theirs. Associativity is, in this precise sense, a first-order
-axiom. The complex-$\beta$ singularities of the tree gas (its Fisher zeros) are
-computed: they inherit the Riemann zeros through $P$, and their new branch points,
+axiom. The complex-temperature zeros of the tree gas
+are computed: they inherit the Riemann zeros through $P$, and their new branch points,
 the solutions of $P(\beta) = \tfrac14$, do \emph{not} lie on a vertical line. Finally,
 the bridge to addition: trees act as \emph{processes} on states of hierarchically
 clustered matter. Under this action associativity becomes unobservable (processes
@@ -145,18 +145,19 @@ multisets $\cM$ & occupation numbers: the primon gas of Julia \\
 degeneracy $g(n)$; \ $S(n) = \log g(n)$ & microstate count and Boltzmann entropy of the integer $n$ \\
 Fund.\ Thm.\ of Arithmetic & the occupation-number description is faithful: $S_\cM \equiv 0$ \\
 $Z(s) = \sum N^{-s}$, \ $s = \beta$ & canonical partition function at inverse temperature $\beta$ \\
-$Z = P + Z^2$ & statistical bootstrap equation (Hagedorn--Frautschi--Nahm) \\
-critical exponents $\sigma$ & inverse Hagedorn temperatures $\beta_H$ \\
-solutions of $P(s) = \tfrac14$ & Fisher singularities: complex-$\beta$ singularities of $Z$ \\
+$Z = P + Z^2$ & self-consistency equation (the Hagedorn--Frautschi bootstrap) \\
+critical exponents $\sigma$ & inverse limiting (``Hagedorn'') temperatures $\beta_H$ \\
+solutions of $P(s) = \tfrac14$ & complex-temperature zeros of $Z$ (its ``Fisher zeros'') \\
 grouped quantities $\cG$ & states of hierarchically clustered matter \\
 the action $\act(T)$ & a process applied to states; $\boxtimes \mapsto$ composition \\
 flattening $\alpha$ & the extensive observable (particle number); expectation level \\
 \bottomrule
 \end{tabular}
-\caption{The dictionary. ``Calorimeter'' and ``cluster'' are imagery; ``primon'' and
-``fireball'' are the historical names from Julia's primon gas and Hagedorn's
-statistical bootstrap, used below only where those models are cited; every other row
-is an exact identity established in the text.}
+\caption{The dictionary. ``Calorimeter'' and ``cluster'' are imagery. ``Primon'',
+``fireball'', ``Hagedorn temperature'' and ``Fisher zeros'' are the historical names
+(Julia's primon gas, Hagedorn's statistical bootstrap, Fisher's complex-temperature
+zeros); we use plainer terms as primary and give these once, where the corresponding
+work is cited. Every other row is an exact identity established in the text.}
 \label{tab:dictionary}
 \end{table}
 
@@ -182,37 +183,38 @@ for $\cT$, multinomial for $\cW$ (OEIS A008480), a sequence for $\cB$ that restr
 to the Wedderburn--Etherington numbers on prime powers and appears not to have been
 recorded before, and $1$ for $\cM$. All verified exhaustively for $n \le 20000$.
 
-\item \textbf{Four partition functions and a Hagedorn ladder} (\S\ref{sec:zeta}). All
+\item \textbf{Four partition functions and a temperature ladder}
+(\S\ref{sec:zeta}). All
 four are exact functionals of the prime zeta function $P$: the free Bose gas
 $\zeta(\beta)$ (the Euler product \emph{is} the textbook free-boson computation), a
 geometric gas $P/(1-P)$, an Otter gas with argument-doubling equation, and the planar
-tree gas obeying the bootstrap equation $Z = P + Z^2$. The inverse Hagedorn
-temperatures form a strict ladder
+tree gas obeying the self-consistency equation $Z = P + Z^2$. The inverse limiting
+temperatures $\beta_H = 1/T_H$ form a strict ladder
 \[
 1 \;<\; 1.3994333287263303 \;<\; 1.9884768518009081 \;<\; \sigma^{*} = 2.5973851271346716 ,
 \]
-one rung per layer of remembered structure. At its Hagedorn point the tree gas
+one rung per layer of remembered structure. At its limiting temperature the tree gas
 converges with $Z_\cT(\sigma^{*}) = \tfrac12$ exactly and a square-root branch point:
 the universal branched-polymer singularity, the same criticality that governs
 planar-diagram counting in the Gaussian matrix model. The symmetrized gases instead
-have poles: whether the Hagedorn temperature is attainable is decided by
+have poles: whether the limiting temperature is attainable is decided by
 associativity. The classical Hagedorn--Frautschi--Nahm bootstrap, transplanted onto
 the prime spectrum, slots into the same family with
 $\beta_H = 2.1487511659\dots$ (Boltzmann counting) and $2.3072314551\dots$ (Bose
 counting).
 
-\item \textbf{Fisher zeros} (\S\ref{sec:analytic}). $Z_\cT$ is algebraic in $P$, so
-its complex-$\beta$ singularities are inherited from $P$ (which carries a branch
-point at $\beta = \rho/k$ for every nontrivial Riemann zero $\rho$, and has the
-imaginary axis as a natural boundary), plus new branch points where $P(\beta) = \tfrac14$. We
-compute the five with $0 < \operatorname{Im}\beta < 50$: they recur near integer
-multiples of $2\pi/\log 2$ (the lightest mode, of energy $\log 2$, sets the
-frequency) and do \emph{not}
+\item \textbf{Complex-temperature zeros} (\S\ref{sec:analytic}). $Z_\cT$ is algebraic
+in $P$, so its complex-temperature singularities are inherited from $P$ (which
+carries a branch point at $\beta = \rho/k$ for every nontrivial Riemann zero $\rho$,
+and has the imaginary axis as a natural boundary), plus new branch points where
+$P(\beta) = \tfrac14$. We compute the five with $0 < \operatorname{Im}\beta < 50$:
+they recur near integer multiples of $2\pi/\log 2$ (the lightest mode, of energy
+$\log 2$, sets the frequency) and do \emph{not}
 lie on a vertical line. The naive tree analogue of the Riemann Hypothesis is false;
-the right question is the distribution of these Fisher singularities, and that
+the right question is the distribution of these complex-temperature zeros, and that
 question we answer: in every substrip of $\operatorname{Re} s > 1$ the tree zeros
 have an exact asymptotic density (Theorem~\ref{thm:density}, via the
-Jessen--Tornehave theory of almost periodic functions). Each singularity occurs when
+Jessen--Tornehave theory of almost periodic functions). Each zero occurs when
 a single mode outshines the coherent rest, and the density is the total
 dominance rate $\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of all $59$ zeros to
 height $500$ matches the formula's Monte Carlo prediction of $58.3$ to one percent.
@@ -259,9 +261,10 @@ planar binary trees with non-commutative addition and one-sided distributivity.
 
 Against this background the contributions here are: the two-dimensional
 coarse-graining (the square, with the new non-planar corner, its Otter equation and
-its Hagedorn point); the exact critical value $Z_\cT(\sigma^{*}) = \tfrac12$ and the
-attainability dichotomy; the computation and non-collinearity of the Fisher zeros;
-the process/state/expectation stratification of the arithmetic laws; and the internal
+its limiting temperature); the exact critical value $Z_\cT(\sigma^{*}) = \tfrac12$
+and the attainability dichotomy; the computation and non-collinearity of the
+complex-temperature zeros; the process/state/expectation stratification of the
+arithmetic laws; and the internal
 derivation of the primes. One caution runs through the paper: a \emph{free} structure
 carries no secrets about the primes themselves. Everything classically hard enters
 through the single-particle spectrum, that is through $P(\beta)$, or through
@@ -513,7 +516,7 @@ $g_\cB(2^k) = 1,1,1,2,3,6$ for $k=1,\dots,6$ (Wedderburn--Etherington).}
 \end{table}
 
 %======================================================================
-\section{Partition functions: bootstrap equations and the Hagedorn ladder}
+\section{Partition functions: self-consistency equations and the temperature ladder}
 \label{sec:zeta}
 
 \subsection{Four gases, four functional equations}
@@ -575,12 +578,12 @@ the Euler product \emph{is} the textbook free-boson partition function: the
 primon gas of Julia~\cite{julia}.
 \emph{(\ref{eq:geo}) is the distinguishable-particle gas}: ordered $k$-particle states
 with no $1/k!$, the counting that produces the Gibbs paradox.
-\emph{(\ref{eq:cat}) is a statistical bootstrap equation} in the sense of
-Hagedorn--Frautschi~\cite{hagedorn,frautschi}, whose composite particles were called
-\emph{fireballs}: a fireball is either an input particle or a fusion of two
-fireballs, with energy exactly conserved. Here the input spectrum is the primes and
-the fusion is ordered and binary.
-\emph{(\ref{eq:otter}) is the non-planar bootstrap}: unordered fusion, with the
+\emph{(\ref{eq:cat}) is a self-consistency equation}: a composite is either an input
+particle or a fusion of two composites, with energy exactly conserved, so
+$Z = P + Z^2$. This is the statistical bootstrap of
+Hagedorn--Frautschi~\cite{hagedorn,frautschi} (whose composites were the
+\emph{fireballs}), here with input spectrum the primes and fusion ordered and binary.
+\emph{(\ref{eq:otter}) is the unordered version}: unordered fusion, with the
 $Z(2s)$ term the standard exchange correction for the two branches being
 \emph{identical}, the same mechanism that separates Bose from Boltzmann counting.
 Finally, Remark~\ref{rem:species} places all four in one family.
@@ -597,9 +600,9 @@ which is why $n=1$ belongs to $\zeta$ and to no other corner
 (Remark~\ref{rem:nounit}).
 \end{remark}
 
-\subsection{The Hagedorn ladder}
+\subsection{The temperature ladder}
 
-\begin{theorem}[Inverse Hagedorn temperatures]\label{thm:ladder}
+\begin{theorem}[Inverse limiting temperatures]\label{thm:ladder}
 Each series has a finite abscissa of convergence $\sigma_{\mathcal X}$, determined by
 $P$:
 \[
@@ -633,9 +636,10 @@ inequality on a positive-density set of $n$.
 energy $E = \log n$ grows like $e^{\sigma_{\mathcal X} E}$ (up to powers), so the
 Boltzmann sum $\sum e^{(\sigma_{\mathcal X} - \beta)E}$ diverges for
 $\beta < \sigma_{\mathcal X}$: the gas has a maximal temperature
-$T_H = 1/\sigma_{\mathcal X}$. Remembering order and history multiplies the microstate
-count at each energy, raises the entropy per unit energy, and lowers the Hagedorn
-temperature:
+$T_H = 1/\sigma_{\mathcal X}$, the \emph{limiting temperature} (called the
+\emph{Hagedorn temperature} in the hadron setting). Remembering order and history
+multiplies the microstate count at each energy, raises the entropy per unit energy,
+and lowers the limiting temperature:
 
 \begin{center}
 \begin{tabular}{@{}lllll@{}}
@@ -650,7 +654,7 @@ planar tree & ordered histories & $2.597385\dots$ & $0.385003\dots$ & cusp, $Z_\
 \end{tabular}
 \end{center}
 
-\begin{remark}[Pole versus cusp: is the Hagedorn temperature attainable?]
+\begin{remark}[Pole versus cusp: is the limiting temperature attainable?]
 \label{rem:cusp}
 The symmetrized (associative) gases diverge at their critical point: $\zeta$ and
 $Z_\cW$ have simple poles ($Z_\cW$ because $P'(\sigma_\cW) = -1.7311562\dots \ne 0$).
@@ -668,7 +672,7 @@ U(\beta) = -\frac{\partial}{\partial \beta} \log Z_\cT(\beta)
 \;\to\; \infty
 \]
 diverges as $\beta \to \sigma^{*+}$: a continuous transition with divergent
-susceptibility, rather than a divergent partition function. Whether the Hagedorn
+susceptibility, rather than a divergent partition function. Whether the limiting
 temperature is attainable, the classic question of the bootstrap
 literature~\cite{nahm}, is decided here by a single algebraic choice:
 \emph{associativity is a first-order axiom}. The square-root branch point itself is
@@ -730,11 +734,12 @@ parts need not be stable particles).
 \end{remark}
 
 %======================================================================
-\section{Fisher zeros of the arithmetic gas}\label{sec:analytic}
+\section{Complex-temperature zeros of the arithmetic gas}\label{sec:analytic}
 
 Lee and Yang taught that the thermodynamics of a system is encoded in the complex
 singularities of its partition function, in complex fugacity for them and in complex
-temperature for Fisher~\cite{leeyang,fisher}. We now locate the complex-$\beta$
+temperature for Fisher~\cite{leeyang,fisher}; the latter are the \emph{Fisher zeros}.
+We now locate the complex-temperature
 singularities of the tree gas. Since $Z_\cT = \tfrac12(1 - \sqrt{1-4P})$ is an
 \emph{algebraic} function of $P$, they come in exactly two kinds: those inherited from
 the single-particle input $P$, and the new branch points where the discriminant
@@ -772,7 +777,7 @@ The new singularities of $Z_\cT$ are the solutions of
 \begin{equation}\label{eq:treezero}
 P(s) = \tfrac14,
 \end{equation}
-square-root branch points of $Z_\cT$: the Fisher singularities of the tree gas.
+square-root branch points of $Z_\cT$: the complex-temperature zeros of the tree gas.
 We call them \emph{tree zeros} (they are the zeros of the discriminant $1 - 4P$). On
 the real axis there is exactly one, $\sigma^{*}$, since $P$ is strictly decreasing
 there. Off the axis:
@@ -826,7 +831,7 @@ $\operatorname{Im}\beta$, and the recurrence frequency is set by the \emph{light
 mode}, $\varepsilon_2 = \log 2$, whose Boltzmann factor $2^{-\beta}$ dominates $P$;
 the interference of $3^{-\beta}$ and later modes then shifts each singularity
 (violently so for $k=1$). Second, and decisively: \emph{the real parts wander}. The
-naive tree analogue of the Riemann Hypothesis (Fisher singularities on a vertical
+naive tree analogue of the Riemann Hypothesis (all zeros on a vertical
 line) is simply false. The correct lifted question is distributional, and it has a
 precise answer.
 
@@ -835,7 +840,7 @@ precise answer.
 Within the half-plane of almost periodicity the tree zeros have an exact asymptotic
 density, computable from a random-phase model of the gas.
 
-\begin{theorem}[Density of the Fisher singularities]\label{thm:density}
+\begin{theorem}[Density of the complex-temperature zeros]\label{thm:density}
 For $\sigma > 1$ let $X_\sigma = \sum_p p^{-\sigma} e^{i\theta_p}$ with $(\theta_p)$
 independent and uniform on $[0, 2\pi)$, and define the \emph{Jensen function} and the
 \emph{dominance probabilities}
@@ -1334,7 +1339,7 @@ no-free-lunch proposition, none was available from counting alone.
 %======================================================================
 \section{Open problems}\label{sec:open}
 
-\begin{question}[Fisher-zero distribution: beyond the almost periodic region]
+\begin{question}[Tree-zero distribution: beyond the almost periodic region]
 \label{prob:zeros}
 Theorem~\ref{thm:density} settles the density of tree zeros in substrips of
 $\operatorname{Re} s > 1$. Remaining: (a) the left edge: the census finds real
