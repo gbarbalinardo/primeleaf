@@ -8,6 +8,8 @@ version = "0.1.0"
 description = "Computational companion to 'Prime-Leaf Tree Theory: arithmetic as the statistical mechanics of multiplication histories'"
 readme = "README.md"
 authors = [{ name = "Giuseppe Barbalinardo" }]
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 dependencies = [
     "mpmath>=1.3",
