@@ -6,6 +6,11 @@
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{forest}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\definecolor{plblue}{HTML}{2B4B8C}
+\definecolor{plred}{HTML}{B0303A}
 \usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
 
 % ---------- macros ----------
@@ -374,16 +379,9 @@ Each quotient is a familiar free object: $\cW$ is the free semigroup on the prim
 (nonempty \emph{words} in primes, i.e.\ ordered prime factorizations); $\cB$ is the
 free \emph{commutative} binary-tree structure (trees with unordered branches); $\cM$
 is the free commutative semigroup (nonempty finite \emph{multisets} of primes). The
-shadow map
-descends to all four corners, and the two identifications commute:
-\[
-\begin{CD}
-\cT @>\text{forget history}>> \cW \\
-@V\text{symmetrize}VV @VV\text{symmetrize}V \\
-\cB @>>\text{forget history}> \cM
-\end{CD}
-\]
-The shadow map of the final corner is where classical arithmetic begins:
+shadow map descends to all four corners, and the two identifications commute
+(Figure~\ref{fig:square}). The shadow map of the final corner is where classical
+arithmetic begins:
 
 \begin{proposition}[FTA as exactness of the collapse]\label{prop:fta}
 The induced map $N \colon \cM \to \NN_{\ge2}$ is a bijection. This statement is
@@ -394,6 +392,37 @@ equivalent to the Fundamental Theorem of Arithmetic.
 Elements of $\cM$ are nonempty prime multisets $\{p_1,\dots,p_k\}$ with
 $N = p_1\cdots p_k$. Surjectivity of $N$ is the existence of a prime factorization;
 injectivity is its uniqueness. \end{proof}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  corner/.style={draw=plblue!40, rounded corners, align=center,
+                 inner sep=5pt, minimum width=44mm},
+  arr/.style={-{Latex[length=2mm]}, plred, thick},
+]
+\node[corner] (T) at (0,3.4) {$\cT$ \; planar trees \;\; $g_\cT(12)=6$\\[2pt]
+  \scriptsize$(L_2 L_2)L_3,\ (L_2 L_3)L_2,\ (L_3 L_2)L_2,$\\[-1pt]
+  \scriptsize$L_2(L_2 L_3),\ L_2(L_3 L_2),\ L_3(L_2 L_2)$};
+\node[corner] (W) at (7.0,3.4) {$\cW$ \; words \;\; $g_\cW(12)=3$\\[2pt]
+  \scriptsize$(2,2,3),\quad (2,3,2),\quad (3,2,2)$};
+\node[corner] (B) at (0,0.6) {$\cB$ \; unordered trees \;\; $g_\cB(12)=2$\\[2pt]
+  \scriptsize$\{\{L_2,L_2\},L_3\},\quad \{\{L_2,L_3\},L_2\}$};
+\node[corner] (M) at (7.0,0.6) {$\cM$ \; multisets \;\; $g_\cM(12)=1$\\[2pt]
+  \scriptsize$\{2,2,3\} \;\xrightarrow{\;N\;}\; 12$};
+\draw[arr] (T) -- node[above,black,font=\scriptsize]{forget history} (W);
+\draw[arr] (B) -- node[below,black,font=\scriptsize]{forget history} (M);
+\draw[arr] (T) -- node[left,black,font=\scriptsize]{symmetrize} (B);
+\draw[arr] (W) -- node[right,black,font=\scriptsize]{symmetrize} (M);
+\end{tikzpicture}
+\caption{The coarse-graining square, shown collapsing the integer $12 = 2^2\cdot 3$.
+Forgetting the interaction history (associativity, horizontal) and symmetrizing the
+particles (commutativity, vertical) are independent, and commute. The number of
+microstates over $12$ drops $6 \to 3 \to 1$ and $6 \to 2 \to 1$ along the two routes;
+the Fundamental Theorem of Arithmetic is the statement that the final corner has
+exactly one. (Here $L_a L_b$ abbreviates $L_a \boxtimes L_b$.)}
+\label{fig:square}
+\end{figure}
 
 \physread The two arrows are the two things an observer can throw away.
 \emph{Forgetting the history} keeps only the ordered list of constituent particles:
@@ -482,27 +511,11 @@ Wedderburn--Etherington on prime powers. Submitting $g_\cB$ is a small item of
 independent interest.
 \end{remark}
 
-\begin{example}[The four levels over $n = 12$]\label{ex:twelve}
-\[
-\begin{array}{lll}
-\cT: & 6 \text{ trees} &
-(L_2\boxtimes L_2)\boxtimes L_3,\;
-(L_2\boxtimes L_3)\boxtimes L_2,\;
-(L_3\boxtimes L_2)\boxtimes L_2, \\
-& & L_2\boxtimes(L_2\boxtimes L_3),\;
-L_2\boxtimes(L_3\boxtimes L_2),\;
-L_3\boxtimes(L_2\boxtimes L_2); \\[1mm]
-\cW: & 3 \text{ words} & (2,2,3),\; (2,3,2),\; (3,2,2); \\[1mm]
-\cB: & 2 \text{ unordered trees} & \{\{L_2,L_2\},L_3\},\; \{\{L_2,L_3\},L_2\}; \\[1mm]
-\cM: & 1 \text{ multiset} & \{2,2,3\}.
-\end{array}
-\]
-So the entropy of $12$ is $S_\cT(12) = \log 6$ at the history level,
-$S_\cW(12) = \log 3$ for the particle list, $S_\cB(12) = \log 2$ non-planar, and $0$
-in Fock space. And $g_\cT(12) = C_2 \cdot \tfrac{3!}{2!\,1!} = 2\cdot 3 = 6$, as predicted.
-\end{example}
-
-Table~\ref{tab:degeneracies} lists the three nontrivial counts for small $n$. All
+For $n = 12 = 2^2\cdot 3$ (Figure~\ref{fig:square}) the four levels have
+$g_\cT = C_2\cdot\tfrac{3!}{2!} = 6$, $g_\cW = 3$, $g_\cB = 2$, $g_\cM = 1$, so the
+entropies are $S_\cT(12) = \log 6$, $S_\cW(12) = \log 3$, $S_\cB(12) = \log 2$, and
+$0$ in Fock space. Table~\ref{tab:degeneracies} lists the three nontrivial counts for
+small $n$. All
 formulas and recursions of this subsection were verified against brute-force
 enumeration for every $n \le 20000$ (Appendix~\ref{app:verification}).
 
@@ -765,23 +778,19 @@ $z$ pushes the limiting temperature up without bound.}
 \end{figure}
 
 \begin{remark}[Growth of the counting functions]\label{rem:growth}
-By the Wiener--Ikehara theorem applied to $Z_\cW$ (legitimate: the line
-$\operatorname{Re} s = \sigma_\cW$ lies in the half-plane of analyticity of $P$, and
-$|P(\sigma_\cW + it)| < 1$ for $t \ne 0$ by Lemma~\ref{lem:strict} below),
+By Wiener--Ikehara applied to $Z_\cW$,
 \[
-\sum_{n \le x} g_\cW(n) \;\sim\; \frac{x^{\sigma_\cW}}{\sigma_\cW\,|P'(\sigma_\cW)|}
-\;\approx\; 0.4128\, x^{1.39943\dots}.
+\sum_{n \le x} g_\cW(n) \sim
+\frac{x^{\sigma_\cW}}{\sigma_\cW |P'(\sigma_\cW)|} \approx 0.413\, x^{1.399\dots},
 \]
-For the tree level, transfer heuristics for the square-root singularity suggest
-$\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$; making this rigorous
-is Problem~\ref{prob:tauberian}. Note also the extreme values: along $n = 2^k$ one has
-$g_\cT(n) = C_{k-1}$, which grows like $n^{2}/(\log n)^{3/2}$ up to constants: the
-microstate count over a single observable can approach the \emph{square} of the
-observable. For comparison, Kalm\'ar's classical problem~\cite{kalmar} of ordered
-factorizations with arbitrary parts $\ge 2$ has Dirichlet series $1/(2 - \zeta(s))$
-and growth exponent $\rho = 1.7286472389981836\dots$ with $\zeta(\rho) = 2$; it sits
-between our Boltzmann and non-planar rungs but belongs to a different family (its
-parts need not be stable particles).
+while for the tree level transfer heuristics for the square-root singularity suggest
+$\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$
+(Problem~\ref{prob:tauberian}). The counts can be extreme: along $n = 2^k$,
+$g_\cT(n) = C_{k-1} \asymp n^{2}/(\log n)^{3/2}$, so the number of microstates over a
+single integer can approach its \emph{square}. (Kalm\'ar's classical
+count~\cite{kalmar} of ordered factorizations into arbitrary parts $\ge 2$, exponent
+$\rho = 1.7286\dots$ with $\zeta(\rho) = 2$, sits between the Boltzmann and non-planar
+rungs but weights composite parts.)
 \end{remark}
 
 %======================================================================
@@ -1104,19 +1113,47 @@ Problem~\ref{prob:zeros}.
 \end{proof}
 
 \physread Fix $\sigma$ and let $t$ run: $P(\sigma + it) - \tfrac14$ is a chain of
-clock hands, one per prime, the $p$-hand of length $p^{-\sigma}$ turning at angular
-speed $\log p$, the whole chain anchored at $-\tfrac14$. A tree zero at height $t$ is
-the event that the tip of the chain passes through the origin. Whenever one hand is
-longer than the anchored sum of all the others, that hand drags the tip around the
-origin and forces one zero per revolution: this is the event measured by $q_p$. At
-$\sigma = 1.30$ the hands have lengths $2^{-1.3} = 0.41$, $3^{-1.3} = 0.24$,
-$5^{-1.3} = 0.12$, \dots, and the Monte Carlo values are $q_2 = 0.624$,
-$q_3 = 0.148$, $q_5 = 0.042$, $q_7 = 0.017$ (Appendix~\ref{app:verification}).
-Weighted by speed, the lightest mode accounts for only $59\%$ of the
-singularities, which is exactly why the observed density \emph{exceeds} the naive
-one-per-period guess $\log 2/2\pi$. Chains of rotating arms are the classical
-mean-motion problem of celestial mechanics, Lagrange's secular perturbations; the
-Jessen--Tornehave theory invoked above is its solution.
+clock hands anchored at $-\tfrac14$, one per prime, the $p$-hand of length
+$p^{-\sigma}$ turning at angular speed $\log p$ (Figure~\ref{fig:hands}). A tree zero
+is a moment when the tip reaches the origin. Whenever one hand is longer than the
+anchored sum of all the others it drags the tip once around the origin per
+revolution, forcing one zero: this is the event $q_p$ measures. At $\sigma = 1.30$
+the hands have lengths $2^{-1.3} = 0.41$, $3^{-1.3} = 0.24$, $5^{-1.3} = 0.12,
+\dots$, and $q_2 = 0.624$, $q_3 = 0.148$, $q_5 = 0.042$, $q_7 = 0.017$; weighted by
+speed the lightest hand accounts for only $59\%$ of the zeros, which is why the
+density \emph{exceeds} the naive one-per-period guess $\log 2/2\pi$. This is exactly
+the classical mean-motion problem of celestial mechanics (Lagrange's secular
+perturbations), and the Jessen--Tornehave theory is its solution.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=2.6, >={Latex[length=1.6mm]}]
+  % anchor at -1/4, hands 0.41 (p=2), 0.24 (p=3), 0.12 (p=5), 0.06 (p=7)
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (-0.25,0);            % anchor -1/4
+  \coordinate (h1) at ($(A)+(28:0.41)$);   % 2-hand, aimed to overshoot origin
+  \coordinate (h2) at ($(h1)+(-52:0.24)$); % 3-hand
+  \coordinate (h3) at ($(h2)+(150:0.12)$); % 5-hand
+  \coordinate (h4) at ($(h3)+(70:0.06)$);  % 7-hand
+  % axes
+  \draw[gray!45, thin, ->] (-0.42,0) -- (0.4,0) node[right,black,font=\scriptsize]{$\operatorname{Re}$};
+  \draw[gray!45, thin, ->] (0,-0.28) -- (0,0.34) node[above,black,font=\scriptsize]{$\operatorname{Im}$};
+  \fill[plred] (O) circle (0.012) node[below right,black,font=\scriptsize]{origin};
+  \fill[black] (A) circle (0.012) node[below,font=\scriptsize]{$-\tfrac14$};
+  \draw[plblue, very thick, ->] (A) -- (h1) node[midway,above,font=\scriptsize]{$2^{-\sigma}$};
+  \draw[plblue!70, thick, ->] (h1) -- (h2) node[midway,right,font=\scriptsize]{$3^{-\sigma}$};
+  \draw[plblue!55, thick, ->] (h2) -- (h3) node[midway,above,font=\scriptsize]{$5^{-\sigma}$};
+  \draw[plblue!45, thick, ->] (h3) -- (h4) node[midway,left,font=\scriptsize]{$7^{-\sigma}$};
+  \fill[plblue] (h4) circle (0.012) node[above right,font=\scriptsize]{tip $= P(s)-\tfrac14$};
+\end{tikzpicture}
+\caption{The value $P(s) - \tfrac14$ at $s = \sigma + it$ as a chain of vectors from
+$-\tfrac14$, the $p$-th of length $p^{-\sigma}$ rotating at speed $\log p$ as $t$
+runs. A tree zero is a moment the tip hits the origin. When one hand
+($2^{-\sigma}$ here) exceeds the anchored sum of the rest, it alone controls the
+winding and forces one zero per turn; the density of zeros is the total rate of such
+dominance, $\frac{1}{2\pi}\sum_p (\log p)\, q_p$ (Theorem~\ref{thm:density}).}
+\label{fig:hands}
+\end{figure}
 
 The numbers confirm the theorem in two independent ways. First the density itself:
 the Monte Carlo dominance probabilities give a curve $D(\sigma)$ rising from
@@ -1248,10 +1285,48 @@ Then
 = \pkg{\,\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\,}\;\pkg{\,\pkg{\ell}\,\pkg{\ell}\,\pkg{\ell}\,}\,,
 \]
 two cartons each holding three bottles; whereas $\act(L_3 \boxtimes L_2)(\ell)$ is
-three cartons each holding two bottles. Neither is ``six liters''; both flatten to
-$6\ell$. The slogan of \S1 is now a statement about the image of $\act$:
-multiplication outputs clustered states, never flat ones.
+three cartons each holding two bottles (Figure~\ref{fig:bridge}). Neither is ``six
+liters''; both flatten to $6\ell$. The slogan of \S1 is now a statement about the
+image of $\act$: multiplication outputs clustered states, never flat ones.
 \end{example}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  bottle/.style={draw=plblue!55, fill=plblue!8, minimum width=3.6mm,
+                 minimum height=6mm, inner sep=0pt},
+  carton/.style={draw=plred!60, rounded corners=1pt, inner sep=2.2pt},
+  lbl/.style={font=\footnotesize},
+]
+% 2 x 3 : two cartons of three
+\begin{scope}
+  \node[carton] (c1) {\begin{tikzpicture}\node[bottle]{};\node[bottle,right=1pt]{};\node[bottle,right=1pt,xshift=3.6mm]{};\end{tikzpicture}};
+  \node[carton, right=3mm of c1] (c2) {\begin{tikzpicture}\node[bottle]{};\node[bottle,right=1pt]{};\node[bottle,right=1pt,xshift=3.6mm]{};\end{tikzpicture}};
+  \node[lbl, above=1pt of c1.north west, anchor=south west, xshift=-2pt]
+    {$\act(L_2\boxtimes L_3)(\ell)$: two cartons of three};
+\end{scope}
+% 3 x 2 : three cartons of two
+\begin{scope}[xshift=6.6cm]
+  \foreach \i in {0,1,2}{
+    \node[carton] (d\i) at (\i*1.15,0)
+      {\begin{tikzpicture}\node[bottle]{};\node[bottle,right=1pt]{};\end{tikzpicture}};
+  }
+  \node[lbl, above=1pt of d0.north west, anchor=south west, xshift=-2pt]
+    {$\act(L_3\boxtimes L_2)(\ell)$: three cartons of two};
+\end{scope}
+% flatten arrows to 6
+\node[lbl] (six) at (5.6,-1.35) {$6\,\ell$};
+\draw[-{Latex[length=1.6mm]}, gray!60] (1.2,-0.5) to[bend right=12] node[below,lbl,black]{$\alpha$} (six.west);
+\draw[-{Latex[length=1.6mm]}, gray!60] (9.0,-0.5) to[bend left=12] node[below,lbl,black]{$\alpha$} (six.east);
+\end{tikzpicture}
+\caption{A tree acts on quantities as a \emph{process}, not a number.
+$L_2\boxtimes L_3$ and $L_3\boxtimes L_2$ package one liter differently: two cartons
+of three bottles versus three cartons of two. As states they differ (associativity
+would too); only the extensive count $\alpha$ collapses both to $6\ell$. ``You never
+get six liters from multiplication'' (\S\ref{sec:trees}) is Theorem~\ref{thm:distrib}:
+the laws hold in expectation, not on states.}
+\label{fig:bridge}
+\end{figure}
 
 \subsection{The stratification theorems}
 
@@ -1376,127 +1451,58 @@ answered: derived. What cannot be derived from the free multiplicative structure
 (\S\ref{sec:priorart}) becomes derivable the moment the additive world and the action
 are in place, because primality is an observational property of clustering.
 
-%======================================================================
-\section{Arithmetic functions on trees}\label{sec:functions}
-
-Classical arithmetic functions pull back along $N$. For the Euler totient,
-\[
-\varphi_\cT(T) \;=\; N(T) \prod_{p \in \supp(T)} \Bigl(1 - \frac1p\Bigr)
-\;=\; \varphi\bigl(N(T)\bigr)
-\]
-by Euler's product formula; e.g.\
-$\varphi_\cT(L_2 \boxtimes L_3) = 6\cdot\tfrac12\cdot\tfrac23 = 2$.
-But this pullback factors through the double quotient: it cannot distinguish
-$L_2\boxtimes L_3$ from $L_3 \boxtimes L_2$. A genuinely history-sensitive totient
-should satisfy: (i) a recursion in $\boxtimes$; (ii) compatibility, i.e.\ it descends
-to $\varphi \circ N$ after the double quotient; (iii) sensitivity, i.e.\ it separates
-some pair of trees with equal shadow. No canonical candidate is known to us; we record
-this as Problem~\ref{prob:totient}. The same design brief applies to M\"obius $\mu$,
-divisor functions, and to two-variable partition functions
-$Z_\cT(s, q) = \sum_T q^{\,\mathrm{stat}(T)} N(T)^{-s}$ for shape statistics
-$\mathrm{stat}$ (depth, right-branch count, Tamari rank): the interesting ones are
-exactly those \emph{not} expressible through $P$ alone (\S\ref{sec:analytic}).
+\begin{remark}[Arithmetic functions on trees]\label{rem:functions}
+Classical arithmetic functions pull back along $N$: the Euler totient gives
+$\varphi_\cT(T) = N(T)\prod_{p\in\supp(T)}(1 - 1/p) = \varphi(N(T))$, factoring
+through the double quotient, so it cannot separate $L_2\boxtimes L_3$ from
+$L_3\boxtimes L_2$. A genuinely history-sensitive $\varphi^{\mathrm{tree}}$ would need
+a recursion in $\boxtimes$ that descends to $\varphi\circ N$ yet distinguishes some
+equal-shadow pair; likewise a shape-weighted zeta
+$Z_\cT(s, q) = \sum_T q^{\,\mathrm{stat}(T)} N(T)^{-s}$ that escapes $P$. Both are open
+(Problem~\ref{prob:totient}).
+\end{remark}
 
 %======================================================================
 \section{Computational content}\label{sec:comp}
 
 If the primes are the particles of this gas, can the gas help us \emph{find} them?
-The question deserves a precise answer, because the temptation to answer yes is
-strong, and wrong in an instructive way. Two theorems mark the boundary: microstate
-counting is blind to primality (\S\ref{sec:nofreelunch}), while the microstate view
-describes exactly what a random integer looks like (\S\ref{sec:randomtree}). We
-then identify the one interface where the theory genuinely touches the complexity of
-primes, the cost of \emph{expressions} (\S\ref{sec:cost}), and close with a map
-of what ``finding a prime'' actually costs and where the open frontier lies
-(\S\ref{sec:costlandscape}).
+The answer is instructive: counting is useless for primality, but the cost of
+\emph{expressions} is exactly where the theory meets the complexity of primes.
 
-\subsection{No free lunch: degeneracy is shape-blind}\label{sec:nofreelunch}
+Two facts explain why no amount of counting helps. First, degeneracy determines
+primality only circularly: rearranging the recursion of Proposition~\ref{prop:gT},
+\[
+[\,n \text{ prime}\,] \;=\; g_\cT(n) - \sum_{d \mid n,\, 1<d<n} g_\cT(d)\,g_\cT(n/d),
+\]
+but the right side consumes the divisor structure of $n$, which is what one is trying
+to find. Second, every degeneracy is \emph{shape-blind}: $g_{\mathcal X}(n)$ depends
+only on the exponent multiset $\{\alpha_p\}$, not on which primes carry them (the
+closed formulas of Propositions~\ref{prop:gT}--\ref{prop:gW} involve only the
+$\alpha_p$; for $\cB$, the divisor lattice is a product of chains of those lengths).
+So $12 = 2^2\cdot 3$, $18 = 2\cdot 3^2$, and $20 = 2^2\cdot 5$ share every count
+($g_\cT = 6$, $g_\cB = 2$, $g_\cW = 3$), and all counts are computable in
+$\mathrm{poly}(\log n)$ once $n$ is factored. This is the computational face of
+freeness: the tree layer is polynomial-time syntax over its input spectrum, so
+whatever algorithmic leverage exists must come from outside the counting.
 
-\begin{proposition}[No free lunch]\label{prop:nofreelunch}
-Let $n \ge 2$ have factorization $\prod_p p^{\alpha_p}$.
-\begin{enumerate}
-\item[(i)] $\displaystyle [\,n \text{ prime}\,] \;=\; g_\cT(n) \;-\;
-\sum_{\substack{d \mid n \\ 1<d<n}} g_\cT(d)\, g_\cT(n/d)$.
-\item[(ii)] For every corner $\mathcal X$ of the square, $g_{\mathcal X}(n)$ depends
-only on the exponent multiset $\{\alpha_p\}$, not on which primes carry the exponents.
-\item[(iii)] Given the factorization of $n$, the values $g_\cT(n)$ and $g_\cW(n)$ are
-computable in time polynomial in $\log n$, and $g_\cB(n)$ in time $n^{o(1)}$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-(i) is the defining recursion of $g_\cT$ rearranged. (ii): for $\cT$ and $\cW$ by the
-closed formulas of Propositions~\ref{prop:gT}--\ref{prop:gW}; for $\cB$ by induction
-along the divisor lattice, which is a product of chains of lengths $\alpha_p$ and
-hence determined by the exponents alone (the square condition reads ``all $\alpha_p$
-even''); for $\cM$ trivially. (iii): the closed formulas involve factorials of
-$\Omega(n) = O(\log n)$, hence numbers with $O(\log n \log\log n)$ bits; the $\cB$
-recursion runs over the divisor lattice, of size $d(n) = n^{o(1)}$.
-\end{proof}
-
-\physread The degeneracies cannot even distinguish $12 = 2^2\cdot3$ from
-$18 = 2\cdot3^2$ from $20 = 2^2\cdot 5$ (all have $g_\cT = 6$, $g_\cB = 2$,
-$g_\cW = 3$): they see the occupation \emph{profile}, never the identities of the
-occupied modes. Identity (i) does determine primality, but its right-hand side
-consumes the divisor structure of $n$, precisely what one would be trying to find,
-and by (ii)--(iii) the entire structural layer is cheap dressing over the
-factorization. This is the computational face of the caution of \S\ref{sec:priorart}:
-freeness means the tree layer is polynomial-time syntax over its input spectrum.
-Counting histories, at any corner of the square, can never be the hard step; whatever
-algorithmic leverage exists must come from outside the counting.
-
-\subsection{The random tree}\label{sec:randomtree}
-
-What the microstate view \emph{does} compute is the statistics of a typical integer
-seen at full resolution.
-
-\begin{theorem}[Random tree]\label{thm:randomtree}
-Draw $n$ uniformly from $\{2, \dots, \lfloor x\rfloor\}$, then draw $T$ uniformly
-from the fiber $N^{-1}(n) \subset \cT$.
-\begin{enumerate}
-\item[(i)] Conditionally on $n$, the shape and the leaf word of $T$ are independent,
-the shape uniform on the $C_{\Omega(n)-1}$ binary shapes and the word uniform on the
-$\Omega(n)!/\prod_p \alpha_p!$ orderings of the prime multiset.
-\item[(ii)] As $x \to \infty$,
-$\bigl(\Omega(n) - \log\log x\bigr)/\sqrt{\log\log x}$ converges in distribution to a
-standard Gaussian.
-\item[(iii)] Consequently, conditionally on $\Omega(n) = k$ the tree is exactly a
-uniform random binary tree with $k$ leaves; in particular its expected height, given
-$k$, is asymptotic to $2\sqrt{\pi k}$.
-\end{enumerate}
-\end{theorem}
-
-\begin{proof}
-(i) The bijection of Proposition~\ref{prop:gT} identifies the fiber with
-(shapes) $\times$ (words); the uniform measure on a product set has independent
-uniform marginals. (ii) is the Erd\H{o}s--Kac theorem~\cite{erdoskac} for
-$\omega(n)$, transferred to $\Omega$: since
-$\mathbb{E}[\Omega - \omega] = \frac1x\sum_p \sum_{j \ge 2} \lfloor x/p^j \rfloor
-\le \sum_p \frac{1}{p(p-1)} = O(1)$ and $\Omega \ge \omega$, the difference is
-$o(\sqrt{\log\log x})$ in probability. (iii) The first claim restates (i); the height
-asymptotic for uniform binary trees is Flajolet--Odlyzko~\cite{flajoletodlyzko}.
-\end{proof}
-
-\physread At full resolution a random integer is a small branched polymer: a Gaussian
-number of constituents concentrated at $\log\log x$ (for $x = 10^{100}$, five or six
-prime factors), a shape drawn from the \emph{universal} Catalan ensemble carrying no
-arithmetic information at all (Proposition~\ref{prop:nofreelunch}(ii)
-again), and height of order $\sqrt{\log\log x}$. Erd\H{o}s--Kac becomes the central
-limit theorem for the constituent number of the arithmetic gas, and the literature on
-random Catalan trees (profiles, path lengths, continuum limits) imports wholesale
-into arithmetic through (iii). Sampling is equally well organized: one can generate a
-uniform random integer below $x$ \emph{together with its Fock state} in polynomial
-expected time, using primality tests as an oracle (Bach~\cite{bach}, simplified by
-Kalai~\cite{kalai}): the occupation-number description is efficiently samplable,
-even though deterministically \emph{aiming} at a prime is not
-known to be.
+What the microstate view \emph{does} compute is the shape of a typical integer. Draw
+$n$ uniformly below $x$ and $T$ uniformly from its fiber $N^{-1}(n)$: by the
+splitting of Proposition~\ref{prop:gT} the shape and leaf-word are independent, the
+shape uniform Catalan, while Erd\H{o}s--Kac~\cite{erdoskac} makes the leaf count
+$\Omega(n)$ Gaussian around $\log\log x$. So a random integer at full resolution is a
+uniform random binary tree with $\approx \log\log x$ leaves (five or six for
+$x = 10^{100}$), carrying \emph{no} arithmetic information in its shape, of height
+$\asymp \sqrt{\log\log x}$~\cite{flajoletodlyzko}. One can even sample a random
+integer together with its factorization in polynomial time~\cite{bach,kalai}: the gas
+is efficiently samplable, though deterministically \emph{aiming} at a prime is not
+known to be (\S\ref{sec:costlandscape}).
 
 \subsection{Expression cost: the invariant that escapes $P$}\label{sec:cost}
 
 Everything so far in this paper is a functional of the input spectrum: the partition
 functions of \S\ref{sec:zeta} through $P(s), P(2s), \dots$ (\S\ref{sec:analytic}),
-the degeneracies through the exponent profile
-(Proposition~\ref{prop:nofreelunch}). Here is the first invariant that is not.
+the degeneracies through the exponent profile (shape-blindness above). Here is the
+first invariant that is not.
 Extend the grammar of \S\ref{sec:trees} with addition, as anticipated by the bridge:
 define \emph{expressions}
 \[
@@ -1595,9 +1601,8 @@ and efficiently recognizable, so deterministic generation is a problem of
 natural formal home of ``dense yet hard to aim at'' is expression cost
 (\S\ref{sec:cost}): a deterministic generator is, in the end, a short expression that
 evaluates to a prime. The honest summary: the theory contributes a sharp map of where
-the hardness cannot be (Proposition~\ref{prop:nofreelunch}), well-posed cost
-questions at the interface where it can be, and no shortcut: by its own
-no-free-lunch proposition, none was available from counting alone.
+the hardness cannot be (shape-blind counting), well-posed cost questions at the
+interface where it can be, and no shortcut: none was available from counting alone.
 
 %======================================================================
 \section{Open problems}\label{sec:open}
@@ -1649,8 +1654,9 @@ phase diagram in $(s,q)$.
 \end{question}
 
 \begin{question}[History-sensitive totient]\label{prob:totient}
-Construct $\varphi^{\mathrm{tree}}$ satisfying (i)--(iii) of \S\ref{sec:functions},
-ideally with an inclusion--exclusion (M\"obius) interpretation over subtrees.
+Construct $\varphi^{\mathrm{tree}}$ as in Remark~\ref{rem:functions} (a $\boxtimes$-recursion
+descending to $\varphi\circ N$ that separates some equal-shadow pair), ideally with an
+inclusion--exclusion interpretation over subtrees.
 \end{question}
 
 \begin{question}[The full expression calculus]\label{prob:calculus}
