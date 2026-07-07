@@ -51,6 +51,8 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--sigma-min", type=float, default=1.30)
     p.add_argument("--sigma-max", type=float, default=2.72)
     p.add_argument("--prime-limit", type=int, default=100_000)
+    p.add_argument("--threshold", type=float, default=0.06,
+                   help="seed threshold for the grid scan")
     p.add_argument("--out", type=str, default=None, help="write zeros to this file")
 
     p = sub.add_parser(
@@ -60,6 +62,16 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--sigma", type=float, default=1.30)
     p.add_argument("--samples", type=int, default=400_000)
     p.add_argument("--prime-limit", type=int, default=10_000)
+
+    p = sub.add_parser(
+        "density",
+        help="predicted zero density right of each sigma, with tail correction",
+    )
+    p.add_argument("--sigma", type=float, nargs="+", default=[1.30])
+    p.add_argument("--samples", type=int, default=400_000)
+    p.add_argument("--prime-limit", type=int, default=20_000)
+    p.add_argument("--track", type=int, default=200)
+    p.add_argument("--out", type=str, default=None, help="append results to this file")
 
     return parser
 
@@ -106,6 +118,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             args.t_max,
             (args.sigma_min, args.sigma_max),
             prime_limit=args.prime_limit,
+            threshold=args.threshold,
         )
         count = len(result.zeros)
         print(f"{count} zeros with 0 < t < {args.t_max}")
@@ -133,6 +146,32 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"q_p at sigma = {args.sigma}: {first}")
         print(f"predicted density: {density:.5f} zeros per unit height")
         print(f"  -> {density * 500:.1f} zeros to height 500")
+        return 0
+
+    if args.command == "density":
+        from primeleaf import zeros as zeros_module
+
+        lines = []
+        for sigma in args.sigma:
+            r = zeros_module.density_prediction(
+                sigma,
+                prime_limit=args.prime_limit,
+                samples=args.samples,
+                track=args.track,
+            )
+            line = (
+                f"sigma={r['sigma']:.3f}  D={r['density']:.5f}"
+                f"  (direct {r['direct']:.5f} + tail {r['tail']:.5f})"
+                f"  q2={r['q2']:.4f} q3={r['q3']:.4f}"
+                f"  f_local={r['local_density']:.3f}"
+            )
+            print(line, flush=True)
+            lines.append(f"{r['sigma']:.4f} {r['density']:.6f} {r['direct']:.6f} "
+                         f"{r['tail']:.6f} {r['q2']:.5f} {r['q3']:.5f}\n")
+        if args.out:
+            with open(args.out, "a") as fh:
+                fh.writelines(lines)
+            print(f"appended to {args.out}")
         return 0
 
     return 2

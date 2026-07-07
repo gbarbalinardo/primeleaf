@@ -195,6 +195,60 @@ def low_band_zeros(
     )
 
 
+def density_prediction(
+    sigma: float = 1.30,
+    *,
+    prime_limit: int = 20_000,
+    samples: int = 400_000,
+    track: int = 200,
+    block: int = 5_000,
+    seed: int = 20260706,
+) -> Dict[str, float]:
+    """Predicted zero density right of ``sigma``, with an analytic tail.
+
+    Monte Carlo estimate of the dominance probabilities q_p for the first
+    ``track`` primes (Theorem 5.3(iii)), a pooled estimate of the local
+    density of the random model near 1/4 from the mid-range tracked primes,
+    and the analytic tail  sum log(p) pi p^(-2 sigma) f_local  over the
+    untracked primes.  Valid down to sigma = 1: the random series converges
+    in L^2 for sigma > 1/2 and the density is continuous, so the value at
+    sigma = 1 is the total density of tree zeros in Re s > 1.
+    """
+    rng = np.random.default_rng(seed)
+    primes, log_primes = _prime_arrays(prime_limit)
+    amplitudes = primes ** (-float(sigma))
+    track = min(track, len(primes))
+    hits = np.zeros(track)
+    done = 0
+    while done < samples:
+        batch = min(block, samples - done)
+        theta = rng.uniform(0.0, 2.0 * np.pi, size=(batch, len(primes)))
+        terms = amplitudes * np.exp(1j * theta)
+        total = terms.sum(axis=1)
+        for k in range(track):
+            rest = total - terms[:, k]
+            hits[k] += np.count_nonzero(np.abs(rest - 0.25) < amplitudes[k])
+        done += batch
+    q = hits / samples
+    direct = float((log_primes[:track] * q).sum()) / (2 * math.pi)
+    window = slice(track // 4, track)
+    disk_areas = math.pi * amplitudes[window] ** 2
+    f_local = float(q[window].sum() / disk_areas.sum())
+    tail_weight = float(
+        (log_primes[track:] * math.pi * amplitudes[track:] ** 2).sum()
+    )
+    tail = f_local * tail_weight / (2 * math.pi)
+    return {
+        "sigma": float(sigma),
+        "direct": direct,
+        "local_density": f_local,
+        "tail": tail,
+        "density": direct + tail,
+        "q2": float(q[0]),
+        "q3": float(q[1]),
+    }
+
+
 def dominance_probabilities(
     sigma: float = 1.30,
     *,

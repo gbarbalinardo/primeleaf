@@ -15,11 +15,13 @@ faithful.
 ## Layout
 
 ```
-paper/            the paper (LaTeX + PDF) and its notes
+paper/            the paper (LaTeX + PDF), its figures, and notes
+  figures/        generated figures (make with scripts/make_figures.py)
   notes/          the original informal recap and the earlier math-first draft
 primeleaf/        Python package: every computation in the paper's Appendix A
+scripts/          make_figures.py (regenerates the paper's figures)
 tests/            fast pytest suite (the full census is marked slow)
-data/             computed artifacts committed for reference (tree zeros to t = 500)
+data/             computed artifacts (tree zeros to t = 5000, the density curve)
 ```
 
 ## Quickstart
@@ -39,13 +41,15 @@ pytest                                     # fast test suite
 |---|---|---|
 | `python -m primeleaf verify-combinatorics` | degeneracy formulas vs brute force, n <= 20000 | ~30 s |
 | `python -m primeleaf verify-zeta` | partition-function identities, Hagedorn ladder, bootstrap constants | ~1 min |
-| `python -m primeleaf census --out data/zeros_t500.txt` | the 59 tree zeros to height 500 | ~10 min |
+| `python -m primeleaf census --t-max 5000 --sigma-min 1.25 --prime-limit 200000 --threshold 0.09 --out data/zeros_t5000.txt` | the 595 tree zeros to height 5000 | ~1 h |
+| `python -m primeleaf density --sigma 1.30 1.10 1.05 1.02 1.01 1.00 --out data/density_curve.txt` | the density curve D(sigma) and total density D(1) | ~5 min |
 | `python -m primeleaf dominance` | Monte Carlo q_p and the predicted zero density | ~1 min |
+| `python scripts/make_figures.py` | the paper's four figures into paper/figures/ | ~1 min |
 | `pytest -m slow` | full census as a test | ~10 min |
 
 ## Key results
 
-| gas | states | inverse Hagedorn temperature |
+| gas | states | inverse limiting temperature |
 |---|---|---|
 | multisets | classical zeta | 1 (pole) |
 | words | ordered prime factorizations | 1.3994333287263303 (P = 1) |
@@ -53,10 +57,13 @@ pytest                                     # fast test suite
 | trees | planar binary trees | 2.5973851271346716 (P = 1/4), Z = 1/2 there |
 
 Tree zeros (solutions of P(s) = 1/4, the complex-temperature zeros of the tree gas):
-59 zeros with Re s > 1.3 and 0 < t < 500, not on a vertical line. Their density is
-given exactly by the mode-dominance formula of Theorem 5.3, which predicts 58.3
-zeros for that window by an independent Monte Carlo (q_2 = 0.624, q_3 = 0.148).
-Eight more zeros sit below the strip, with real parts drifting down to 1.013.
+a census finds 595 of them with 0 < t < 5000, all left of sigma* = 2.597, real parts
+wandering (not on a vertical line). Their density in each substrip of Re s > 1 is
+given exactly by the mode-dominance formula (Theorem 5.3, proved in full), with total
+density D(1) = 0.1436 (4-seed Monte Carlo cross-check). The spacing statistics show a
+spectrum far more rigid than either Poisson or GUE: number variance saturates at
+Sigma^2(10) = 0.67 vs 10 for Poisson, and spacings repel (min normalized gap 0.79).
+This is the fingerprint of the zeros of an almost periodic function.
 
 The classical Hagedorn-Frautschi-Nahm bootstrap transplanted onto the prime
 spectrum has beta_H = 2.14875116590273 (Boltzmann counting) and

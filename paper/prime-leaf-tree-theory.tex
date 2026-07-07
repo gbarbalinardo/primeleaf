@@ -4,6 +4,7 @@
 \usepackage{amsmath,amssymb,amsthm,amscd}
 \usepackage{booktabs}
 \usepackage{microtype}
+\usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
 
@@ -68,7 +69,10 @@ universal for branched polymers: the transition is continuous, whereas the symme
 gases diverge at theirs. Associativity is, in this precise sense, a first-order
 axiom. The complex-temperature zeros of the tree gas
 are computed: they inherit the Riemann zeros through $P$, and their new branch points,
-the solutions of $P(\beta) = \tfrac14$, do \emph{not} lie on a vertical line. Finally,
+the solutions of $P(\beta) = \tfrac14$, do \emph{not} lie on a vertical line but carry
+an exact asymptotic density (total density $0.1436\dots$ in the strip
+$\operatorname{Re} s > 1$), and a census of $595$ of them shows a spectrum far more
+rigid than either random-matrix or Poisson statistics. Finally,
 the bridge to addition: trees act as \emph{processes} on states of hierarchically
 clustered matter. Under this action associativity becomes unobservable (processes
 compose), commutativity fails at the level of states and survives only in expectation,
@@ -214,11 +218,15 @@ $\log 2$, sets the frequency) and do \emph{not}
 lie on a vertical line. The naive tree analogue of the Riemann Hypothesis is false;
 the right question is the distribution of these complex-temperature zeros, and that
 question we answer: in every substrip of $\operatorname{Re} s > 1$ the tree zeros
-have an exact asymptotic density (Theorem~\ref{thm:density}, via the
-Jessen--Tornehave theory of almost periodic functions). Each zero occurs when
-a single mode outshines the coherent rest, and the density is the total
-dominance rate $\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of all $59$ zeros to
-height $500$ matches the formula's Monte Carlo prediction of $58.3$ to one percent.
+have an exact asymptotic density (Theorem~\ref{thm:density}, proved via the
+Jessen--Tornehave theory of almost periodic functions), with total density
+$D(1) = 0.1436\dots$ in the strip $\operatorname{Re} s > 1$
+(Corollary~\ref{cor:totaldensity}). Each zero occurs when a single mode outshines the
+coherent rest, and the density is the total dominance rate
+$\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of $595$ zeros to height $5000$
+confirms the density and reveals a spectrum that is neither Poissonian nor of
+random-matrix type but markedly more \emph{rigid} than both
+(\S\ref{sec:spacings}), the signature of the zeros of an almost periodic function.
 
 \item \textbf{The additive bridge} (\S\ref{sec:bridge}). Trees act as
 \emph{processes} on states of clustered matter (boxed heaps of unit quanta), and the
@@ -720,6 +728,42 @@ resolved: an integer's prime factorization is its ultimate decay inventory, and 
 primes are the stable particles.
 \end{remark}
 
+\begin{remark}[Fugacity and the phase diagram]\label{rem:fugacity}
+Give each particle (each leaf) a fugacity $z$, that is, weight a tree by
+$z^{|T|}$. The grand partition function of the planar tree gas,
+$Z_\cT(s, z) = \sum_T z^{|T|} N(T)^{-s}$, satisfies the same self-consistency
+equation with a rescaled input, since a tree is a leaf (weight $z\,p^{-s}$) or a pair:
+\[
+Z_\cT(s, z) = z\,P(s) + Z_\cT(s, z)^2,
+\qquad
+Z_\cT(s, z) = \frac{1 - \sqrt{1 - 4z\,P(s)}}{2}.
+\]
+The limiting temperature becomes $z$-dependent: convergence holds up to the
+\emph{critical line}
+\[
+z\, P(\beta) = \tfrac14
+\]
+in the $(\beta, z)$ quarter-plane, which passes through $(\sigma^{*}, 1)$ and, as $z$
+grows, sweeps the limiting temperature to arbitrarily high values (Figure~\ref{fig:phase}).
+The tree world $\cT$ is the slice $z = 1$. Fugacity thus turns the single Hagedorn
+point of \S\ref{sec:zeta} into a one-parameter family, and the same substitution
+$P \mapsto zP$ carries every result of \S\ref{sec:analytic} along the line: the
+complex-temperature zeros of the grand gas are the solutions of $z\,P(s) = \tfrac14$,
+a level set of $P$ at a tunable height. The physical zeros ($z=1$, level $\tfrac14$)
+are one horizontal cut through the value-distribution theory of $P$ developed there.
+\end{remark}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/phase.pdf}
+\caption{Phase diagram of the planar tree gas with a fugacity $z$ per particle
+(Remark~\ref{rem:fugacity}). The grand partition function converges below the
+critical line $z\,P(\beta) = \tfrac14$ and diverges above it. The tree world $\cT$ is
+the slice $z = 1$, meeting the line at the limiting temperature $\sigma^{*}$; raising
+$z$ pushes the limiting temperature up without bound.}
+\label{fig:phase}
+\end{figure}
+
 \begin{remark}[Growth of the counting functions]\label{rem:growth}
 By the Wiener--Ikehara theorem applied to $Z_\cW$ (legitimate: the line
 $\operatorname{Re} s = \sigma_\cW$ lies in the half-plane of analyticity of $P$, and
@@ -848,9 +892,10 @@ Within the half-plane of almost periodicity the tree zeros have an exact asympto
 density, computable from a random-phase model of the gas.
 
 \begin{theorem}[Density of the complex-temperature zeros]\label{thm:density}
-For $\sigma > 1$ let $X_\sigma = \sum_p p^{-\sigma} e^{i\theta_p}$ with $(\theta_p)$
-independent and uniform on $[0, 2\pi)$, and define the \emph{Jensen function} and the
-\emph{dominance probabilities}
+For $\sigma > \tfrac12$ let $X_\sigma = \sum_p p^{-\sigma} e^{i\theta_p}$ with
+$(\theta_p)$ independent and uniform on $[0, 2\pi)$ (the series converges almost
+surely and in $L^2$, since $\sum_p p^{-2\sigma} = P(2\sigma) < \infty$), and define
+the \emph{Jensen function} and the \emph{dominance probabilities}
 \[
 \Phi(\sigma) = \mathbb{E}\,\log\bigl|X_\sigma - \tfrac14\bigr|,
 \qquad
@@ -875,33 +920,187 @@ $\sigma \ge \sigma^{*}$, reproving Proposition~\ref{prop:strip}.
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-In closed substrips of $\operatorname{Re} s > 1$ the series $P(s) - \tfrac14$
+The proof rests on two regularity lemmas for the random model and one imported
+estimate from the theory of almost periodic functions. Throughout, $Y_\sigma$ denotes
+either $X_\sigma$ or a \emph{deleted} sum $X_\sigma - p^{-\sigma}e^{i\theta_p}$, and
+$f_\sigma$ denotes its density.
+
+\begin{lemma}[Regularity of the random model]\label{lem:regularity}
+Fix $\tfrac12 < \sigma_0 \le \sigma_1 < \infty$. Uniformly for
+$\sigma \in [\sigma_0, \sigma_1]$:
+(a) $Y_\sigma$ has a $C^\infty$ density $f_\sigma$ on $\mathbb{C}$ with
+$\sup f_\sigma \le C(\sigma_0, \sigma_1)$;
+(b) $\mathbb{E}\,|Y_\sigma - w|^{-\gamma} \le C'(\sigma_0, \sigma_1, \gamma)$ for
+every $w \in \mathbb{C}$ and every $0 < \gamma < 2$;
+(c) $\sigma \mapsto f_\sigma$ is continuous in the uniform norm, and consequently
+each $q_p$ is continuous on $(\tfrac12, \infty)$.
+\end{lemma}
+
+\begin{proof}
+(a) A single mode $a e^{i\theta}$ with $\theta$ uniform has characteristic function
+$\mathbb{E}\, e^{i\langle \xi,\, a e^{i\theta}\rangle} = J_0(a|\xi|)$, so by
+independence $\widehat{f}_\sigma(\xi) = \prod_q J_0(q^{-\sigma}|\xi|)$ over the
+participating primes. With the classical bound $|J_0(x)| \le \min(1, C_0 x^{-1/2})$
+and any $K$ fixed primes $q \le Q$ (all primes participate except possibly the one
+deleted mode),
+\[
+|\widehat{f}_\sigma(\xi)| \;\le\; C_0^K\, Q^{K\sigma_1/2}\, |\xi|^{-K/2}
+\qquad (|\xi| \ge 1).
+\]
+Taking $K = 5$ makes $\widehat{f}_\sigma$ integrable on $\mathbb{R}^2$ with a bound
+uniform in $\sigma$, so Fourier inversion yields a continuous density with
+$\sup f_\sigma \le (2\pi)^{-2}\|\widehat{f}_\sigma\|_{L^1}$; taking $K$ arbitrarily
+large gives integrability of $|\xi|^m \widehat{f}_\sigma$ for every $m$, hence
+smoothness. (b) Split at distance $1$:
+$\mathbb{E}|Y_\sigma - w|^{-\gamma} \le \sup f_\sigma \int_{|z|\le1} |z|^{-\gamma}\,
+dz + 1 < \infty$ since $\gamma < 2$. (c) As $\sigma' \to \sigma$ the characteristic
+functions converge pointwise (each factor does, and the infinite product converges
+locally uniformly by the $L^2$ tail bound), dominated by the integrable envelope of
+(a); Fourier inversion turns this into uniform convergence of the densities. Then
+$q_p(\sigma) = \int_{|w - 1/4| < p^{-\sigma}} f_\sigma(w)\, dw$, taken with the
+deleted density, is continuous, the radius being continuous as well.
+\end{proof}
+
+\begin{lemma}[Dominance bounds]\label{lem:qbound}
+Uniformly for $\sigma \ge 1$, $q_p(\sigma) \le \pi C\, p^{-2\sigma}$. Hence
+$\sum_p (\log p)\, q_p(\sigma)$ converges uniformly on $[1, \infty)$ and is
+continuous there.
+\end{lemma}
+
+\begin{proof}
+The dominance event puts the deleted sum in a disk of radius $p^{-\sigma}$, so
+$q_p \le \sup f_\sigma \cdot \pi p^{-2\sigma}$, with
+Lemma~\ref{lem:regularity}(a) applied on $[1, \sigma^{*}+1]$; for
+$\sigma > \sigma^{*}$ one has $q_p = 0$ outright, as shown in step (i) below. Since
+$\sum_p (\log p)\, p^{-2} < \infty$, Weierstrass gives uniform convergence, and
+continuity follows from Lemma~\ref{lem:regularity}(c).
+\end{proof}
+
+\begin{lemma}[Small values; Jessen--Tornehave]\label{lem:smallvalues}
+Let $f$ be uniformly almost periodic and analytic on a closed substrip of
+$\operatorname{Re} s > 1$, not identically zero. Then for every interior $\sigma$,
+\[
+\lim_{\varepsilon \downarrow 0}\; \limsup_{T \to \infty}\;
+\frac1T \int_0^T \log^{+}\!\frac{\varepsilon}{|f(\sigma + it)|}\, dt \;=\; 0 .
+\]
+This is the technical heart of the Jessen--Tornehave theory of the Jensen
+function~\cite{jessentornehave}; the same estimate, for $\zeta$ and its $a$-points,
+is carried out by Borchsenius and Jessen~\cite{borchsenius}.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem~\ref{thm:density}]
+On a closed substrip of $\operatorname{Re} s > 1$ the series $P(s) - \tfrac14$
 converges absolutely and uniformly, so it is a uniformly almost periodic analytic
-function with frequency set $\{\log p\}$, linearly independent over $\mathbb{Q}$
-(once more unique factorization). By Kronecker--Weyl the flow
-$t \mapsto (t \log p \bmod 2\pi)_p$ equidistributes on the torus, identifying time
-averages with expectations over the phases $(\theta_p)$: this is Bohr and Jessen's
-argument for $\log\zeta$~\cite{bohrjessen}, and gives (i). The value $\log\tfrac14$
-for $\sigma \ge \sigma^{*}$ follows by integrating out the phases one at a time: if
-$\sum_p p^{-\sigma} \le \tfrac14$ then $|{-\tfrac14} + \text{rest}| \ge p^{-\sigma}$
-pointwise for each peeled mode, and the circular average of $\log|W + a e^{i\theta}|$
-equals $\log|W|$ whenever $|W| \ge a$. Statement (ii) is the fundamental theorem of
-Jessen--Tornehave on mean motions and zeros of almost periodic
-functions~\cite{jessentornehave}. For (iii), differentiate under the expectation and
-average over $\theta_p$ first: for fixed $W$ with $|W| \neq a$,
+function with frequency set $\{\log p\}$. The frequencies are linearly independent
+over $\mathbb{Q}$: a rational relation $\sum_k c_k \log p_k = 0$ would give
+$\prod_k p_k^{c_k} = 1$, impossible by unique factorization.
+
+\emph{(i).} For $y \ge 2$ and $\varepsilon > 0$ put
+$P_y(s) = \sum_{p \le y} p^{-s}$, let $X_{\sigma,y}$ be the correspondingly truncated
+model, and let $\ell_\varepsilon(z) = \log \max(|z|, \varepsilon)$, which is
+$(1/\varepsilon)$-Lipschitz in $|z|$. The function
+$t \mapsto \ell_\varepsilon(P_y(\sigma+it) - \tfrac14)$ is a continuous function of
+the finitely many phases $(t \log p \bmod 2\pi)_{p \le y}$, which equidistribute on
+their torus by Weyl's criterion~\cite{weyl} and the linear independence above; hence
+its time
+average converges to $\mathbb{E}\,\ell_\varepsilon(X_{\sigma,y} - \tfrac14)$. Since
+$|P - P_y| \le \sum_{p > y} p^{-\sigma} \to 0$ uniformly in $t$ and
+$\mathbb{E}|X_\sigma - X_{\sigma,y}| \to 0$, letting $y \to \infty$ gives, for every
+$\varepsilon > 0$,
+\[
+\lim_{T\to\infty} \frac1T \int_0^T
+\ell_\varepsilon\bigl(P(\sigma+it) - \tfrac14\bigr)\, dt
+\;=\; \mathbb{E}\,\ell_\varepsilon\bigl(X_\sigma - \tfrac14\bigr).
+\]
+As $\varepsilon \downarrow 0$ the right side decreases to $\Phi(\sigma)$, finite by
+Lemma~\ref{lem:regularity}(b) with $\gamma = 1$; on the left,
+$\ell_\varepsilon - \log|\,\cdot\,| = \log^+(\varepsilon/|\,\cdot\,|)$ is controlled
+by Lemma~\ref{lem:smallvalues}. Together these give
+$\frac1T \int_0^T \log|P(\sigma+it) - \tfrac14|\, dt \to \Phi(\sigma)$. Convexity of
+$\Phi$ is inherited from the finite-$T$ means, which are convex in $\sigma$ because
+$\log|P - \tfrac14|$ is subharmonic.
+
+For $\sigma > \sigma^{*}$, fix any prime $q$ and condition on the other phases:
+writing $X_\sigma - \tfrac14 = W_q + q^{-\sigma} e^{i\theta_q}$, the pointwise bound
+$|W_q| \ge \tfrac14 - (P(\sigma) - q^{-\sigma}) > q^{-\sigma}$ holds because
+$P(\sigma) < \tfrac14$, and the circular mean
+$\frac{1}{2\pi}\int_0^{2\pi} \log|W + a e^{i\theta}|\, d\theta = \log\max(|W|, a)$
+gives $\mathbb{E} \log|X_\sigma - \tfrac14| = \mathbb{E}\log|W_q|$: deleting one mode
+does not change the Jensen function. Iterating over all $p \le y$ and letting
+$y \to \infty$, the remaining tail $T_y$ satisfies $|T_y - \tfrac14| \in
+[\tfrac14 - \delta_y, \tfrac14 + \delta_y]$ with $\delta_y \to 0$, so
+$\Phi(\sigma) = \lim_y \mathbb{E}\log|T_y - \tfrac14| = \log\tfrac14$. The same
+pointwise bound shows the dominance event is empty, $q_p(\sigma) = 0$; at
+$\sigma = \sigma^{*}$ both statements follow by continuity
+(Lemmas~\ref{lem:regularity}(c) and \ref{lem:qbound}, and convexity for $\Phi$).
+
+\emph{(ii)} is the fundamental theorem of Jessen--Tornehave on mean motions and
+zeros of almost periodic analytic functions~\cite{jessentornehave}, applied to
+$P - \tfrac14$: the zeros in a substrip have a mean density equal to the difference
+of one-sided derivatives of the Jensen function over $2\pi$. By (i) the Jensen
+function is $\Phi$, and by (iii) below $\Phi'$ exists and is continuous on
+$(1, \infty)$, so there are no exceptional points and the two-sided statement holds.
+
+\emph{(iii).} Pathwise, $\sigma \mapsto X_\sigma$ is smooth for $\sigma > 1$ with
+$|\partial_\sigma X_\sigma| \le \sum_p (\log p)\, p^{-\sigma} = |P'(\sigma)|$, an
+absolutely convergent series. For $h \ne 0$ the difference quotients obey
+\[
+\Bigl|\frac{\log|X_{\sigma+h} - \tfrac14| - \log|X_\sigma - \tfrac14|}{h}\Bigr|
+\;\le\; \sup_{|u| \le |h|} |P'(\sigma+u)| \cdot
+\Bigl(\,\bigl|X_\sigma - \tfrac14\bigr|^{-1} \wedge
+\bigl|X_{\sigma+h} - \tfrac14\bigr|^{-1}\Bigr)^{\!*}
+\]
+in the elementary form $|\log x - \log y| \le |x - y|/\min(x, y)$; by
+Lemma~\ref{lem:regularity}(b) with $\gamma = \tfrac32$ the family of quotients is
+bounded in $L^{3/2}$, hence uniformly integrable, and it converges almost surely
+(the event $X_\sigma = \tfrac14$ is null). Vitali's theorem then allows
+differentiation under the expectation:
+\[
+\Phi'(\sigma) \;=\; \mathbb{E}\, \operatorname{Re}
+\frac{\partial_\sigma X_\sigma}{X_\sigma - \tfrac14}
+\;=\; -\sum_p (\log p)\; \mathbb{E}\, \operatorname{Re}
+\frac{p^{-\sigma} e^{i\theta_p}}{X_\sigma - \tfrac14},
+\]
+the exchange of sum and expectation being dominated by
+$|P'(\sigma)|\,|X_\sigma - \tfrac14|^{-1}$. Average over $\theta_p$ first, holding
+the other phases fixed: for $W$ with $|W| \neq a$,
 \[
 \frac{1}{2\pi}\int_0^{2\pi} \frac{a e^{i\theta}}{W + a e^{i\theta}}\, d\theta
 \;=\;
 \begin{cases} 1 & |W| < a, \\ 0 & |W| > a, \end{cases}
 \]
-by residues. The interchanges are justified: the characteristic function of
-$X_\sigma$ is $\prod_p J_0(p^{-\sigma}|\xi|)$, with infinitely many Bessel factors
-each decaying like $|\xi|^{-1/2}$, so $X_\sigma$ has a smooth bounded density. Hence
-$\mathbb{E}\,|X_\sigma - \tfrac14|^{-1}$ is finite, uniformly on compact
-$\sigma$-intervals; this dominates the $\sigma$-derivative, whose modulus is at most
-$\sum_p (\log p)\, p^{-\sigma} \big/ |X_\sigma - \tfrac14|$, and gives the boundary
-event $|W| = a$ probability zero.
+by residues, and the boundary event $|W| = a$ has probability zero because the
+deleted sum has a density (Lemma~\ref{lem:regularity}(a)). This yields
+$\Phi'(\sigma) = -\sum_p (\log p)\, q_p(\sigma)$, real as it must be, and continuous
+by Lemma~\ref{lem:qbound}.
+\end{proof}
+
+\begin{corollary}[Total density]\label{cor:totaldensity}
+Set $D(\sigma) = \frac{1}{2\pi}\sum_p (\log p)\, q_p(\sigma)$. Then $D$ is finite
+and continuous on $[1, \infty)$ and vanishes for $\sigma \ge \sigma^{*}$; for every
+$\sigma_1 > 1$ the tree zeros with $\operatorname{Re} s > \sigma_1$ have asymptotic
+density $D(\sigma_1)$; and as $\sigma_1 \downarrow 1$ these densities increase to
+the finite limit
+\[
+D(1) \;=\; \frac{1}{2\pi} \sum_p (\log p)\, q_p(1) \;=\; 0.1436\ldots,
+\]
+which we call the \emph{total density} of the tree zeros in
+$\operatorname{Re} s > 1$ (Appendix~\ref{app:verification}).
+\end{corollary}
+
+\begin{proof}
+Finiteness and continuity on $[1, \infty)$ are Lemma~\ref{lem:qbound}; note that the
+random model, and with it $q_p$ and $D$, is defined for all $\sigma > \tfrac12$, so
+$\sigma = 1$ is an interior point for the model even though almost periodicity fails
+there. For $\sigma_1 > 1$ the zeros right of $\sigma_1$ all lie in the substrip
+$(\sigma_1, \sigma^{*}]$ by Proposition~\ref{prop:strip}, so
+Theorem~\ref{thm:density}(ii)--(iii) gives their density as
+$D(\sigma_1) - D(\sigma^{*} + 1) = D(\sigma_1)$. These densities are non-decreasing
+as $\sigma_1$ decreases, by nesting, and converge to $D(1)$ by continuity. Whether
+the zero count in the closed half-plane $\operatorname{Re} s > 1$ is exactly linear
+with slope $D(1)$ depends on how the zeros accumulate toward the boundary line,
+where the continuation \eqref{eq:Pcont} takes over; that is part of
+Problem~\ref{prob:zeros}.
 \end{proof}
 
 \physread Fix $\sigma$ and let $t$ run: $P(\sigma + it) - \tfrac14$ is a chain of
@@ -919,20 +1118,77 @@ one-per-period guess $\log 2/2\pi$. Chains of rotating arms are the classical
 mean-motion problem of celestial mechanics, Lagrange's secular perturbations; the
 Jessen--Tornehave theory invoked above is its solution.
 
-The numbers confirm the theorem. A census to height $500$
-(Appendix~\ref{app:verification}) finds exactly $59$ zeros with
-$\operatorname{Re} s > 1.3$; the dominance formula predicts
-$\frac{500}{2\pi}\sum_p (\log p)\, q_p(1.30) = 58.3$, agreement to one percent
-between two independent computations (Newton root-finding on
-$\texttt{primezeta}$ against a random-phase Monte Carlo). One-per-period
-would give $55.2$. The running counts are $N(100), \dots, N(500) = 11, 23, 35, 47,
-59$; the mean spacing is $8.42$ against $2\pi/\log 2 = 9.06$; individual spacings
-range from $1.31$ to $10.54$. The left edge, meanwhile, drifts: a coarser sweep of
-$1.05 < \operatorname{Re} s < 1.30$ finds at least eight further zeros below the
-strip, with real parts as low as $1.0130$ (at $t \approx 470.2$). The real parts
-approach $1$ as the height grows, where almost periodicity fails and the continuation
-\eqref{eq:Pcont}, with its Riemann-zero branch points, takes over: what happens
-there is Problem~\ref{prob:zeros}.
+The numbers confirm the theorem in two independent ways. First the density itself:
+the Monte Carlo dominance probabilities give a curve $D(\sigma)$ rising from
+$D(\sigma^{*}) = 0$ to
+\[
+D(1.30) = 0.1162, \quad D(1.10) = 0.1314, \quad D(1.05) = 0.1372, \quad
+D(1) = 0.1436
+\]
+(Appendix~\ref{app:verification}), the last value being the total density of
+Corollary~\ref{cor:totaldensity}. Against this, a full census to height $5000$
+(Figure~\ref{fig:zeros}) locates $595$ tree zeros, all with
+$1.26 < \operatorname{Re} s < 2.57$, hence all left of $\sigma^{*}$ as
+Proposition~\ref{prop:strip} requires. The counting function $N(T)$ tracks the
+predicted line $D(1)\,T$ closely (Figure~\ref{fig:zeros}, right); the small deficit is
+exactly the tail of zeros with $1 < \operatorname{Re} s < 1.26$ that the census box
+does not reach, whose density $D(1) - D(1.26) \approx 0.014$ accounts for it. The
+mean spacing is $8.39$ against the lightest-mode period $2\pi/\log 2 = 9.06$. The
+left edge drifts as before: the lowest real part found is $1.262$ within the box, and
+a coarse sub-box sweep continues to turn up zeros with real parts approaching $1$,
+where almost periodicity fails and the continuation \eqref{eq:Pcont}, with its
+Riemann-zero branch points, takes over. What happens on and past that line is
+Problem~\ref{prob:zeros}.
+
+\subsection{Spectral statistics: rigidity, not randomness}\label{sec:spacings}
+
+The $595$ ordinates are numerous enough to ask how the zeros are spaced, the question
+one asks of any spectrum. Normalizing to unit mean spacing, the nearest-neighbour
+distribution is neither Poissonian (uncorrelated levels) nor of random-matrix type:
+it is far more \emph{rigid} than both (Figure~\ref{fig:spacings}). The mass piles up
+near $s = 1$; the coefficient of variation of the raw gaps is $0.259$, against $1$ for
+a Poisson process; the smallest normalized gap observed is $0.79$, and only $8\%$ of
+gaps fall below $s = \tfrac12$ (a Poisson process would have $39\%$). The number
+variance saturates rather than growing linearly,
+\[
+\Sigma^2(1) = 0.18, \quad \Sigma^2(5) = 0.57, \quad \Sigma^2(10) = 0.67
+\qquad (\text{Poisson: } \Sigma^2(L) = L),
+\]
+so the count of zeros in a long window is almost deterministic. This is the expected
+fingerprint of the zeros of an almost periodic analytic function: a quasi-periodic
+skeleton (here paced by $2\pi/\log 2$) dressed with defects where a wandering
+lighter-mode resonance displaces a zero. It is emphatically \emph{not} the GUE
+statistics conjectured for the Riemann zeros themselves~\cite{montgomery}; the tree
+gas and the Riemann gas, though the former inherits the latter's zeros through $P$,
+have entirely different spectral rigidity. Making the empirical rigidity
+(near-crystalline order with a controlled density of defects) into a theorem is
+Problem~\ref{prob:zeros}(c).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.49\textwidth]{figures/zeros.pdf}\hfill
+\includegraphics[width=0.49\textwidth]{figures/staircase.pdf}
+\caption{Left: the $595$ tree zeros (solutions of $P(s) = \tfrac14$) with
+$0 < \operatorname{Im} s < 5000$, all left of $\sigma^{*}$
+(Proposition~\ref{prop:strip}), the real parts wandering across the strip.
+Right: the counting function against the predicted line $D(1)\,T$ with
+$D(1) = 0.1436$ (Corollary~\ref{cor:totaldensity}) and against the naive
+one-per-period line; the deficit is the tail of zeros with
+$\operatorname{Re} s < 1.26$ outside the census box.}
+\label{fig:zeros}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/spacings.pdf}
+\caption{Nearest-neighbour spacings of the tree-zero ordinates, normalized to unit
+mean, against the Poisson and GUE (Wigner) laws. The distribution is more rigid than
+either: negligible mass below $s = \tfrac12$, a sharp peak near $s = 1$, and a number
+variance that saturates ($\Sigma^2(10) = 0.67$ against $10$ for Poisson). This is the
+signature of the zeros of an almost periodic function, not of a random-matrix
+ensemble.}
+\label{fig:spacings}
+\end{figure}
 
 %======================================================================
 \section{The additive bridge: states, processes, and classical observables}
@@ -1349,19 +1605,23 @@ no-free-lunch proposition, none was available from counting alone.
 \begin{question}[Tree-zero distribution: beyond the almost periodic region]
 \label{prob:zeros}
 Theorem~\ref{thm:density} settles the density of tree zeros in substrips of
-$\operatorname{Re} s > 1$. Remaining: (a) the left edge: the census finds real
-parts as low as $1.013$ by height $500$; do they accumulate at $1$? Do zeros of the
-continued $P - \tfrac14$ exist with $\operatorname{Re} s \le 1$, where almost
-periodicity fails and the Riemann zeros enter through \eqref{eq:Pcont}? (b) the total
-density $\lim_{\sigma_1 \downarrow 1} \frac{1}{2\pi}\sum_p (\log p)\,
-q_p(\sigma_1)$: expected finite (the tail should behave like
-$\sum_p (\log p)\, p^{-2\sigma}$), but its value and the speed of the leftward drift
-are open. (c) pair correlations and the gap law of the ordinates: the census gives
-spacings from $1.31$ to $10.54$ around mean $8.42$; is there level repulsion?
+$\operatorname{Re} s > 1$, and Corollary~\ref{cor:totaldensity} evaluates the total
+density $D(1) = 0.1436\dots$ Remaining: (a) the left edge: the census finds real
+parts down to $1.26$ within the scanned box and lower on coarse sweeps; do the zeros
+accumulate at $1$? Do zeros of the continued $P - \tfrac14$ exist with
+$\operatorname{Re} s \le 1$, where almost periodicity fails and the Riemann zeros
+enter through \eqref{eq:Pcont}? (b) upgrade $D(1)$ to a boundary count: is the number
+of zeros with $\operatorname{Re} s > 1$ and $0 < t \le T$ asymptotic to $D(1)\,T$, or
+does accumulation at the line $\operatorname{Re} s = 1$ add a correction? (c) prove
+the observed \emph{rigidity}: the empirical number variance saturates
+($\Sigma^2(10) = 0.67$ against $10$ for Poisson) and the spacings repel
+(Figure~\ref{fig:spacings}); establish that the tree zeros form a quasi-periodic set
+with a controlled defect density, and compute the pair-correlation function.
 (d) a Lee--Yang-type question: is there a natural deformation of the gas for which
-the singularities align on a line? (e) the same program for the level sets
-$P(s) = c$, $0 < c < 1$: the tree zeros are $c = \tfrac14$, the Boltzmann-gas poles
-$c = 1$.
+the zeros align on a line? (e) the same program for the level sets
+$P(s) = c$, $0 < c < 1$, of which the tree zeros are $c = \tfrac14$ and the
+Boltzmann-gas poles $c = 1$: the fugacity of Remark~\ref{rem:fugacity} realizes the
+family $c = 1/(4z)$.
 \end{question}
 
 \begin{question}[Tauberian rigor]\label{prob:tauberian}
@@ -1487,26 +1747,41 @@ $|P(s) - \tfrac14| < 10^{-15}$. A coarser sweep of $[1.05, 1.40) \times [0.5, 50
 (step $0.05 \times 0.25$) found no additional candidates; its only sub-threshold dip
 flowed to zero \#1 of the table.
 
-\subsection{Zero census and the density check}
+\subsection{Zero census, density curve, and spacings}
 
-The census of \S\ref{sec:density} (command \texttt{python -m primeleaf census})
-extends the scan to $[1.30, 2.72] \times [0.3, 500]$ with primes up to $10^5$ (grid
-$0.02 \times 0.05$, seed threshold $0.06$, Newton polish at 18 significant digits,
-residuals below $10^{-14}$): $59$ zeros, real parts in $(1.3149,\, 2.5396)$, listed
-in \texttt{data/zeros\_t500.txt}. The running counts are
-$N(100), \dots, N(500) = 11, 23, 35, 47, 59$; the one-per-period line
-$T\log 2/2\pi$ would give $11.0, 22.1, 33.1, 44.1, 55.2$; the mean spacing is
-$8.417$, with extremes $1.31$ and $10.54$. A
-coarse sweep of $[1.05, 1.30) \times [0.5, 500]$ (steps $0.05 \times 0.25$, not
-exhaustive) finds eight further zeros with real parts down to $1.01298$ (at
-$t \approx 470.24$). The dominance probabilities at $\sigma = 1.30$ were estimated
-from $4 \cdot 10^5$ random-phase samples over the primes up to $10^4$:
+\emph{Census} (\S\ref{sec:density}, \S\ref{sec:spacings}, command
+\texttt{python -m primeleaf census}). The scan covers
+$[1.25, 2.72] \times [0.3, 5000]$ with primes up to $2 \times 10^5$ (grid
+$0.02 \times 0.05$, seed threshold $0.09$, Newton polish on the full
+\texttt{primezeta} at 18 significant digits, residuals below $10^{-14}$): $595$ zeros,
+real parts in $(1.2615,\, 2.5679)$, all below $\sigma^{*}$, listed in
+\texttt{data/zeros\_t5000.txt}. The mean spacing is $8.39$ against
+$2\pi/\log 2 = 9.06$. The figures are produced by \texttt{scripts/make\_figures.py}.
+
+\emph{Density curve} (command \texttt{python -m primeleaf density}). Dominance
+probabilities from $10^6$ random-phase samples over the primes up to $2 \times 10^4$,
+for the first $200$ primes, with an analytic tail
+$\frac{1}{2\pi}\sum_{p > p_0}(\log p)\,\pi p^{-2\sigma} f_{\mathrm{loc}}$ (the tail
+never exceeds $0.001$):
 \[
-q_2 = 0.6237, \quad q_3 = 0.1484, \quad q_5 = 0.0416, \quad q_7 = 0.0167, \quad
-q_{11} = 0.0051, \quad q_{13} = 0.0031,
+\begin{array}{c|ccccccc}
+\sigma & 1.30 & 1.20 & 1.10 & 1.05 & 1.02 & 1.01 & 1.00 \\ \hline
+D(\sigma) & 0.1162 & 0.1223 & 0.1314 & 0.1372 & 0.1406 & 0.1421 & 0.1435
+\end{array}
 \]
-giving predicted density $0.11659$ per unit height, i.e.\ $58.3$ zeros to height
-$500$, against $59$ observed.
+with, at $\sigma = 1.30$, $q_2 = 0.624$, $q_3 = 0.148$, $q_5 = 0.042$, $q_7 = 0.017$.
+The total density $D(1)$ was pinned by four independent seeds ($1.5 \times 10^6$
+samples each): $0.14363, 0.14341, 0.14367, 0.14352$, mean $0.14356$, standard
+deviation $0.00010$; we quote $D(1) = 0.1436$. As a cross-check at $\sigma = 1.30$,
+$D(1.30) = 0.1162$ predicts $58.1$ zeros to height $500$, against the $59$ found by
+the earlier dedicated $t \le 500$ census.
+
+\emph{Spacings} (\S\ref{sec:spacings}). From the $595$ ordinates, normalized to unit
+mean: coefficient of variation of the raw gaps $0.259$; smallest normalized gap
+$0.79$; fraction below $s = \tfrac12$ equal to $0.081$ (Poisson: $0.393$); number
+variance $\Sigma^2(1) = 0.18$, $\Sigma^2(5) = 0.57$, $\Sigma^2(10) = 0.67$ (Poisson:
+$\Sigma^2(L) = L$). The saturation of $\Sigma^2$ and the near-total level repulsion
+are the rigidity reported in the text.
 
 %======================================================================
 \begin{thebibliography}{99}
@@ -1561,6 +1836,11 @@ Springer, 1998.
 H.~Bohr and B.~Jessen,
 \emph{\"Uber die Werteverteilung der Riemannschen Zetafunktion},
 Acta Math. \textbf{54} (1930), 1--35; \textbf{58} (1932), 1--55.
+
+\bibitem{borchsenius}
+V.~Borchsenius and B.~Jessen,
+\emph{Mean motions and values of the Riemann zeta function},
+Acta Math. \textbf{80} (1948), 97--166.
 
 \bibitem{chenluors}
 L.~Chen, Z.~Lu, I.~C.~Oliveira, H.~Ren, and R.~Santhanam,
@@ -1657,6 +1937,12 @@ K.~Mahler and J.~Popken,
 \emph{On a maximum problem in arithmetic},
 Nieuw Arch. Wiskd. (3) \textbf{1} (1953), 1--15.
 
+\bibitem{montgomery}
+H.~L.~Montgomery,
+\emph{The pair correlation of zeros of the zeta function},
+in: Analytic Number Theory (St.\ Louis, 1972), Proc. Sympos. Pure Math.
+\textbf{24}, Amer. Math. Soc., 1973, pp.~181--193.
+
 \bibitem{nahm}
 W.~Nahm,
 \emph{Analytical solution of the statistical bootstrap model},
@@ -1702,6 +1988,11 @@ Progress in Mathematics \textbf{299}, Birkh\"auser, 2012.
 G.~'t~Hooft,
 \emph{A planar diagram theory for strong interactions},
 Nucl. Phys. B \textbf{72} (1974), 461--473.
+
+\bibitem{weyl}
+H.~Weyl,
+\emph{\"Uber die Gleichverteilung von Zahlen mod. Eins},
+Math. Ann. \textbf{77} (1916), 313--352.
 
 \end{thebibliography}
 

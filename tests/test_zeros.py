@@ -39,6 +39,20 @@ def test_dominance_probabilities_sane():
     assert 0.08 < density < 0.16
 
 
+def test_density_prediction_curve_is_increasing():
+    # Corollary 5.7: D(sigma) increases as sigma decreases toward 1.
+    d130 = zeros.density_prediction(
+        1.30, prime_limit=2000, samples=30_000, track=40, seed=3
+    )
+    d100 = zeros.density_prediction(
+        1.00, prime_limit=2000, samples=30_000, track=40, seed=3
+    )
+    assert d100["density"] > d130["density"]
+    # total density D(1) ~ 0.1436 (4-seed cross-check, Appendix A.4)
+    assert 0.12 < d100["density"] < 0.17
+    assert d100["tail"] >= 0.0
+
+
 @pytest.mark.slow
 def test_full_census_matches_paper():
     # Appendix A.4: 59 zeros with Re s > 1.3 and 0 < t < 500.
