@@ -74,9 +74,10 @@ spectrum has beta_H = 2.14875116590273 (Boltzmann counting) and
 beta_H = 2.30723145510135 (Bose counting).
 
 The unordered-tree degeneracy sequence (1, 1, 1, ..., 2 at n = 12, ..., 41 at
-n = 144) is not in the OEIS as of July 2026; A375120 is a near-miss with a different
-diagonal convention (first divergence at n = 144: 41 vs 42). An OEIS submission is
-in preparation.
+n = 144) was submitted to the OEIS as
+[A397740](https://oeis.org/A397740) (under editorial review as of July 2026);
+A375120 is a near-miss with a different diagonal convention (first divergence at
+n = 144: 41 vs 42).
 
 ## Building the paper
 
