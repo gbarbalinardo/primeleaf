@@ -22,3 +22,5 @@ g_values.txt
 
 # macOS
 .DS_Store
+submission/
+uv.lock

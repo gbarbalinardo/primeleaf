@@ -42,50 +42,44 @@
 
 \title{Prime-Leaf Tree Theory\\[2mm]
 \large Arithmetic as the statistical mechanics of multiplication histories}
-\author{Giuseppe Barbalinardo}
-\date{Working draft, \today}
+\author{Giuseppe Barbalinardo%
+\thanks{Email: \texttt{giuseppe.barbalinardo@gmail.com}.
+Affiliation to be added at submission.}}
+\date{\today}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We treat the integers as a gas with one mode per prime $p$, of energy $\log p$: the
-setting of Julia's gas of numbers~\cite{julia} and of Bost--Connes. In the usual
-reading, an integer
-is a Fock state (its prime factorization is an occupation-number configuration) and
-the Riemann zeta function is the free bosonic partition function. This paper studies
-the same gas \emph{before} symmetrization and \emph{before} the interaction history
-is forgotten. A microstate is then a \emph{multiplication tree}: an ordered,
-parenthesized record of pairwise combinations, whose only conserved quantity is the
-integer $N(T) = e^{E(T)}$ it evaluates to. Multiplication is not commutative or
-associative at this level, because microstates remember their formation; ordinary
-arithmetic is the fully coarse-grained description, and the Fundamental Theorem of
-Arithmetic is precisely the statement that the occupation-number description is
-faithful (zero residual entropy). Forgetting history and symmetrizing are independent
-coarse-grainings, so there are four gases, each with an exact partition function
-determined by the prime zeta function $P(\beta)$: the Riemann gas $\zeta(\beta)$, a
-distinguishable-particle gas with inverse limiting temperature $1.39943\dots$, a
-non-planar tree gas at $1.98847\dots$, and the full planar tree gas, whose
-partition function obeys the self-consistency equation $Z = P + Z^2$ (a tree is a
-prime or a pair of trees) and reaches its limiting temperature at
-$\beta_H = \sigma^{*} = 2.59738\dots$, where $P(\sigma^{*}) = \tfrac14$. There the
-partition function is finite and exactly $\tfrac12$, with the square-root branch point
-universal for branched polymers: the transition is continuous, whereas the symmetrized
-gases diverge at theirs. Associativity is, in this precise sense, a first-order
-axiom. The complex-temperature zeros of the tree gas
-are computed: they inherit the Riemann zeros through $P$, and their new branch points,
-the solutions of $P(\beta) = \tfrac14$, do \emph{not} lie on a vertical line but carry
-an exact asymptotic density (total density $0.1436\dots$ in the strip
-$\operatorname{Re} s > 1$), and a census of $595$ of them shows a spectrum far more
-rigid than either random-matrix or Poisson statistics. Finally,
-the bridge to addition: trees act as \emph{processes} on states of hierarchically
-clustered matter. Under this action associativity becomes unobservable (processes
-compose), commutativity fails at the level of states and survives only in expectation,
-and distributivity is a theorem about the extensive observable rather than an axiom.
-Primes themselves emerge as the cluster sizes that cannot crystallize into identical
-cells. All combinatorial claims are verified by exhaustive enumeration and all
-constants to high precision (Appendix~\ref{app:verification}).
+We treat the integers as a gas with one mode per prime $p$, of energy $\log p$ (the
+setting of Julia's gas of numbers and of Bost--Connes), and study it \emph{before}
+symmetrization and \emph{before} the interaction history is forgotten. A microstate
+is a multiplication tree: an ordered, parenthesized record of pairwise combinations
+whose only conserved quantity is the integer it evaluates to. Forgetting history and
+symmetrizing are independent coarse-grainings, giving four gases whose partition
+functions are exact functionals of the prime zeta function $P(\beta)$; their inverse
+limiting temperatures form a strict ladder
+$1 < 1.3994\ldots < 1.9885\ldots < \sigma^{*} = 2.5974\ldots$, and whether the
+limiting temperature is attained is decided by associativity: the symmetrized gases
+have poles, the tree gases square-root branch points, with
+$Z_\cT(\sigma^{*}) = \tfrac12$ exactly. The complex-temperature zeros of the tree gas
+inherit the Riemann zeros through $P$; their new branch points, the solutions of
+$P(\beta) = \tfrac14$, do not lie on a vertical line but carry an exact asymptotic
+density given by mode-dominance probabilities (total density $0.1436\ldots$ in
+$\operatorname{Re}\beta > 1$), and a census of $595$ zeros to height $5000$ reveals
+a spectrum far more rigid than Poisson or random-matrix statistics. The Fundamental
+Theorem of Arithmetic appears as zero residual entropy of the coarse-grained
+description, and the classical laws of arithmetic hold only in expectation. All
+results are reproducible from an accompanying open-source package.
 \end{abstract}
+
+\noindent\textbf{Keywords:} prime numbers; partition functions; limiting (Hagedorn)
+temperature; complex-temperature (Fisher) zeros; almost periodic functions;
+statistical bootstrap; value distribution
+
+\medskip
+\noindent\textbf{Mathematics Subject Classification (2020):} 11M41 (primary);
+05A16, 42A75, 82B26 (secondary)
 
 \tableofcontents
 
@@ -992,9 +986,11 @@ $\operatorname{Re} s > 1$, not identically zero. Then for every interior $\sigma
 \lim_{\varepsilon \downarrow 0}\; \limsup_{T \to \infty}\;
 \frac1T \int_0^T \log^{+}\!\frac{\varepsilon}{|f(\sigma + it)|}\, dt \;=\; 0 .
 \]
-This is the technical heart of the Jessen--Tornehave theory of the Jensen
-function~\cite{jessentornehave}; the same estimate, for $\zeta$ and its $a$-points,
-is carried out by Borchsenius and Jessen~\cite{borchsenius}.
+This is Theorem~5 of Jessen--Tornehave~\cite{jessentornehave}: the means of
+$\log\max(|f(\sigma+it)|, \varepsilon)$ converge, uniformly on substrips, to the
+Jensen function as $\varepsilon \to 0$, which is exactly the displayed statement.
+The same estimate, for $\zeta$ and its $a$-points, is carried out by Borchsenius and
+Jessen~\cite{borchsenius}.
 \end{lemma}
 
 \begin{proof}[Proof of Theorem~\ref{thm:density}]
@@ -1044,12 +1040,13 @@ pointwise bound shows the dominance event is empty, $q_p(\sigma) = 0$; at
 $\sigma = \sigma^{*}$ both statements follow by continuity
 (Lemmas~\ref{lem:regularity}(c) and \ref{lem:qbound}, and convexity for $\Phi$).
 
-\emph{(ii)} is the fundamental theorem of Jessen--Tornehave on mean motions and
-zeros of almost periodic analytic functions~\cite{jessentornehave}, applied to
-$P - \tfrac14$: the zeros in a substrip have a mean density equal to the difference
-of one-sided derivatives of the Jensen function over $2\pi$. By (i) the Jensen
-function is $\Phi$, and by (iii) below $\Phi'$ exists and is continuous on
-$(1, \infty)$, so there are no exceptional points and the two-sided statement holds.
+\emph{(ii)} is the Jensen formula for almost periodic functions of
+Jessen--Tornehave (Theorem~7 and \S46 of~\cite{jessentornehave}), applied to
+$P - \tfrac14$: when the Jensen function is differentiable at $\sigma_1$ and
+$\sigma_2$, the relative frequency of zeros in the strip $(\sigma_1, \sigma_2)$
+exists and equals $\bigl(\varphi'(\sigma_2) - \varphi'(\sigma_1)\bigr)/2\pi$. By (i)
+the Jensen function is $\Phi$, and by (iii) below $\Phi'$ exists and is continuous
+on $(1, \infty)$, so there are no exceptional points.
 
 \emph{(iii).} Pathwise, $\sigma \mapsto X_\sigma$ is smooth for $\sigma > 1$ with
 $|\partial_\sigma X_\sigma| \le \sum_p (\log p)\, p^{-\sigma} = |P'(\sigma)|$, an
@@ -1123,8 +1120,10 @@ the hands have lengths $2^{-1.3} = 0.41$, $3^{-1.3} = 0.24$, $5^{-1.3} = 0.12,
 \dots$, and $q_2 = 0.624$, $q_3 = 0.148$, $q_5 = 0.042$, $q_7 = 0.017$; weighted by
 speed the lightest hand accounts for only $59\%$ of the zeros, which is why the
 density \emph{exceeds} the naive one-per-period guess $\log 2/2\pi$. This is exactly
-the classical mean-motion problem of celestial mechanics (Lagrange's secular
-perturbations), and the Jessen--Tornehave theory is its solution.
+the classical mean-motion problem of celestial mechanics: a hand exceeding the
+anchored sum of the rest is what Lagrange called a \emph{preponderant term}
+(see the introduction of~\cite{jessentornehave}), and the Jessen--Tornehave theory
+is the problem's solution.
 
 \begin{figure}[t]
 \centering
@@ -1683,6 +1682,23 @@ Theorem~\ref{thm:assoc} hold with \emph{exactly} $\approx_a$, and is $(\cG,\alph
 universal among them?
 \end{question}
 
+\section*{Acknowledgments}
+
+This manuscript was prepared with substantial assistance from an AI system (Claude,
+Anthropic), which contributed to drafting, computation, and verification under the
+author's direction; the author takes full responsibility for the content. All
+quantitative claims are independently reproducible from the accompanying code
+(see the data availability statement).
+
+\section*{Data and code availability}
+
+All computations in this paper are reproducible from the open-source
+\texttt{primeleaf} Python package and scripts at
+\url{https://github.com/gbarbalinardo/prime-research}. The repository includes the
+computed tree zeros to height $5000$, the density curve, the figure-generation
+scripts, and a test suite; the commands reproducing each part of
+Appendix~\ref{app:verification} are listed there.
+
 %======================================================================
 \appendix
 \section{Computational verification}\label{app:verification}
@@ -1852,7 +1868,8 @@ Acta Math. \textbf{80} (1948), 97--166.
 \bibitem{chenluors}
 L.~Chen, Z.~Lu, I.~C.~Oliveira, H.~Ren, and R.~Santhanam,
 \emph{Polynomial-time pseudodeterministic construction of primes},
-Proc. 64th IEEE Symposium on Foundations of Computer Science (FOCS), 2023.
+J. ACM \textbf{73} (2026), no.~2; conference version in Proc. 64th IEEE FOCS, 2023;
+arXiv:2305.15140.
 
 \bibitem{cramer}
 H.~Cram\'er,
@@ -1873,7 +1890,7 @@ Amer. J. Math. \textbf{62} (1940), 738--742.
 \bibitem{fisher}
 M.~E.~Fisher,
 \emph{The nature of critical points},
-in: Lectures in Theoretical Physics, vol.~VII~C,
+in: W.~E.~Brittin (ed.), Lectures in Theoretical Physics, vol.~VII~C,
 University of Colorado Press, Boulder, 1965, pp.~1--159.
 
 \bibitem{flajoletodlyzko}
@@ -1937,11 +1954,12 @@ T.~D.~Lee and C.~N.~Yang, \emph{II. Lattice gas and Ising model}, ibid., 410--41
 \bibitem{loday}
 J.-L.~Loday,
 \emph{Arithmetree},
-J. Algebra \textbf{267} (2003), 507--539; arXiv:math/0112034.
+J. Algebra \textbf{258} (2002), no.~1, 275--309; arXiv:math/0112034.
 
 \bibitem{mahlerpopken}
 K.~Mahler and J.~Popken,
-\emph{On a maximum problem in arithmetic},
+\emph{Over een maximumprobleem uit de rekenkunde} [On a maximum problem in
+arithmetic],
 Nieuw Arch. Wiskd. (3) \textbf{1} (1953), 1--15.
 
 \bibitem{montgomery}
