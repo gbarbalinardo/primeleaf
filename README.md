@@ -1,6 +1,6 @@
 # Prime-Leaf Tree Theory
 
-[![CI](https://github.com/gbarbalinardo/prime-research/actions/workflows/ci.yml/badge.svg)](https://github.com/gbarbalinardo/prime-research/actions/workflows/ci.yml)
+[![CI](https://github.com/gbarbalinardo/primeleaf/actions/workflows/ci.yml/badge.svg)](https://github.com/gbarbalinardo/primeleaf/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Arithmetic in which multiplication does not return a number. The product of two
