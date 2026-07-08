@@ -1,5 +1,8 @@
 # Prime-Leaf Tree Theory
 
+[![CI](https://github.com/gbarbalinardo/prime-research/actions/workflows/ci.yml/badge.svg)](https://github.com/gbarbalinardo/prime-research/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Arithmetic in which multiplication does not return a number. The product of two
 objects is a multiplication tree over prime leaves, and the ordinary integer is the
 shadow of that tree. Read as statistical mechanics: the primes are the modes of a gas
@@ -71,10 +74,17 @@ beta_H = 2.30723145510135 (Bose counting).
 
 The unordered-tree degeneracy sequence (1, 1, 1, ..., 2 at n = 12, ..., 41 at
 n = 144) is not in the OEIS as of July 2026; A375120 is a near-miss with a different
-diagonal convention. Candidate submission.
+diagonal convention (first divergence at n = 144: 41 vs 42). An OEIS submission is
+in preparation.
 
 ## Building the paper
 
 ```sh
 make paper        # or: cd paper && latexmk -pdf prime-leaf-tree-theory.tex
 ```
+
+## Citing
+
+See [`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button uses it).
+Until the paper has a journal or arXiv identifier, cite the manuscript PDF in this
+repository.

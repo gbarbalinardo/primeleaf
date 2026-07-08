@@ -1,8 +1,26 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below."
+message: "If you use this repository, please cite the paper below."
 title: "Prime-Leaf Tree Theory: arithmetic as the statistical mechanics of multiplication histories"
 authors:
   - family-names: Barbalinardo
     given-names: Giuseppe
+    email: giuseppe.barbalinardo@gmail.com
 version: 0.1.0
-date-released: "2026-07-06"
+date-released: "2026-07-07"
+license: MIT
+repository-code: "https://github.com/gbarbalinardo/prime-research"
+keywords:
+  - number theory
+  - prime numbers
+  - partition functions
+  - statistical mechanics
+  - complex-temperature zeros
+  - almost periodic functions
+preferred-citation:
+  type: unpublished
+  title: "Prime-Leaf Tree Theory: arithmetic as the statistical mechanics of multiplication histories"
+  authors:
+    - family-names: Barbalinardo
+      given-names: Giuseppe
+  year: 2026
+  notes: "Manuscript, submitted. PDF at paper/prime-leaf-tree-theory.pdf in this repository."
