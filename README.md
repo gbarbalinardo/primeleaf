@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/gbarbalinardo/primeleaf/actions/workflows/ci.yml/badge.svg)](https://github.com/gbarbalinardo/primeleaf/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21252898.svg)](https://doi.org/10.5281/zenodo.21252898)
 
 Arithmetic in which multiplication does not return a number. The product of two
 objects is a multiplication tree over prime leaves, and the ordinary integer is the
@@ -86,5 +87,7 @@ make paper        # or: cd paper && latexmk -pdf prime-leaf-tree-theory.tex
 ## Citing
 
 See [`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button uses it).
-Until the paper has a journal or arXiv identifier, cite the manuscript PDF in this
-repository.
+The repository is archived on Zenodo: DOI
+[10.5281/zenodo.21252898](https://doi.org/10.5281/zenodo.21252898) (all versions).
+Until the paper has a journal or arXiv identifier, cite the manuscript PDF via that
+DOI.
