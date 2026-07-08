@@ -6,7 +6,7 @@ authors:
     given-names: Giuseppe
     email: gbarbalinardo@ucdavis.edu
     affiliation: "University of California, Davis; Da Vinci Labs"
-version: 0.1.1
+version: 0.1.2
 date-released: "2026-07-07"
 license: MIT
 doi: 10.5281/zenodo.21252898
