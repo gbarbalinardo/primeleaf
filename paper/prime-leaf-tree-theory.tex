@@ -55,8 +55,8 @@ ORCID: \href{https://orcid.org/0000-0002-7829-4403}{0000-0002-7829-4403}.}\\[4pt
 
 \begin{abstract}
 We treat the integers as a gas with one mode per prime $p$, of energy $\log p$ (the
-setting of Julia's gas of numbers and of Bost--Connes), and study it \emph{before}
-symmetrization and \emph{before} the interaction history is forgotten. A microstate
+setting of Julia's gas of numbers and of Bost--Connes), and study it before
+symmetrization and before the interaction history is forgotten. A microstate
 is a multiplication tree: an ordered, parenthesized record of pairwise combinations
 whose only conserved quantity is the integer it evaluates to. Forgetting history and
 symmetrizing are independent coarse-grainings, giving four gases whose partition
@@ -116,9 +116,9 @@ recorded history of how the primes involved were combined, ordered and parenthes
 unevaluated. (The cartons and bottles return in \S\ref{sec:bridge}, where the slogan
 becomes a theorem.) The familiar integer is produced only by an evaluator, the shadow
 map $N$, which plays the role of the measurement: it reads off the single conserved
-quantity and discards the history. The classical laws of multiplication are then not properties of
-multiplication at all. They are properties of the \emph{coarse-graining}: statements
-about which distinct microstates the measurement fails to distinguish. In one line:
+quantity and discards the history. The classical laws of multiplication are then
+properties of the coarse-graining rather than of the multiplication itself: they
+record which distinct microstates the measurement fails to distinguish. In one line:
 
 \begin{quote}
 \emph{The primes are the particles; an integer is a measured energy; the Riemann
@@ -131,7 +131,7 @@ coarse-graining.}
 The paper is written for readers who think in statistical mechanics. Every physical
 term below is either an \emph{exact structural identity} (the object on the left
 satisfies, verbatim, the defining equation of the object on the right) or is flagged
-as imagery. Theorems remain theorems; the physics is load-bearing, not decorative.
+as imagery.
 
 \begin{table}[ht]
 \centering\small
@@ -193,7 +193,7 @@ recorded before, and $1$ for $\cM$. All verified exhaustively for $n \le 20000$.
 \item \textbf{Four partition functions and a temperature ladder}
 (\S\ref{sec:zeta}). All
 four are exact functionals of the prime zeta function $P$: the free Bose gas
-$\zeta(\beta)$ (the Euler product \emph{is} the textbook free-boson computation), a
+$\zeta(\beta)$ (the Euler product is the textbook free-boson computation), a
 geometric gas $P/(1-P)$, an Otter gas with argument-doubling equation, and the planar
 tree gas obeying the self-consistency equation $Z = P + Z^2$. The inverse limiting
 temperatures $\beta_H = 1/T_H$ form a strict ladder
@@ -216,18 +216,18 @@ carries a branch point at $\beta = \rho/k$ for every nontrivial Riemann zero $\r
 and has the imaginary axis as a natural boundary), plus new branch points where
 $P(\beta) = \tfrac14$. We compute the five with $0 < \operatorname{Im}\beta < 50$:
 they recur near integer multiples of $2\pi/\log 2$ (the lightest mode, of energy
-$\log 2$, sets the frequency) and do \emph{not}
-lie on a vertical line. The naive tree analogue of the Riemann Hypothesis is false;
-the right question is the distribution of these complex-temperature zeros, and that
-question we answer: in every substrip of $\operatorname{Re} s > 1$ the tree zeros
+$\log 2$, sets the frequency) and do not
+lie on a vertical line. The naive tree analogue of the Riemann Hypothesis is
+therefore false, and the right question concerns the distribution of these zeros: in
+every substrip of $\operatorname{Re} s > 1$ the tree zeros
 have an exact asymptotic density (Theorem~\ref{thm:density}, proved via the
 Jessen--Tornehave theory of almost periodic functions), with total density
 $D(1) = 0.1436\dots$ in the strip $\operatorname{Re} s > 1$
 (Corollary~\ref{cor:totaldensity}). Each zero occurs when a single mode outshines the
 coherent rest, and the density is the total dominance rate
 $\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of $595$ zeros to height $5000$
-confirms the density and reveals a spectrum that is neither Poissonian nor of
-random-matrix type but markedly more \emph{rigid} than both
+confirms the density and reveals a spectrum markedly more rigid than either Poisson
+or random-matrix statistics
 (\S\ref{sec:spacings}), the signature of the zeros of an almost periodic function.
 
 \item \textbf{The additive bridge} (\S\ref{sec:bridge}). Trees act as
@@ -240,17 +240,18 @@ The primes themselves are then derivable inside the additive world: a size is
 composite iff its heap can crystallize into $k \ge 2$ identical cells of $m \ge 2$
 quanta; primes are the non-crystallizable sizes.
 
-\item \textbf{Computational content} (\S\ref{sec:comp}). Two theorems mark what the
-gas can and cannot compute. Microstate counting is \emph{shape-blind}: every
+\item \textbf{Computational content} (\S\ref{sec:comp}). Microstate counting is
+\emph{shape-blind}: every
 degeneracy depends only on the exponent profile of $n$, so no counting of histories
-can locate primes: the no-free-lunch face of freeness. In the other direction, a
+can locate primes. In the other direction, a
 random integer seen at full resolution is a universal random object: a uniform
 Catalan tree with a Gaussian, $\log\log x$, number of prime factors (Erd\H{o}s--Kac
 lifted to trees). The interface where the theory genuinely meets the complexity of
 finding primes is \emph{expression cost}: integer complexity is the first invariant
 here that escapes $P$ (it distinguishes $4$ from $9$), Wilson's theorem makes
 primality one factorial-expression away, and the open frontier, deterministic
-prime generation, is a derandomization problem, mapped but not shortened.
+prime generation, is a derandomization problem, which the theory maps but does not
+shorten.
 \end{enumerate}
 
 \subsection{Relation to existing work}\label{sec:priorart}
@@ -267,8 +268,8 @@ standard~\cite{stanley}; the
 degeneracy $g_\cT(n)$ appears as OEIS A144757 and the ordered-factorization count as
 A008480~\cite{oeis}; ordered factorizations with arbitrary parts go back to
 Kalm\'ar~\cite{kalmar}; the natural boundary of the prime zeta function is due to
-Landau and Walfisz~\cite{landauwalfisz}. Closest in spirit to our refusal to
-symmetrize is Loday's \emph{arithmetree}~\cite{loday,brunoyasaki}: arithmetic on
+Landau and Walfisz~\cite{landauwalfisz}. Closest in spirit to the unsymmetrized
+viewpoint is Loday's \emph{arithmetree}~\cite{loday,brunoyasaki}: arithmetic on
 planar binary trees with non-commutative addition and one-sided distributivity.
 
 Against this background the contributions here are: the two-dimensional
@@ -277,8 +278,8 @@ its limiting temperature); the exact critical value $Z_\cT(\sigma^{*}) = \tfrac1
 and the attainability dichotomy; the computation and non-collinearity of the
 complex-temperature zeros; the process/state/expectation stratification of the
 arithmetic laws; and the internal
-derivation of the primes. One caution runs through the paper: a \emph{free} structure
-carries no secrets about the primes themselves. Everything classically hard enters
+derivation of the primes. One caution runs through the paper: a free structure by
+itself carries no information about the primes. Everything classically hard enters
 through the single-particle spectrum, that is through $P(\beta)$, or through
 the additive bridge. What the theory offers is a clean separation of the structural
 from the arithmetic, and computable invariants in the separated layers.
@@ -310,7 +311,7 @@ L_3 \boxtimes L_2, \qquad
 L_2 \boxtimes (L_3 \boxtimes L_5).
 \]
 Non-commutativity and non-associativity are not axioms we impose; they are the
-\emph{absence} of axioms. Keeping the left--right order is keeping the combination
+absence of axioms. Keeping the left--right order is keeping the combination
 channels ordered, as one does for planar diagrams of matrix-valued
 fields~\cite{thooft}; keeping the parenthesization is keeping the interaction history:
 which pair combined first. A multiplication tree is the parse tree of a
@@ -335,9 +336,8 @@ unique map with $N(L_p)=p$ that respects $\boxtimes$).
 \physread Define the energy $E(T) = \log N(T)$. Then $E(L_p) = \varepsilon_p$ and
 $E(T_1 \boxtimes T_2) = E(T_1) + E(T_2)$: energies add under combination
 \emph{because} shadows multiply. The shadow is the measured value: the single
-conserved
-quantity, blind to history and to order. An integer is not a microstate; it is the
-measured value $e^{E}$ shared by many microstates.
+conserved quantity, blind to history and to order. An integer is the reading $e^{E}$
+shared by many microstates, and is not itself a microstate.
 
 \begin{remark}[No vacuum]\label{rem:nounit}
 $\cT$ has no unit object and $1$ is not the shadow of any tree: the image of
@@ -428,9 +428,9 @@ an asymptotic state, with the internal dynamics integrated out.
 statistics. Doing both lands in the occupation-number description: an element of
 $\cM$ is exactly a configuration $(\alpha_2, \alpha_3, \alpha_5, \dots)$, a basis
 vector of the symmetric Fock space over the single-particle spectrum. $\cW$, the
-half-way house that keeps order but forgets history, is a basis of the \emph{full}
-(Boltzmann) Fock space. Proposition~\ref{prop:fta} then says: \emph{the
-occupation-number description of the integers is faithful}. Unique factorization is
+half-way house that keeps order but forgets history, is a basis of the full
+(Boltzmann) Fock space. Proposition~\ref{prop:fta} then says that the
+occupation-number description of the integers is faithful: unique factorization is
 the absence of residual entropy at the Fock level.
 
 \begin{remark}[The identifications are themselves structured]
@@ -598,7 +598,7 @@ $k \log p$, so
 Z_\cM(\beta) \;=\; \prod_p \sum_{k \ge 0} e^{-\beta k \log p}
 \;=\; \prod_p \frac{1}{1 - p^{-\beta}} \;=\; \zeta(\beta):
 \]
-the Euler product \emph{is} the textbook free-boson partition function: the
+the Euler product is the textbook free-boson partition function: the
 gas of numbers of Julia~\cite{julia}.
 \emph{(\ref{eq:geo}) is the distinguishable-particle gas}: ordered $k$-particle states
 with no $1/k!$, the counting that produces the Gibbs paradox.
@@ -609,8 +609,7 @@ Hagedorn--Frautschi~\cite{hagedorn,frautschi}, here with input spectrum the prim
 and the combination ordered and binary.
 \emph{(\ref{eq:otter}) is the unordered version}: unordered combination, with the
 $Z(2s)$ term the standard exchange correction for the two branches being
-\emph{identical}, the same mechanism that separates Bose from Boltzmann counting.
-Finally, Remark~\ref{rem:species} places all four in one family.
+identical, the same mechanism that separates Bose from Boltzmann counting.
 
 \begin{remark}[One gas per statistics]\label{rem:species}
 The four right-hand sides are the four classical constructions of the symbolic
@@ -619,9 +618,8 @@ tree), each applied to the single-particle element $P$. Choosing a corner of the
 square is choosing a \emph{statistics}: what to remember of order and of history.
 There is one partition function per statistics, all exact functionals of
 $P(s), P(2s), \dots$, and the Riemann zeta function is the Bose member of the family.
-Note where the vacuum lives: only the multiset construction has an empty structure,
-which is why $n=1$ belongs to $\zeta$ and to no other corner
-(Remark~\ref{rem:nounit}).
+Only the multiset construction has an empty structure, which is why $n=1$ belongs to
+$\zeta$ and to no other corner (Remark~\ref{rem:nounit}).
 \end{remark}
 
 \subsection{The temperature ladder}
@@ -698,8 +696,8 @@ U(\beta) = -\frac{\partial}{\partial \beta} \log Z_\cT(\beta)
 diverges as $\beta \to \sigma^{*+}$: a continuous transition with divergent
 susceptibility, rather than a divergent partition function. Whether the limiting
 temperature is attainable, the classic question of the bootstrap
-literature~\cite{nahm}, is decided here by a single algebraic choice:
-\emph{associativity is a first-order axiom}. The square-root branch point itself is
+literature~\cite{nahm}, is decided here by associativity alone. The square-root
+branch point itself is
 the universal singularity of tree and branched-polymer generating functions
 (susceptibility exponent $\tfrac12$)~\cite{adj}, the same criticality that governs
 planar-diagram counting in the Gaussian matrix model, where the Catalan numbers arise
@@ -784,7 +782,7 @@ while for the tree level transfer heuristics for the square-root singularity sug
 $\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$
 (Problem~\ref{prob:tauberian}). The counts can be extreme: along $n = 2^k$,
 $g_\cT(n) = C_{k-1} \asymp n^{2}/(\log n)^{3/2}$, so the number of microstates over a
-single integer can approach its \emph{square}. (Kalm\'ar's classical
+single integer can approach its square. (Kalm\'ar's classical
 count~\cite{kalmar} of ordered factorizations into arbitrary parts $\ge 2$, exponent
 $\rho = 1.7286\dots$ with $\zeta(\rho) = 2$, sits between the Boltzmann and non-planar
 rungs but weights composite parts.)
@@ -882,15 +880,14 @@ range.}
 \label{tab:zeros}
 \end{table}
 
-Two empirical observations. First, the ordinates hug integer multiples of
-$2\pi/\log 2 = 9.0647\dots$: the partition function is almost periodic in
-$\operatorname{Im}\beta$, and the recurrence frequency is set by the \emph{lightest
-mode}, $\varepsilon_2 = \log 2$, whose Boltzmann factor $2^{-\beta}$ dominates $P$;
-the interference of $3^{-\beta}$ and later modes then shifts each singularity
-(violently so for $k=1$). Second, and decisively: \emph{the real parts wander}. The
-naive tree analogue of the Riemann Hypothesis (all zeros on a vertical
-line) is simply false. The correct lifted question is distributional, and it has a
-precise answer.
+The ordinates stay near integer multiples of $2\pi/\log 2 = 9.0647\dots$: the
+partition function is almost periodic in $\operatorname{Im}\beta$, with the
+recurrence frequency set by the lightest mode, $\varepsilon_2 = \log 2$, whose
+Boltzmann factor $2^{-\beta}$ dominates $P$; interference from $3^{-\beta}$ and the
+later modes shifts each singularity, strongly so for $k=1$. The real parts, on the
+other hand, wander. A tree analogue of the Riemann Hypothesis, with all zeros on one
+vertical line, is therefore false, and the right question is distributional: with
+what density do the zeros fill the strip? Theorem~\ref{thm:density} answers this.
 
 \subsection{The density of tree zeros}\label{sec:density}
 
@@ -1122,7 +1119,7 @@ revolution, forcing one zero: this is the event $q_p$ measures. At $\sigma = 1.3
 the hands have lengths $2^{-1.3} = 0.41$, $3^{-1.3} = 0.24$, $5^{-1.3} = 0.12,
 \dots$, and $q_2 = 0.624$, $q_3 = 0.148$, $q_5 = 0.042$, $q_7 = 0.017$; weighted by
 speed the lightest hand accounts for only $59\%$ of the zeros, which is why the
-density \emph{exceeds} the naive one-per-period guess $\log 2/2\pi$. This is exactly
+density exceeds the naive one-per-period guess $\log 2/2\pi$. This is exactly
 the classical mean-motion problem of celestial mechanics: a hand exceeding the
 anchored sum of the rest is what Lagrange called a \emph{preponderant term}
 (see the introduction of~\cite{jessentornehave}), and the Jessen--Tornehave theory
@@ -1158,8 +1155,7 @@ dominance, $\frac{1}{2\pi}\sum_p (\log p)\, q_p$ (Theorem~\ref{thm:density}).}
 \label{fig:hands}
 \end{figure}
 
-The numbers confirm the theorem in two independent ways. First the density itself:
-the Monte Carlo dominance probabilities give a curve $D(\sigma)$ rising from
+The Monte Carlo dominance probabilities give a curve $D(\sigma)$ rising from
 $D(\sigma^{*}) = 0$ to
 \[
 D(1.30) = 0.1162, \quad D(1.10) = 0.1314, \quad D(1.05) = 0.1372, \quad
@@ -1170,9 +1166,9 @@ Corollary~\ref{cor:totaldensity}. Against this, a full census to height $5000$
 (Figure~\ref{fig:zeros}) locates $595$ tree zeros, all with
 $1.26 < \operatorname{Re} s < 2.57$, hence all left of $\sigma^{*}$ as
 Proposition~\ref{prop:strip} requires. The counting function $N(T)$ tracks the
-predicted line $D(1)\,T$ closely (Figure~\ref{fig:zeros}, right); the small deficit is
-exactly the tail of zeros with $1 < \operatorname{Re} s < 1.26$ that the census box
-does not reach, whose density $D(1) - D(1.26) \approx 0.014$ accounts for it. The
+predicted line $D(1)\,T$ closely (Figure~\ref{fig:zeros}, right); the small deficit
+comes from the zeros with $1 < \operatorname{Re} s < 1.26$ outside the census box,
+whose density $D(1) - D(1.26) \approx 0.014$ accounts for it. The
 mean spacing is $8.39$ against the lightest-mode period $2\pi/\log 2 = 9.06$. The
 left edge drifts as before: the lowest real part found is $1.262$ within the box, and
 a coarse sub-box sweep continues to turn up zeros with real parts approaching $1$,
@@ -1180,12 +1176,12 @@ where almost periodicity fails and the continuation \eqref{eq:Pcont}, with its
 Riemann-zero branch points, takes over. What happens on and past that line is
 Problem~\ref{prob:zeros}.
 
-\subsection{Spectral statistics: rigidity, not randomness}\label{sec:spacings}
+\subsection{Spectral statistics of the tree zeros}\label{sec:spacings}
 
 The $595$ ordinates are numerous enough to ask how the zeros are spaced, the question
 one asks of any spectrum. Normalizing to unit mean spacing, the nearest-neighbour
 distribution is neither Poissonian (uncorrelated levels) nor of random-matrix type:
-it is far more \emph{rigid} than both (Figure~\ref{fig:spacings}). The mass piles up
+it is far more rigid than both (Figure~\ref{fig:spacings}). The mass piles up
 near $s = 1$; the coefficient of variation of the raw gaps is $0.259$, against $1$ for
 a Poisson process; the smallest normalized gap observed is $0.79$, and only $8\%$ of
 gaps fall below $s = \tfrac12$ (a Poisson process would have $39\%$). The number
@@ -1197,10 +1193,10 @@ variance saturates rather than growing linearly,
 so the count of zeros in a long window is almost deterministic. This is the expected
 fingerprint of the zeros of an almost periodic analytic function: a quasi-periodic
 skeleton (here paced by $2\pi/\log 2$) dressed with defects where a wandering
-lighter-mode resonance displaces a zero. It is emphatically \emph{not} the GUE
-statistics conjectured for the Riemann zeros themselves~\cite{montgomery}; the tree
-gas and the Riemann gas, though the former inherits the latter's zeros through $P$,
-have entirely different spectral rigidity. Making the empirical rigidity
+lighter-mode resonance displaces a zero. It is not the GUE statistics conjectured
+for the Riemann zeros themselves~\cite{montgomery}: although the tree gas inherits
+the Riemann zeros through $P$, its spectrum has entirely different rigidity. Making
+the empirical rigidity
 (near-crystalline order with a controlled density of defects) into a theorem is
 Problem~\ref{prob:zeros}(c).
 
@@ -1225,7 +1221,7 @@ $\operatorname{Re} s < 1.26$ outside the census box.}
 mean, against the Poisson and GUE (Wigner) laws. The distribution is more rigid than
 either: negligible mass below $s = \tfrac12$, a sharp peak near $s = 1$, and a number
 variance that saturates ($\Sigma^2(10) = 0.67$ against $10$ for Poisson). This is the
-signature of the zeros of an almost periodic function, not of a random-matrix
+signature of the zeros of an almost periodic function rather than of a random-matrix
 ensemble.}
 \label{fig:spacings}
 \end{figure}
@@ -1237,10 +1233,10 @@ ensemble.}
 The additive world of the theory is flat: $\cA = \{\,n\,\ell : n \in \NN_{\ge1}\}$,
 heaps of a unit quantum $\ell$ (``one liter''), with
 $+\colon \cA \times \cA \to \cA$ ordinary accumulation. The question left open so far
-is how $\cT$ and $\cA$ interact. The answer proposed here: they do not interact by a
-map $\cT \to \cA$. \emph{Multiplication acts on quantities} (trees are
-\emph{processes}, not amounts), and the output of the action is neither a tree nor
-a flat quantity but a third kind of object: a state of clustered matter.
+is how $\cT$ and $\cA$ interact. The answer proposed here is that they do not
+interact through a map $\cT \to \cA$: multiplication acts on quantities. Trees are
+processes, and the output of the action is a third kind of object, a state of
+clustered matter.
 
 \subsection{States: grouped quantities}
 
@@ -1322,12 +1318,12 @@ image of $\act$: multiplication outputs clustered states, never flat ones.
 \draw[-{Latex[length=1.6mm]}, gray!60] (1.2,-0.5) to[bend right=12] node[below,lbl,black]{$\alpha$} (six.west);
 \draw[-{Latex[length=1.6mm]}, gray!60] (9.0,-0.5) to[bend left=12] node[below,lbl,black]{$\alpha$} (six.east);
 \end{tikzpicture}
-\caption{A tree acts on quantities as a \emph{process}, not a number.
+\caption{A tree acts on quantities as a process rather than a number.
 $L_2\boxtimes L_3$ and $L_3\boxtimes L_2$ package one liter differently: two cartons
 of three bottles versus three cartons of two. As states they differ (associativity
 would too); only the extensive count $\alpha$ collapses both to $6\ell$. ``You never
 get six liters from multiplication'' (\S\ref{sec:trees}) is Theorem~\ref{thm:distrib}:
-the laws hold in expectation, not on states.}
+the laws hold in expectation but not on states.}
 \label{fig:bridge}
 \end{figure}
 
@@ -1357,11 +1353,11 @@ therefore give distinct maps.
 \end{proof}
 
 \physread Why does associativity feel inevitable, when nothing in \S\ref{sec:trees}
-imposes it? Because \emph{processes compose}: any semantics that interprets
-multiplication as something one \emph{does} (anything of the form
+imposes it? Because processes compose: any semantics that interprets
+multiplication as something one does (anything of the form
 $\boxtimes \mapsto \circ$ into an endomorphism monoid) must identify at least
 $\approx_a$, since composition of maps is associative whether we like it or not. Our
-semantics identifies \emph{exactly} $\approx_a$: nothing more is lost. Interaction
+semantics identifies exactly $\approx_a$: nothing more is lost. Interaction
 history is unobservable in any operational reading of multiplication; to observe it,
 one would have to make states out of the processes themselves (currying), which is
 precisely to leave the additive world. By contrast, nothing forces the process monoid
@@ -1388,10 +1384,9 @@ factorization. Distinctness on $\cG$ is Theorem~\ref{thm:assoc} (different words
 \end{proof}
 
 The two observation layers thus recover the two axes of the coarse-graining square:
-\emph{clustered} observation quotients by exactly associativity; \emph{extensive}
-observation quotients by exactly associativity and commutativity, and the
-``exactly'' of the second statement is one more disguise of the Fundamental Theorem
-of Arithmetic.
+clustered observation quotients by exactly associativity, and extensive observation
+quotients by exactly associativity and commutativity; the second ``exactly'' is
+again the Fundamental Theorem of Arithmetic.
 
 \begin{theorem}[Distributivity holds only in expectation]\label{thm:distrib}
 For every $T \in \cT$ and $f, g \in \cG$:
@@ -1414,9 +1409,9 @@ Theorem~\ref{thm:shadowaction}.
 ``Process the merged system'' and ``process the parts, then merge'' are genuinely
 different protocols with the same extensive outcome: the informal claim of \S1,
 now a theorem. Note also the built-in one-sidedness: there is no
-$(f \oplus g) \cdot T$ at all, because states are not processes. It is striking that
-in Loday's arithmetree~\cite{loday}, where both arguments \emph{are} trees,
-distributivity likewise survives on one side only.
+$(f \oplus g) \cdot T$ at all, because states are not processes. In Loday's
+arithmetree~\cite{loday}, where both arguments are trees, distributivity likewise
+survives on one side only.
 
 \begin{center}
 \begin{tabular}{@{}lccc@{}}
@@ -1433,7 +1428,7 @@ distributivity & not formulable & fails & \textbf{holds} \\
 \subsection{Where the primes come from}\label{sec:primesfrom}
 
 The theory so far imports its particle spectrum from classical arithmetic. The bridge
-removes this dependency: the primes can be \emph{found} inside $\cG$.
+removes this dependency: the primes can be found inside $\cG$.
 
 \begin{definition}\label{def:groupable}
 Call $n \in \NN_{\ge 2}$ \emph{groupable} if some quantity consisting of $k \ge 2$
@@ -1444,13 +1439,13 @@ $n = km$ with $k, m \ge 2$. Call $n$ \emph{prime} if it is not groupable.
 \physread A size is composite iff a heap of that size can crystallize into $k$
 identical unit cells; the primes are the non-crystallizable sizes, the stable
 particles of the decay chains of Remark~\ref{rem:bootstrap}. This is, of course, the
-classical definition of primality; that is the point. It is expressible entirely
+classical definition of primality. The content is that it is expressible entirely
 inside the clustered additive world, using only $\odot$ and $\alpha$, with no imported
 number labels. One can therefore \emph{define} the particle spectrum as the set of
 non-groupable heap sizes and generate $\cT$ freely on it; the numerical label of a
 prime leaf is recovered as the observable $\alpha$ of its heap. The foundational question
 ``are prime leaves labeled by known primes, or can the labels be derived?'' is thus
-answered: derived. What cannot be derived from the free multiplicative structure alone
+answered: the labels can be derived. What cannot be derived from the free multiplicative structure alone
 (\S\ref{sec:priorart}) becomes derivable the moment the additive world and the action
 are in place, because primality is an observational property of clustering.
 
@@ -1468,11 +1463,11 @@ $Z_\cT(s, q) = \sum_T q^{\,\mathrm{stat}(T)} N(T)^{-s}$ that escapes $P$. Both a
 %======================================================================
 \section{Computational content}\label{sec:comp}
 
-If the primes are the particles of this gas, can the gas help us \emph{find} them?
-The answer is instructive: counting is useless for primality, but the cost of
-\emph{expressions} is exactly where the theory meets the complexity of primes.
+If the primes are the particles of this gas, can the gas help us find them?
+Counting cannot, for two reasons given below; the cost of expressions, on the other
+hand, is where the theory meets the complexity of primes.
 
-Two facts explain why no amount of counting helps. First, degeneracy determines
+First, degeneracy determines
 primality only circularly: rearranging the recursion of Proposition~\ref{prop:gT},
 \[
 [\,n \text{ prime}\,] \;=\; g_\cT(n) - \sum_{d \mid n,\, 1<d<n} g_\cT(d)\,g_\cT(n/d),
@@ -1484,20 +1479,20 @@ closed formulas of Propositions~\ref{prop:gT}--\ref{prop:gW} involve only the
 $\alpha_p$; for $\cB$, the divisor lattice is a product of chains of those lengths).
 So $12 = 2^2\cdot 3$, $18 = 2\cdot 3^2$, and $20 = 2^2\cdot 5$ share every count
 ($g_\cT = 6$, $g_\cB = 2$, $g_\cW = 3$), and all counts are computable in
-$\mathrm{poly}(\log n)$ once $n$ is factored. This is the computational face of
-freeness: the tree layer is polynomial-time syntax over its input spectrum, so
-whatever algorithmic leverage exists must come from outside the counting.
+$\mathrm{poly}(\log n)$ once $n$ is factored. This is freeness seen computationally:
+the tree layer is polynomial-time syntax over its input spectrum, so whatever
+algorithmic leverage exists must come from outside the counting.
 
-What the microstate view \emph{does} compute is the shape of a typical integer. Draw
+What the microstate view does compute is the shape of a typical integer. Draw
 $n$ uniformly below $x$ and $T$ uniformly from its fiber $N^{-1}(n)$: by the
 splitting of Proposition~\ref{prop:gT} the shape and leaf-word are independent, the
 shape uniform Catalan, while Erd\H{o}s--Kac~\cite{erdoskac} makes the leaf count
 $\Omega(n)$ Gaussian around $\log\log x$. So a random integer at full resolution is a
 uniform random binary tree with $\approx \log\log x$ leaves (five or six for
-$x = 10^{100}$), carrying \emph{no} arithmetic information in its shape, of height
+$x = 10^{100}$), carrying no arithmetic information in its shape, of height
 $\asymp \sqrt{\log\log x}$~\cite{flajoletodlyzko}. One can even sample a random
 integer together with its factorization in polynomial time~\cite{bach,kalai}: the gas
-is efficiently samplable, though deterministically \emph{aiming} at a prime is not
+is efficiently samplable, though deterministically aiming at a prime is not
 known to be (\S\ref{sec:costlandscape}).
 
 \subsection{Expression cost: the invariant that escapes $P$}\label{sec:cost}
@@ -1524,10 +1519,10 @@ allowing subexpression reuse (straight-line programs) gives the Shub--Smale meas
 $\tau(n) = O(\log n)$~\cite{shubsmale}.
 
 Cost sees what no degeneracy can: $\|4\| = 4$ while $\|9\| = 6$, although $4 = 2^2$
-and $9 = 3^2$ have the same exponent profile. It is, structurally, a bridge quantity:
+and $9 = 3^2$ have the same exponent profile. Structurally it is a bridge quantity:
 it measures how expensively an integer can be synthesized once additions are allowed
-inside the build. And it is exactly where the known connections between the structure
-of multiplication and the complexity of primes live:
+inside the build, and it is where the known connections between the structure of
+multiplication and the complexity of primes live:
 
 \begin{proposition}[Wilson's theorem as an expression statement]\label{prop:wilson}
 \begin{enumerate}
@@ -1549,10 +1544,10 @@ size polylogarithmic in $n$, factoring would have polynomial-size circuits (folk
 see Blum--Cucker--Shub--Smale~\cite{bcss}), and the Shub--Smale $\tau$-conjecture
 (a polynomial bound on the integer roots of a polynomial in terms of its program
 size) implies $\mathrm{P}_{\mathbb C} \neq \mathrm{NP}_{\mathbb C}$~\cite{shubsmale}.
-In the vocabulary of this paper: \emph{the computational hardness of arithmetic is a
-statement about the additive--multiplicative interface of \S\ref{sec:bridge}, about
-the cost of synthesizing specific integers with additions, and Wilson's
-theorem says primality is one factorial-expression away.}
+In the vocabulary of this paper: the computational hardness of arithmetic lives at
+the additive--multiplicative interface of \S\ref{sec:bridge}, in the cost of
+synthesizing specific integers with additions, and Wilson's theorem puts primality
+one factorial-expression away.
 
 The theory also suggests its own cost observable. Define the \emph{factored cost} and
 the \emph{addition dividend}
@@ -1572,12 +1567,12 @@ Problem~\ref{prob:cost}.
 
 \subsection{What finding a prime costs}\label{sec:costlandscape}
 
-Finally, the target itself, stated honestly. \emph{Recognizing} primes is solved:
-PRIMES $\in$ P~\cite{aks}. \emph{Hitting} one randomly is easy: by the prime number
+Recognizing primes is solved:
+PRIMES $\in$ P~\cite{aks}. Hitting one randomly is easy: by the prime number
 theorem a random $n$-bit integer is prime with probability $\sim 1/(n \log 2)$, so
 sampling plus testing generates an $n$-bit prime in expected time
 $\widetilde{O}(n^3)$~\cite{crandallpomerance}. The genuine open problem, the
-Polymath~4 problem~\cite{polymath}, is \emph{deterministic} generation:
+Polymath~4 problem~\cite{polymath}, is deterministic generation:
 
 \begin{center}\small
 \begin{tabular}{@{}lll@{}}
@@ -1595,17 +1590,16 @@ quantum search & $\sim 2^{0.2625\,n}$: Grover~\cite{grover} on~\cite{bhp} & quad
 
 Even the Riemann Hypothesis only bounds prime gaps by $O(\sqrt{x}\log x)$, leaving a
 $2^{n/2}$ search; a Cram\'er-type gap bound $O(\log^2 x)$~\cite{cramer} would make
-``scan forward and test'' polynomial. The two attack surfaces are exactly the two
-places this paper has located all remaining hardness. \emph{Gaps} are quantitative
-statements about the additive--multiplicative interface: \S\ref{sec:bridge} names the
-interface but is not yet quantitative. \emph{Derandomization}: the primes are dense
-and efficiently recognizable, so deterministic generation is a problem of
-\emph{aiming} (pseudorandomness rather than number-theoretic search), and the
-natural formal home of ``dense yet hard to aim at'' is expression cost
-(\S\ref{sec:cost}): a deterministic generator is, in the end, a short expression that
-evaluates to a prime. The honest summary: the theory contributes a sharp map of where
-the hardness cannot be (shape-blind counting), well-posed cost questions at the
-interface where it can be, and no shortcut: none was available from counting alone.
+``scan forward and test'' polynomial. The two available attack surfaces, gap bounds
+and derandomization, are the two places where this paper has located the remaining
+hardness. Gap bounds are quantitative statements about the additive--multiplicative
+interface: \S\ref{sec:bridge} names the interface but is not yet quantitative.
+Derandomization is a problem of aiming: the primes are dense and efficiently
+recognizable, and a deterministic generator is, in the end, a short expression that
+evaluates to a prime, which places the problem in the expression-cost frame of
+\S\ref{sec:cost}. In summary, the theory maps where the hardness cannot be
+(shape-blind counting) and poses cost questions at the interface where it can be; it
+does not provide a shortcut.
 
 %======================================================================
 \section{Open problems}\label{sec:open}
@@ -1621,7 +1615,7 @@ $\operatorname{Re} s \le 1$, where almost periodicity fails and the Riemann zero
 enter through \eqref{eq:Pcont}? (b) upgrade $D(1)$ to a boundary count: is the number
 of zeros with $\operatorname{Re} s > 1$ and $0 < t \le T$ asymptotic to $D(1)\,T$, or
 does accumulation at the line $\operatorname{Re} s = 1$ add a correction? (c) prove
-the observed \emph{rigidity}: the empirical number variance saturates
+the observed rigidity: the empirical number variance saturates
 ($\Sigma^2(10) = 0.67$ against $10$ for Poisson) and the spacings repel
 (Figure~\ref{fig:spacings}); establish that the tree zeros form a quasi-periodic set
 with a controlled defect density, and compute the pair-correlation function.
@@ -1681,7 +1675,7 @@ fixed corner of the coarse-graining square.
 
 \begin{question}[Axiomatics of the bridge]\label{prob:axioms}
 Characterize the pair $(\cG, \alpha)$ abstractly: for which ``clustering worlds'' does
-Theorem~\ref{thm:assoc} hold with \emph{exactly} $\approx_a$, and is $(\cG,\alpha)$
+Theorem~\ref{thm:assoc} hold with exactly $\approx_a$, and is $(\cG,\alpha)$
 universal among them?
 \end{question}
 
