@@ -74,10 +74,10 @@ spectrum has beta_H = 2.14875116590273 (Boltzmann counting) and
 beta_H = 2.30723145510135 (Bose counting).
 
 The unordered-tree degeneracy sequence (1, 1, 1, ..., 2 at n = 12, ..., 41 at
-n = 144) was submitted to the OEIS as
-[A397740](https://oeis.org/A397740) (under editorial review as of July 2026);
-A375120 is a near-miss with a different diagonal convention (first divergence at
-n = 144: 41 vs 42).
+n = 144) is OEIS entry [A375120](https://oeis.org/A375120). Its original formula and
+program counted the equal-factor split as an ordered pair (42 at n = 144 instead of
+41); the verification here exposed the error, and the entry was corrected in July
+2026 with a b-file to n = 10000.
 
 ## Building the paper
 

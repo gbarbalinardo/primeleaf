@@ -187,8 +187,9 @@ $\cT, \cW, \cB, \cM$. The Fundamental Theorem of Arithmetic says exactly that th
 final corner has one microstate per macrostate. Each level carries a computable
 entropy: e.g.\ $S_\cT(12) = \log 6$. The degeneracies are Catalan $\times$ multinomial
 for $\cT$, multinomial for $\cW$ (OEIS A008480), a sequence for $\cB$ that restricts
-to the Wedderburn--Etherington numbers on prime powers and appears not to have been
-recorded before, and $1$ for $\cM$. All verified exhaustively for $n \le 20000$.
+to the Wedderburn--Etherington numbers on prime powers (OEIS A375120, whose formula
+and program were corrected following this work), and $1$ for $\cM$. All verified
+exhaustively for $n \le 20000$.
 
 \item \textbf{Four partition functions and a temperature ladder}
 (\S\ref{sec:zeta}). All
@@ -497,15 +498,16 @@ unordered binary trees with $k$ indistinguishable leaves, the defining recursion
 the Wedderburn--Etherington numbers.
 \end{proof}
 
-\begin{remark}[A sequence not in the OEIS]\label{rem:newseq}
-At the time of writing, the sequence $g_\cB(2), g_\cB(3), \dots =
-1,1,1,1,1,1,1,1,1,1,2,\dots$ does not appear in the OEIS. The closest entry, A375120
-(``complete binary unordered tree-factorizations''), uses a different convention: it
-counts the two children as an \emph{ordered} pair whenever the factor split is
-$(d,d)$, so it disagrees with Proposition~\ref{prop:gB} first at $n=144$ (it gives
-$42$ where the true unordered count is $41$) and disagrees with
-Wedderburn--Etherington on prime powers. Submitting $g_\cB$ is a small item of
-independent interest.
+\begin{remark}[The OEIS entry, corrected]\label{rem:newseq}
+The sequence $g_\cB(2), g_\cB(3), \dots = 1,1,1,1,1,1,1,1,1,1,2,\dots$ is OEIS
+entry A375120 (``complete binary unordered tree-factorizations''; the entry sets
+$a(1)=1$ by an empty-factorization convention). Its original formula and program
+counted the two children as an ordered pair whenever the factor split is $(d,d)$, a
+convention that disagrees with Proposition~\ref{prop:gB} first at $n=144$ (giving
+$42$ where the unordered count is $41$) and disagrees with Wedderburn--Etherington
+on prime powers. The verification in Appendix~\ref{app:verification} exposed the
+discrepancy, and the entry was corrected following this work in July 2026, with a
+table of values to $n = 10000$.
 \end{remark}
 
 For $n = 12 = 2^2\cdot 3$ (Figure~\ref{fig:square}) the four levels have
@@ -1715,10 +1717,11 @@ g_\cT(d)\, g_\cT(n/d)$; the multinomial of Proposition~\ref{prop:gW} agrees with
 first-letter recursion; and the unordered recursion of Proposition~\ref{prop:gB}
 reproduces the Wedderburn--Etherington numbers
 $1,1,1,2,3,6,11,23,46,98,207,451,983,2179$ at $n = 2^k$, $k \le 14$, as well as the
-hand-enumerated values $g_\cB(12)=2$, $g_\cB(24)=4$, $g_\cB(30)=3$. The OEIS near-miss
-A375120 (which uses ordered pairs on the diagonal) first diverges at $n = 144$: $42$
-against the true $41$; a control query confirmed the OEIS search interface finds
-A375120 from its own terms while the $g_\cB$ terms return no match (July 2026).
+hand-enumerated values $g_\cB(12)=2$, $g_\cB(24)=4$, $g_\cB(30)=3$. The original
+formula and program of OEIS entry A375120 used ordered pairs on the diagonal and
+first diverged from the unordered count at $n = 144$ ($42$ against the true $41$);
+following this comparison the entry was corrected in July 2026 and now lists the
+unordered counts to $n = 10000$ (Remark~\ref{rem:newseq}).
 
 \subsection{Analytic checks and constants}
 
