@@ -7,7 +7,7 @@ authors:
     email: gbarbalinardo@ucdavis.edu
     affiliation: "University of California, Davis; Da Vinci Labs"
     orcid: "https://orcid.org/0000-0002-7829-4403"
-version: 0.1.2
+version: 0.1.3
 date-released: "2026-07-07"
 license: MIT
 doi: 10.5281/zenodo.21252898
