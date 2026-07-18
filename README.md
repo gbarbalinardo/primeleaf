@@ -64,10 +64,11 @@ Tree zeros (solutions of P(s) = 1/4, the complex-temperature zeros of the tree g
 a census finds 595 of them with 0 < t < 5000, all left of sigma* = 2.597, real parts
 wandering (not on a vertical line). Their density in each substrip of Re s > 1 is
 given exactly by the mode-dominance formula (Theorem 5.3, proved in full), with total
-density D(1) = 0.1436 (4-seed Monte Carlo cross-check). The spacing statistics show a
-spectrum far more rigid than either Poisson or GUE: number variance saturates at
-Sigma^2(10) = 0.67 vs 10 for Poisson, and spacings repel (min normalized gap 0.79).
-This is the fingerprint of the zeros of an almost periodic function.
+density D(1) = 0.1436 (4-seed Monte Carlo cross-check). The spacing statistics show
+the rigid, quasi-periodic pattern expected of the zeros of an almost periodic
+function, far from both Poisson and GUE: number variance saturates at
+Sigma^2(10) = 0.70 vs 10 for Poisson, and small gaps are rare (8% below half the
+mean spacing).
 
 The classical Hagedorn-Frautschi-Nahm bootstrap transplanted onto the prime
 spectrum has beta_H = 2.14875116590273 (Boltzmann counting) and

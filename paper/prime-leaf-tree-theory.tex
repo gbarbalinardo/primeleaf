@@ -62,15 +62,18 @@ whose only conserved quantity is the integer it evaluates to. Forgetting history
 symmetrizing are independent coarse-grainings, giving four gases whose partition
 functions are exact functionals of the prime zeta function $P(\beta)$; their inverse
 limiting temperatures form a strict ladder
-$1 < 1.3994\ldots < 1.9885\ldots < \sigma^{*} = 2.5974\ldots$, and whether the
-limiting temperature is attained is decided by associativity: the symmetrized gases
-have poles, the tree gases square-root branch points, with
-$Z_\cT(\sigma^{*}) = \tfrac12$ exactly. The complex-temperature zeros of the tree gas
+$1 < 1.3994\ldots < 1.9885\ldots < \sigma^{*} = 2.5974\ldots$. The symmetrized
+gases have simple poles at their critical points, while the tree gases converge
+there, with $Z_\cT(\sigma^{*}) = \tfrac12$ exactly at a square-root branch point:
+within this family, attainability of the limiting temperature tracks the
+combinatorial construction (sequence against binary tree) that each quotient
+leaves behind. The complex-temperature zeros of the tree gas
 inherit the Riemann zeros through $P$; their new branch points, the solutions of
 $P(\beta) = \tfrac14$, do not lie on a vertical line but carry an exact asymptotic
 density given by mode-dominance probabilities (total density $0.1436\ldots$ in
-$\operatorname{Re}\beta > 1$), and a census of $595$ zeros to height $5000$ reveals
-a spectrum far more rigid than Poisson or random-matrix statistics. The Fundamental
+$\operatorname{Re}\beta > 1$), and a census of $595$ zeros to height $5000$ shows
+the rigid, quasi-periodic statistics expected of an almost periodic function, far
+from both Poisson and random-matrix behavior. The Fundamental
 Theorem of Arithmetic appears as zero residual entropy of the coarse-grained
 description, and the classical laws of arithmetic hold only in expectation. All
 results are reproducible from an accompanying open-source package.
@@ -205,8 +208,9 @@ one rung per layer of remembered structure. At its limiting temperature the tree
 converges with $Z_\cT(\sigma^{*}) = \tfrac12$ exactly and a square-root branch point:
 the universal branched-polymer singularity, the same criticality that governs
 planar-diagram counting in the Gaussian matrix model. The symmetrized gases instead
-have poles: whether the limiting temperature is attainable is decided by
-associativity. The classical Hagedorn--Frautschi--Nahm bootstrap, transplanted onto
+have poles; within the family, attainability of the limiting temperature follows
+the construction each quotient selects, geometric series against branching
+recursion. The classical Hagedorn--Frautschi--Nahm bootstrap, transplanted onto
 the prime spectrum, slots into the same family with
 $\beta_H = 2.1487511659\dots$ (Boltzmann counting) and $2.3072314551\dots$ (Bose
 counting).
@@ -227,9 +231,9 @@ $D(1) = 0.1436\dots$ in the strip $\operatorname{Re} s > 1$
 (Corollary~\ref{cor:totaldensity}). Each zero occurs when a single mode outshines the
 coherent rest, and the density is the total dominance rate
 $\frac{1}{2\pi}\sum_p (\log p)\, q_p$. A census of $595$ zeros to height $5000$
-confirms the density and reveals a spectrum markedly more rigid than either Poisson
-or random-matrix statistics
-(\S\ref{sec:spacings}), the signature of the zeros of an almost periodic function.
+confirms the density and shows the rigid, quasi-periodic statistics expected of
+the zeros of an almost periodic function, far from both Poisson and GUE
+(\S\ref{sec:spacings}).
 
 \item \textbf{The additive bridge} (\S\ref{sec:bridge}). Trees act as
 \emph{processes} on states of clustered matter (boxed heaps of unit quanta), and the
@@ -260,18 +264,28 @@ shorten.
 The Fock-level reading is classical: the gas of numbers of Julia~\cite{julia} and
 Spector~\cite{spector}, deepened by Bost--Connes~\cite{bostconnes}, identifies
 $\zeta(\beta)$ with a free bosonic partition function over the spectrum
-$\{\log p\}$ and locates a limiting temperature at $\beta = 1$. The statistical
+$\{\log p\}$ and locates a limiting temperature at $\beta = 1$. In those
+treatments the integer is a microstate, an occupation configuration of the Fock
+space; here the integer is a macrostate, the common reading of many histories,
+and the finer ensembles live above the Fock description. The statistical
 bootstrap and its limiting temperature are from~\cite{hagedorn,frautschi}, with the
-analytical solution and the square-root criticality due to Nahm~\cite{nahm}.
+analytical solution and the square-root criticality due to Nahm~\cite{nahm}; a
+limiting temperature for the \emph{additive} partitions of an integer was found by
+Blanchard, Fortunato, and Satz~\cite{bfs}, of which the gases here are the
+multiplicative counterpart.
 Lee--Yang and Fisher zeros are from~\cite{leeyang,fisher}. On the mathematical side,
 the free binary-tree structure on a set and its Catalan combinatorics are
 standard~\cite{stanley}; the
 degeneracy $g_\cT(n)$ appears as OEIS A144757 and the ordered-factorization count as
 A008480~\cite{oeis}; ordered factorizations with arbitrary parts go back to
-Kalm\'ar~\cite{kalmar}; the natural boundary of the prime zeta function is due to
+Kalm\'ar~\cite{kalmar}, with the rigorous asymptotics due to Hille~\cite{hille};
+the natural boundary of the prime zeta function is due to
 Landau and Walfisz~\cite{landauwalfisz}. Closest in spirit to the unsymmetrized
 viewpoint is Loday's \emph{arithmetree}~\cite{loday,brunoyasaki}: arithmetic on
 planar binary trees with non-commutative addition and one-sided distributivity.
+The direction there is opposite, however: arithmetree makes trees themselves the
+numbers, where here trees are histories of ordinary integers, collapsed by the
+evaluation map.
 
 Against this background the contributions here are: the two-dimensional
 coarse-graining (the square, with the new non-planar corner, its Otter equation and
@@ -518,6 +532,15 @@ small $n$. All
 formulas and recursions of this subsection were verified against brute-force
 enumeration for every $n \le 20000$ (Appendix~\ref{app:verification}).
 
+\begin{remark}[Squarefree integers]\label{rem:squarefree}
+On squarefree $n$ the three counts collapse to functions of $\omega(n)$ alone:
+$g_\cT = C_{\omega-1}\,\omega!$, $g_\cW = \omega!$, and $g_\cB = (2\omega-3)!!$
+(OEIS A001147). The entropy of a squarefree integer therefore measures nothing
+beyond its number of prime factors; everything finer in the degeneracies is
+carried by repeated primes. This is the sharpest form of the shape-blindness of
+\S\ref{sec:comp}.
+\end{remark}
+
 \begin{table}[ht]
 \centering\small
 \begin{tabular}{@{}rrrrr@{\hspace{9mm}}rrrrr@{}}
@@ -698,7 +721,12 @@ U(\beta) = -\frac{\partial}{\partial \beta} \log Z_\cT(\beta)
 diverges as $\beta \to \sigma^{*+}$: a continuous transition with divergent
 susceptibility, rather than a divergent partition function. Whether the limiting
 temperature is attainable, the classic question of the bootstrap
-literature~\cite{nahm}, is decided here by associativity alone. The square-root
+literature~\cite{nahm}, is decided here by the construction each quotient leaves
+available: sequence-like composition gives a simple pole, branching recursion
+gives the square-root schema of tree generating functions~\cite{flajolet}. Within
+the four corners this split happens to coincide with associativity; it does not
+extend beyond them, and the fully symmetrized bootstrap gas of
+Remark~\ref{rem:bootstrap} also converges at a square-root point. The square-root
 branch point itself is
 the universal singularity of tree and branched-polymer generating functions
 (susceptibility exponent $\tfrac12$)~\cite{adj}, the same criticality that governs
@@ -785,7 +813,7 @@ $\sum_{n \le x} g_\cT(n) \asymp x^{\sigma^{*}} (\log x)^{-3/2}$
 (Problem~\ref{prob:tauberian}). The counts can be extreme: along $n = 2^k$,
 $g_\cT(n) = C_{k-1} \asymp n^{2}/(\log n)^{3/2}$, so the number of microstates over a
 single integer can approach its square. (Kalm\'ar's classical
-count~\cite{kalmar} of ordered factorizations into arbitrary parts $\ge 2$, exponent
+count~\cite{kalmar,hille} of ordered factorizations into arbitrary parts $\ge 2$, exponent
 $\rho = 1.7286\dots$ with $\zeta(\rho) = 2$, sits between the Boltzmann and non-planar
 rungs but weights composite parts.)
 \end{remark}
@@ -894,7 +922,10 @@ what density do the zeros fill the strip? Theorem~\ref{thm:density} answers this
 \subsection{The density of tree zeros}\label{sec:density}
 
 Within the half-plane of almost periodicity the tree zeros have an exact asymptotic
-density, computable from a random-phase model of the gas.
+density, computable from a random-phase model of the gas. That solution counts of
+equations $f(s) = c$ grow linearly in $T$ in this regime is classical, going back
+to Bohr and to Bohr--Jessen for $\log\zeta$~\cite{bohrjessen,borchsenius}; the
+content of what follows is the exact evaluation of the density for $P$.
 
 \begin{theorem}[Density of the complex-temperature zeros]\label{thm:density}
 For $\sigma > \tfrac12$ let $X_\sigma = \sum_p p^{-\sigma} e^{i\theta_p}$ with
@@ -1184,23 +1215,31 @@ The $595$ ordinates are numerous enough to ask how the zeros are spaced, the que
 one asks of any spectrum. Normalizing to unit mean spacing, the nearest-neighbour
 distribution is neither Poissonian (uncorrelated levels) nor of random-matrix type:
 it is far more rigid than both (Figure~\ref{fig:spacings}). The mass piles up
-near $s = 1$; the coefficient of variation of the raw gaps is $0.259$, against $1$ for
-a Poisson process; the smallest normalized gap observed is $0.79$, and only $8\%$ of
-gaps fall below $s = \tfrac12$ (a Poisson process would have $39\%$). The number
-variance saturates rather than growing linearly,
+near $s = 1$; the coefficient of variation of the raw gaps is $0.259$, against $1$
+for a Poisson process, and only $8\%$ of gaps fall below $s = \tfrac12$ (a Poisson
+process would have $39\%$). The smallest normalized gap observed is $0.095$, a
+single close pair of ordinates near $t = 3724$ whose zeros sit at well-separated
+real parts ($1.51$ and $1.36$); the ordinate gap is a one-dimensional shadow of a
+two-dimensional configuration, so occasional near-coincidences in $t$ between
+zeros far apart in $\sigma$ are expected, and are not near-collisions in the
+strip. The number variance saturates rather than growing linearly,
 \[
-\Sigma^2(1) = 0.18, \quad \Sigma^2(5) = 0.57, \quad \Sigma^2(10) = 0.67
+\Sigma^2(1) = 0.20, \quad \Sigma^2(5) = 0.57, \quad \Sigma^2(10) = 0.70
 \qquad (\text{Poisson: } \Sigma^2(L) = L),
 \]
-so the count of zeros in a long window is almost deterministic. This is the expected
+estimated on overlapping windows of length $L$ with step $L/4$, so the count of
+zeros in a long window is nearly deterministic. This is the expected
 fingerprint of the zeros of an almost periodic analytic function: a quasi-periodic
 skeleton (here paced by $2\pi/\log 2$) dressed with defects where a wandering
-lighter-mode resonance displaces a zero. It is not the GUE statistics conjectured
-for the Riemann zeros themselves~\cite{montgomery}: although the tree gas inherits
-the Riemann zeros through $P$, its spectrum has entirely different rigidity. Making
-the empirical rigidity
-(near-crystalline order with a controlled density of defects) into a theorem is
-Problem~\ref{prob:zeros}(c).
+lighter-mode resonance displaces a zero. Two cautions attach to the numbers:
+$595$ zeros is a modest sample for variance statistics, and the census box
+excludes the zeros below $\operatorname{Re} s = 1.26$, whose omission can only
+stiffen the apparent order, since they are among the defects. It is not the GUE
+statistics conjectured for the Riemann zeros themselves~\cite{montgomery}:
+although the tree gas inherits the Riemann zeros through $P$, its spectrum
+differs in the direction of more order, not more randomness. Making the
+empirical picture (a near-crystalline skeleton with a controlled density of
+defects) into a theorem is Problem~\ref{prob:zeros}(c).
 
 \begin{figure}[t]
 \centering
@@ -1221,10 +1260,10 @@ $\operatorname{Re} s < 1.26$ outside the census box.}
 \includegraphics[width=0.62\textwidth]{figures/spacings.pdf}
 \caption{Nearest-neighbour spacings of the tree-zero ordinates, normalized to unit
 mean, against the Poisson and GUE (Wigner) laws. The distribution is more rigid than
-either: negligible mass below $s = \tfrac12$, a sharp peak near $s = 1$, and a number
-variance that saturates ($\Sigma^2(10) = 0.67$ against $10$ for Poisson). This is the
-signature of the zeros of an almost periodic function rather than of a random-matrix
-ensemble.}
+either: little mass below $s = \tfrac12$ ($8\%$), a sharp peak near $s = 1$, and a
+number variance that saturates ($\Sigma^2(10) = 0.70$ against $10$ for Poisson).
+This is the signature of the zeros of an almost periodic function rather than of a
+random-matrix ensemble.}
 \label{fig:spacings}
 \end{figure}
 
@@ -1802,10 +1841,13 @@ the earlier dedicated $t \le 500$ census.
 
 \emph{Spacings} (\S\ref{sec:spacings}). From the $595$ ordinates, normalized to unit
 mean: coefficient of variation of the raw gaps $0.259$; smallest normalized gap
-$0.79$; fraction below $s = \tfrac12$ equal to $0.081$ (Poisson: $0.393$); number
-variance $\Sigma^2(1) = 0.18$, $\Sigma^2(5) = 0.57$, $\Sigma^2(10) = 0.67$ (Poisson:
-$\Sigma^2(L) = L$). The saturation of $\Sigma^2$ and the near-total level repulsion
-are the rigidity reported in the text.
+$0.095$ (the pair $t = 3724.43,\ 3725.23$, at real parts $1.513$ and $1.358$);
+fraction below $s = \tfrac12$ equal to $0.081$ (Poisson: $0.393$); number variance
+$\Sigma^2(1) = 0.20$, $\Sigma^2(5) = 0.57$, $\Sigma^2(10) = 0.70$, estimated on
+overlapping windows of length $L$ with step $L/4$ (Poisson: $\Sigma^2(L) = L$).
+The saturation of $\Sigma^2$ and the suppression of small gaps are the rigidity
+reported in the text; with $595$ zeros and a census box truncated at
+$\operatorname{Re} s = 1.25$, these statistics are preliminary.
 
 %======================================================================
 \begin{thebibliography}{99}
@@ -1829,6 +1871,11 @@ SIAM Review \textbf{41} (1999), 236--266.
 E.~Br\'ezin, C.~Itzykson, G.~Parisi, and J.-B.~Zuber,
 \emph{Planar diagrams},
 Comm. Math. Phys. \textbf{59} (1978), 35--51.
+
+\bibitem{bfs}
+P.~Blanchard, S.~Fortunato, and H.~Satz,
+\emph{The Hagedorn temperature and partition thermodynamics},
+Eur. Phys. J. C \textbf{34} (2004), 327--333.
 
 \bibitem{bostconnes}
 J.-B.~Bost and A.~Connes,
@@ -1919,6 +1966,11 @@ R.~Hagedorn,
 \emph{Statistical thermodynamics of strong interactions at high energies},
 Nuovo Cimento Suppl. \textbf{3} (1965), 147--186.
 
+\bibitem{hille}
+E.~Hille,
+\emph{A problem in ``Factorisatio Numerorum''},
+Acta Arith. \textbf{2} (1936), 134--144.
+
 \bibitem{jessentornehave}
 B.~Jessen and H.~Tornehave,
 \emph{Mean motions and zeros of almost periodic functions},
@@ -1993,7 +2045,7 @@ Duke Math. J. \textbf{81} (1995), 47--54.
 \bibitem{oeis}
 N.~J.~A.~Sloane (ed.),
 \emph{The On-Line Encyclopedia of Integer Sequences},
-\url{https://oeis.org}. Entries A000108, A001190, A005245, A008480, A144757, A375120.
+\url{https://oeis.org}. Entries A000108, A001147, A001190, A005245, A008480, A144757, A375120.
 
 \bibitem{spector}
 D.~Spector,
